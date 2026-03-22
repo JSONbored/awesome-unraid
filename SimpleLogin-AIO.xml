@@ -26,8 +26,8 @@ First-Run Steps:
 4. Add the necessary A, MX, SPF, DMARC, and DKIM records to your domain's DNS settings.
   </Overview>
   <Category>Network:Email Privacy:Anti-Tracking</Category>
-  <Icon>https://raw.githubusercontent.com/JSONbored/unraid-templates/main/icons/simplelogin.png</Icon>
-  <TemplateURL>https://raw.githubusercontent.com/JSONbored/unraid-templates/main/SimpleLogin-AIO.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/simplelogin.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/SimpleLogin-AIO.xml</TemplateURL>
   <Beta>True</Beta>
   <Requires>PostgreSQL, Redis, SimpleLogin-Postfix</Requires>
   <ExtraSearchTerms>email, alias, proxy, privacy, proton, forwarding</ExtraSearchTerms>

@@ -33,8 +33,8 @@ This template has been pre-configured with multiple Relay Modes to bypass your I
 Select your Relay Mode in the dropdown below, and fill in the corresponding credential variables in the Advanced settings.
   </Overview>
   <Category>Network:Email Privacy:Anti-Tracking</Category>
-  <Icon>https://raw.githubusercontent.com/JSONbored/unraid-templates/main/icons/postfix.png</Icon>
-  <TemplateURL>https://raw.githubusercontent.com/JSONbored/unraid-templates/main/SimpleLogin-Postfix.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/postfix.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/SimpleLogin-Postfix.xml</TemplateURL>
   <Beta>True</Beta>
   <Requires>SimpleLogin-AIO, PostgreSQL</Requires>
   <ExtraSearchTerms>email, postfix, mta, relay, smtp, brevo, mailgun, protonmail, gmail</ExtraSearchTerms>
