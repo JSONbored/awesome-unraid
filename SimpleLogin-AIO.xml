@@ -1,0 +1,662 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>SimpleLogin-AIO</Name>
+  <Repository>ghcr.io/jsonbored/simplelogin-aio:latest</Repository>
+  <Registry>https://github.com/JSONbored/simplelogin-aio</Registry>
+  <Network>homelab_net</Network>
+  <WebUI>http://[IP]:[PORT:7777]</WebUI>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net</Support>
+  <Project>https://simplelogin.io/</Project>
+  <Overview>
+SimpleLogin is an open-source email alias service. It allows users to create disposable email addresses (aliases) to protect their real identity from spam and data breaches. 
+
+What it replaces: SimpleLogin costs $36/year as a standalone SaaS, or is included in Proton Unlimited for $156/year. Hosting this on your Unraid server eliminates these recurring costs.
+
+Required Companion Containers (Install in this order):
+1. PostgreSQL Database (postgres-shared:5432)
+2. Redis Cache (redis-shared:6380)
+3. SimpleLogin-Postfix (MTA for inbound/outbound mail routing)
+4. SimpleLogin-AIO (This container)
+
+First-Run Steps:
+1. Ensure your Postgres and Redis containers are running.
+2. Start this container. The startup script will automatically run database migrations and generate DKIM keys.
+3. Check the container logs to retrieve your auto-generated DKIM DNS TXT record.
+4. Add the necessary A, MX, SPF, DMARC, and DKIM records to your domain's DNS settings.
+  </Overview>
+  <Category>Network:Email Privacy:Anti-Tracking</Category>
+  <Icon>https://raw.githubusercontent.com/JSONbored/unraid-templates/main/icons/simplelogin.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/unraid-templates/main/SimpleLogin-AIO.xml</TemplateURL>
+  <Beta>True</Beta>
+  <Requires>PostgreSQL, Redis, SimpleLogin-Postfix</Requires>
+  <ExtraSearchTerms>email, alias, proxy, privacy, proton, forwarding</ExtraSearchTerms>
+  <Changes>
+[2026-03-21] - Initial massive template rewrite to expose 70+ environment variables natively.
+  </Changes>
+
+  <!-- PORTS -->
+  <Config 
+    Name="WebUI Port" 
+    Target="7777" 
+    Default="7777" 
+    Mode="tcp" 
+    Description="The port for the Web UI. Must be mapped to an available host port." 
+    Type="Port" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="Email Handler Port" 
+    Target="20381" 
+    Default="20381" 
+    Mode="tcp" 
+    Description="The internal port used by the SimpleLogin email handler to receive routed mail from Postfix." 
+    Type="Port" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+
+  <!-- CORE -->
+  <Config 
+    Name="App URL" 
+    Target="URL" 
+    Default="http://localhost:7777" 
+    Mode="" 
+    Description="The public-facing server URL for the SimpleLogin web interface. Expected format: http(s)://domain.com. If left blank, the app will fail to start." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="Flask Secret" 
+    Target="FLASK_SECRET" 
+    Default="changeme123" 
+    Mode="" 
+    Description="Cryptographic secret used by Flask to sign session cookies. Expected format: A long random string. If left blank, the app will crash." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="true"
+  />
+  <Config 
+    Name="Database URI" 
+    Target="DB_URI" 
+    Default="postgresql://user:pass@postgres-shared:5432/simplelogin" 
+    Mode="" 
+    Description="Connection string for the PostgreSQL database. Expected format: postgresql://user:pass@host:port/db. If left blank, the app will crash." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="true"
+  />
+  <Config 
+    Name="Words File Path" 
+    Target="WORDS_FILE_PATH" 
+    Default="local_data/test_words.txt" 
+    Mode="" 
+    Description="Path to the text file containing words used to generate random email aliases. If left blank, fallback defaults are used." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Temp Directory" 
+    Target="TEMP_DIR" 
+    Default="/tmp" 
+    Mode="" 
+    Description="Temporary directory used by the application for processing. If left blank, defaults to /tmp." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+
+  <!-- MAIL -->
+  <Config 
+    Name="Email Domain" 
+    Target="EMAIL_DOMAIN" 
+    Default="sl.lan" 
+    Mode="" 
+    Description="The primary domain used to create aliases. Expected format: domain.com. If left blank, aliases cannot be created." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="Support Email" 
+    Target="SUPPORT_EMAIL" 
+    Default="support@sl.lan" 
+    Mode="" 
+    Description="The address from which transactional system emails are sent. Expected format: email@domain.com. If left blank, system emails may fail to send." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="Support Name" 
+    Target="SUPPORT_NAME" 
+    Default="Son from SimpleLogin" 
+    Mode="" 
+    Description="The display name used for transactional system emails. If left blank, the email address will be used as the name." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Admin Email" 
+    Target="ADMIN_EMAIL" 
+    Default="admin@sl.lan" 
+    Mode="" 
+    Description="The email address designated to receive general system statistics and alerts. If left blank, admin alerts are disabled." 
+    Type="Variable" 
+    Display="always" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Postmaster" 
+    Target="POSTMASTER" 
+    Default="postmaster@example.com" 
+    Mode="" 
+    Description="The official postmaster email address for the server. If left blank, standard bounce protocols may be rejected by strict receivers." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Email Servers With Priority" 
+    Target="EMAIL_SERVERS_WITH_PRIORITY" 
+    Default='[(10, "email.hostname.")]' 
+    Mode="" 
+    Description="Defines the MX servers that custom domains must point to for validation. Expected format: [(10, 'mx.domain.com.')]. If left blank, custom domain validation may fail." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Postfix Server" 
+    Target="POSTFIX_SERVER" 
+    Default="my-postfix.com" 
+    Mode="" 
+    Description="The hostname or IP of the MTA (Postfix) server used to send outbound emails. If left blank, uses localhost." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="Postfix Port" 
+    Target="POSTFIX_PORT" 
+    Default="1025" 
+    Mode="" 
+    Description="The port used to communicate with the outbound Postfix server. If left blank, defaults to 25." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+
+  <!-- DKIM -->
+  <Config 
+    Name="DKIM Appdata Volume" 
+    Target="/dkim" 
+    Default="/mnt/user/appdata/simplelogin/dkim" 
+    Mode="rw" 
+    Description="Volume mapping for DKIM keys. This stores your generated cryptographic keys for signing emails. Must be backed up to prevent mail spoofing rejections." 
+    Type="Path" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="DKIM Private Key Path" 
+    Target="DKIM_PRIVATE_KEY_PATH" 
+    Default="/dkim/dkim.key" 
+    Mode="" 
+    Description="The file path inside the container to the DKIM private key used to compute DKIM-Signatures. If left blank, mail will be unsigned." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="true" 
+    Mask="false"
+  />
+
+  <!-- ALIAS BEHAVIOR -->
+  <Config 
+    Name="Other Alias Domains" 
+    Target="OTHER_ALIAS_DOMAINS" 
+    Default='["domain1.com", "domain2.com"]' 
+    Mode="" 
+    Description="List of additional domains that can be used to create aliases, appending to EMAIL_DOMAIN. Expected format: JSON array. If left blank, only primary domain is used." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Alias Domains" 
+    Target="ALIAS_DOMAINS" 
+    Default='["domain1.com", "domain2.com"]' 
+    Mode="" 
+    Description="Strict list of domains that can be used to create aliases (overrides OTHER_ALIAS_DOMAINS). If left blank, uses fallback arrays." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Premium Alias Domains" 
+    Target="PREMIUM_ALIAS_DOMAINS" 
+    Default='["premium.com"]' 
+    Mode="" 
+    Description="List of domains reserved strictly for premium accounts. If left blank, all domains are free to use." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="First Alias Domain" 
+    Target="FIRST_ALIAS_DOMAIN" 
+    Default="another-domain.com" 
+    Mode="" 
+    Description="The specific alias domain used when automatically creating the first alias for a new user. If left blank, falls back to EMAIL_DOMAIN." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Disable Alias Suffix" 
+    Target="DISABLE_ALIAS_SUFFIX" 
+    Default="1" 
+    Mode="" 
+    Description="Disables the forced '.{random_word}' suffix on new aliases. Highly recommended for self-hosting. Set to 1 to disable." 
+    Type="Variable" 
+    Display="always" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Max Emails Free Plan" 
+    Target="MAX_NB_EMAIL_FREE_PLAN" 
+    Default="5" 
+    Mode="" 
+    Description="The maximum number of aliases a free tier user can generate. If left blank, defaults to 5." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Alias Limit" 
+    Target="ALIAS_LIMIT" 
+    Default="100/day;50/hour;5/minute" 
+    Mode="" 
+    Description="Rate limiting for alias creation to prevent abuse. If left blank, no limit is applied." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Alias Automatic Disable" 
+    Target="ALIAS_AUTOMATIC_DISABLE" 
+    Default="true" 
+    Mode="" 
+    Description="Toggles whether aliases are automatically disabled under certain conditions (like excessive bounces). Set to true or false." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Disable Onboarding" 
+    Target="DISABLE_ONBOARDING" 
+    Default="true" 
+    Mode="" 
+    Description="Disables the series of onboarding emails sent to new users. Set to true to disable." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+
+  <!-- STORAGE -->
+  <Config 
+    Name="Local File Upload" 
+    Target="LOCAL_FILE_UPLOAD" 
+    Default="true" 
+    Mode="" 
+    Description="Instructs the app to upload files to local directory instead of an S3 bucket. Must be true for standard Unraid usage." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="AWS Bucket" 
+    Target="BUCKET" 
+    Default="" 
+    Mode="" 
+    Description="AWS S3 Bucket name for remote storage. If left blank, local storage is used." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="AWS Access Key ID" 
+    Target="AWS_ACCESS_KEY_ID" 
+    Default="" 
+    Mode="" 
+    Description="AWS S3 Access Key ID. Leave blank if using local storage." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+  <Config 
+    Name="AWS Secret Access Key" 
+    Target="AWS_SECRET_ACCESS_KEY" 
+    Default="" 
+    Mode="" 
+    Description="AWS S3 Secret Access Key. Leave blank if using local storage." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+  <Config 
+    Name="AWS Region" 
+    Target="AWS_REGION" 
+    Default="" 
+    Mode="" 
+    Description="AWS S3 Region. Leave blank if using local storage." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+
+  <!-- SECURITY -->
+  <Config 
+    Name="Disable Registration" 
+    Target="DISABLE_REGISTRATION" 
+    Default="1" 
+    Mode="" 
+    Description="Prevents new users from creating accounts. Essential for private self-hosted instances. Set to 1 to disable." 
+    Type="Variable" 
+    Display="always" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Enforce SPF" 
+    Target="ENFORCE_SPF" 
+    Default="true" 
+    Mode="" 
+    Description="Allows SimpleLogin to enforce SPF checks using extra headers appended by Postfix. Recommended true." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="GNUPG Home Volume" 
+    Target="/tmp/gnupg" 
+    Default="/mnt/user/appdata/simplelogin/gnupg" 
+    Mode="rw" 
+    Description="Directory path where the GPG Keyring is stored. Used for encrypting emails to users. Should be backed up." 
+    Type="Path" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="GNUPGHOME Env" 
+    Target="GNUPGHOME" 
+    Default="/tmp/gnupg" 
+    Mode="" 
+    Description="Environment variable pointing to the GPG Keyring folder." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="PGP Sender Private Key Path" 
+    Target="PGP_SENDER_PRIVATE_KEY_PATH" 
+    Default="local_data/private-pgp.asc" 
+    Mode="" 
+    Description="Path to the private key used to sign forwarded emails. If left blank, forwards are not signed." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Allowed Redirect Domains" 
+    Target="ALLOWED_REDIRECT_DOMAINS" 
+    Default="[]" 
+    Mode="" 
+    Description="List of domains permitted in the redirect parameter for absolute URL redirects, preventing open redirect vulnerabilities. If left blank, redirects are strict." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="hCaptcha Secret" 
+    Target="HCAPTCHA_SECRET" 
+    Default="" 
+    Mode="" 
+    Description="Secret key for hCaptcha integration on registration pages. Leave blank to disable." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+  <Config 
+    Name="hCaptcha Sitekey" 
+    Target="HCAPTCHA_SITEKEY" 
+    Default="" 
+    Mode="" 
+    Description="Public site key for hCaptcha integration. Leave blank to disable." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+
+  <!-- OAUTH -->
+  <Config 
+    Name="GitHub Client ID" 
+    Target="GITHUB_CLIENT_ID" 
+    Default="" 
+    Mode="" 
+    Description="Credentials for GitHub OAuth login. If left blank, GitHub login is disabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="GitHub Client Secret" 
+    Target="GITHUB_CLIENT_SECRET" 
+    Default="" 
+    Mode="" 
+    Description="Secret for GitHub OAuth login. If left blank, GitHub login is disabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+  <Config 
+    Name="Google Client ID" 
+    Target="GOOGLE_CLIENT_ID" 
+    Default="" 
+    Mode="" 
+    Description="Credentials for Google OAuth login. If left blank, Google login is disabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Google Client Secret" 
+    Target="GOOGLE_CLIENT_SECRET" 
+    Default="" 
+    Mode="" 
+    Description="Secret for Google OAuth login. If left blank, Google login is disabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+  <Config 
+    Name="OIDC Client ID" 
+    Target="OIDC_CLIENT_ID" 
+    Default="" 
+    Mode="" 
+    Description="Credentials for Generic OpenID Connect login. If left blank, OIDC login is disabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="OIDC Client Secret" 
+    Target="OIDC_CLIENT_SECRET" 
+    Default="" 
+    Mode="" 
+    Description="Secret for Generic OpenID Connect login. If left blank, OIDC login is disabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+
+  <!-- ANALYTICS -->
+  <Config 
+    Name="Plausible Host" 
+    Target="PLAUSIBLE_HOST" 
+    Default="https://plausible.io" 
+    Mode="" 
+    Description="Host URL for Plausible Analytics. Leave blank to disable." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Plausible Domain" 
+    Target="PLAUSIBLE_DOMAIN" 
+    Default="yourdomain.com" 
+    Mode="" 
+    Description="Domain name for Plausible Analytics tracking. Leave blank to disable." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Sentry DSN" 
+    Target="SENTRY_DSN" 
+    Default="" 
+    Mode="" 
+    Description="Sentry endpoint URL for error tracking. Leave blank to disable." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+
+  <!-- ADVANCED -->
+  <Config 
+    Name="Nameservers" 
+    Target="NAMESERVERS" 
+    Default="1.1.1.1,1.0.0.1" 
+    Mode="" 
+    Description="Comma-separated list of DNS nameservers for the app to use directly. Prevents Pi-Hole loop issues. If left blank, uses host default." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Color Log" 
+    Target="COLOR_LOG" 
+    Default="true" 
+    Mode="" 
+    Description="Applies colored logging formatting in Docker logs. Recommended true." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Not Send Email" 
+    Target="NOT_SEND_EMAIL" 
+    Default="false" 
+    Mode="" 
+    Description="Prevents email sending, instead printing the content to standard output. ONLY used for debugging. Set to false for production." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Enable SpamAssassin" 
+    Target="ENABLE_SPAM_ASSASSIN" 
+    Default="0" 
+    Mode="" 
+    Description="Toggles inbound spam scanning using SpamAssassin. Requires a separate SpamAssassin container. Set to 1 to enable." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="SpamAssassin Host" 
+    Target="SPAMASSASSIN_HOST" 
+    Default="127.0.0.1" 
+    Mode="" 
+    Description="The IP address or hostname of the SpamAssassin server. If left blank, spam scanning will fail if enabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Bounce Prefix" 
+    Target="BOUNCE_PREFIX" 
+    Default="bounces+" 
+    Mode="" 
+    Description="The prefix added to the return-path for handling bounces. Must end with a plus. If left blank, VERP is disabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+  <Config 
+    Name="Bounce Suffix" 
+    Target="BOUNCE_SUFFIX" 
+    Default="+@sl.lan" 
+    Mode="" 
+    Description="The suffix added to the return-path for handling bounces. Must start with a plus. If left blank, VERP is disabled." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="false"
+  />
+</Container>
