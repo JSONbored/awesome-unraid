@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Stirling-PDF</Name>
+  <Repository>stirlingtools/stirling-pdf:latest</Repository>
+  <Registry>https://github.com/Stirling-Tools/Stirling-PDF</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Stirling-Tools/Stirling-PDF/issues</Support>
+  <Project>https://stirlingpdf.com</Project>
+  <Overview>Stirling-PDF: Comprehensive web-based PDF manipulation tool. Edit, merge, split, and convert PDFs securely.</Overview>
+  <Category>Productivity: Office: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/main/docs/stirling-pdf-logo.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Config Name="Web Port" Target="8080" Default="8080" Mode="tcp" Description="TIER 1: Stirling-PDF Web UI port." Type="Port" Display="always" Required="true" Mask="false"/>
+  <Config Name="App Name" Target="UI_APPNAME" Default="Stirling-PDF" Mode="" Description="TIER 1: Display name of your instance." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Timezone" Target="TZ" Default="America/Denver" Mode="" Description="TIER 1: Your local timezone. Example: America/Denver." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Data Path" Target="/usr/share/tessdata" Default="/mnt/user/appdata/stirling-pdf/tessdata" Mode="rw" Description="TIER 2: Standard Mode - Path for OCR language data." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Configs Path" Target="/configs" Default="/mnt/user/appdata/stirling-pdf/configs" Mode="rw" Description="TIER 2: Standard Mode - Path for configuration files." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Logs Path" Target="/logs" Default="/mnt/user/appdata/stirling-pdf/logs" Mode="rw" Description="TIER 2: Standard Mode - Path for application logs." Type="Path" Display="advanced" Required="true" Mask="false"/>
+  <Config Name="Enable Login" Target="SECURITY_ENABLELOGIN" Default="false" Mode="" Description="TIER 3: Power Mode - Set to true to enable authentication." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Max File Size" Target="SYSTEM_MAXFILESIZE" Default="100" Mode="" Description="TIER 3: Power Mode - Maximum upload size in MB." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Google Visibility" Target="SYSTEM_GOOGLEVISIBILITY" Default="false" Mode="" Description="TIER 3: Power Mode - Allow search engine indexing." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>
