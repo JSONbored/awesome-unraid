@@ -1,3 +1,0 @@
-<?xml version="1.0"?><Container version="2"><Name>glance</Name><Repository>repo/image</Repository>
-  <Config Name="Config{1..45}" Target="T{1..45}" Default="D{1..45}" Mode="tcp" Description="Desc" Type="Variable" Display="always" Required="true" Mask="false">val</Config>
-</Container>

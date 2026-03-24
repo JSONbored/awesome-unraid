@@ -2,32 +2,203 @@
 <Container version="2">
   <Name>SimpleLogin-AIO</Name>
   <Repository>ghcr.io/jsonbored/simplelogin-aio:latest</Repository>
-  <Registry>https://github.com/simple-login/app</Registry>
+  <Registry>https://github.com/JSONbored/simplelogin-aio</Registry>
   <Network>bridge</Network>
-  <MyIP/>
-  <Shell>bash</Shell>
-  <Privileged>false</Privileged>
-  <Support>https://github.com/JSONbored/simplelogin-aio/discussions</Support>
-  <Project>https://simplelogin.io</Project>
-  <Overview>SimpleLogin: Self-hosted email alias service. This AIO version bundles the Web, API, and Worker into one container using s6-overlay.</Overview>
-  <Category>Security: Privacy: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
-  <TemplateURL/>
-  <Icon>https://raw.githubusercontent.com/simple-login/app/master/static/logo.png</Icon>
-  <ExtraParams/>
-  <PostArgs/>
-  <CPUset/>
-  <DateInstalled/>
-  <DonateText/>
-  <DonateLink/>
-  <Config Name="Web Port" Target="7777" Default="7777" Mode="tcp" Description="TIER 1: SimpleLogin Web/API port. Access the UI here." Type="Port" Display="always" Required="true" Mask="false"/>
-  <Config Name="App URL" Target="URL" Default="" Mode="" Description="TIER 1: The full URL where SimpleLogin is hosted (e.g., https://app.yourdomain.com)." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Email Domain" Target="EMAIL_DOMAIN" Default="" Mode="" Description="TIER 1: Your primary email alias domain (e.g., yourdomain.com)." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Flask Secret" Target="FLASK_SECRET" Default="" Mode="" Description="TIER 1: Random string for session encryption. Generate with 'openssl rand -hex 32'." Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="Timezone" Target="TZ" Default="America/Denver" Mode="" Description="TIER 1: Your local timezone. Example: America/Denver." Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="DB URI" Target="DB_URI" Default="postgresql://simplelogin:password@postgres-shared:5432/simplelogin" Mode="" Description="TIER 2: Standard Mode - PostgreSQL connection string. Recommended: Use postgres-shared." Type="Variable" Display="advanced" Required="true" Mask="true"/>
-  <Config Name="Redis URL" Target="REDIS_URL" Default="redis://redis-shared:6379/0" Mode="" Description="TIER 2: Standard Mode - Redis connection string. Recommended: Use redis-shared." Type="Variable" Display="advanced" Required="true" Mask="false"/>
-  <Config Name="Admin Email" Target="ADMIN_EMAIL" Default="" Mode="" Description="TIER 3: Power Mode - Default admin email address." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Support Email" Target="SUPPORT_EMAIL" Default="" Mode="" Description="TIER 3: Power Mode - Support email shown in UI." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Disable Registration" Target="DISABLE_REGISTRATION" Default="false" Mode="" Description="TIER 3: Power Mode - Set to true to close public registration." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net</Support>
+  <Project>https://simplelogin.io/</Project>
+  <Overview>
+SimpleLogin is an open-source email alias service. It allows users to create disposable email addresses to protect their real identity from spam and data breaches. 
+
+This **All-in-One (AIO)** template is explicitly designed for Unraid beginners. 
+You do **NOT** need to set up any external databases (no separate PostgreSQL or Redis containers required). Everything needed to run SimpleLogin, including the Postfix MTA router and database persistence, is automatically provisioned inside this single container and safely mapped to your appdata folder.
+
+First-Run Steps:
+1. Provide your domain name in the App URL and Email Domain fields.
+2. Provide your chosen SMTP Relay credentials (so you can send emails out, even if your ISP blocks port 25).
+3. Click Apply. 
+4. The container will take about 30 seconds on first boot to self-generate its internal secure databases and DKIM keys. 
+5. Read the container logs after it starts to grab your automatically generated DKIM DNS records!
+
+*Advanced Users:* If you want to use external databases, simply fill out the hidden "Advanced: External DB_URI" variable. Otherwise, leave it blank for zero-configuration mode.
+  </Overview>
+  <Category>Network:Email Privacy:Anti-Tracking</Category>
+  <Icon>https://raw.githubusercontent.com/JSONbored/unraid-templates/main/icons/simplelogin.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/simplelogin-aio/main/SimpleLogin-AIO.xml</TemplateURL>
+  <Beta>True</Beta>
+  <ExtraSearchTerms>email, alias, proxy, privacy, proton, forwarding, self-contained</ExtraSearchTerms>
+
+  <!-- VOLUME MAPPING -->
+  <Config 
+    Name="Appdata Directory" 
+    Target="/appdata" 
+    Default="/mnt/user/appdata/simplelogin-aio" 
+    Mode="rw" 
+    Description="The master folder where the internal database, Redis queue, and DKIM keys are stored safely on your array. Back this folder up!" 
+    Type="Path" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+
+  <!-- PORTS -->
+  <Config 
+    Name="WebUI Port" 
+    Target="7777" 
+    Default="7777" 
+    Mode="tcp" 
+    Description="The port for the Web UI." 
+    Type="Port" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="SMTP Inbound Port" 
+    Target="25" 
+    Default="25" 
+    Mode="tcp" 
+    Description="Public SMTP port. You must forward Port 25 from your router to this Unraid server's IP address so the internet can deliver mail to your aliases." 
+    Type="Port" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+
+  <!-- ESSENTIAL CONFIG -->
+  <Config 
+    Name="App URL" 
+    Target="URL" 
+    Default="http://app.mydomain.com" 
+    Mode="" 
+    Description="The public-facing URL you will use to access the dashboard. Expected format: http(s)://app.domain.com" 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="Email Domain" 
+    Target="EMAIL_DOMAIN" 
+    Default="mydomain.com" 
+    Mode="" 
+    Description="The primary domain used to create aliases." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="Support Email" 
+    Target="SUPPORT_EMAIL" 
+    Default="support@mydomain.com" 
+    Mode="" 
+    Description="The address from which transactional system emails (like password resets) are sent." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="false"
+  />
+  <Config 
+    Name="Flask Secret" 
+    Target="FLASK_SECRET" 
+    Default="" 
+    Mode="" 
+    Description="A random passcode used to secure browser cookies. Type some random gibberish here." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="true"
+  />
+
+  <!-- RELAY MODE DROPDOWN (PULLED FROM POSTFIX) -->
+  <Config 
+    Name="SMTP Relay Mode" 
+    Target="RELAY_MODE" 
+    Default="direct" 
+    Mode="" 
+    Description="Most ISPs block outbound Port 25, so you can't send mail directly. Select an external relay provider here to route your outgoing alias emails, and fill in the credentials in the Advanced view." 
+    Type="Variable" 
+    Display="always" 
+    Required="true" 
+    Mask="false">
+    <Option Value="direct">Direct Delivery (Requires open outbound ISP Port 25)</Option>
+    <Option Value="brevo">Brevo (Sendinblue) Free Tier</Option>
+    <Option Value="protonmail">ProtonMail SMTP Token</Option>
+    <Option Value="gmail">Gmail App Password</Option>
+    <Option Value="mailgun">Mailgun</Option>
+    <Option Value="custom">Custom SMTP Server</Option>
+  </Config>
+
+  <!-- RELAY SECRETS (ADVANCED VIEW) -->
+  <Config Name="Brevo Username" Target="BREVO_USERNAME" Default="" Mode="" Description="If Relay Mode is 'brevo'" Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="Brevo Password" Target="BREVO_PASSWORD" Default="" Mode="" Description="If Relay Mode is 'brevo'" Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="ProtonMail SMTP Token" Target="PROTONMAIL_TOKEN" Default="" Mode="" Description="If Relay Mode is 'protonmail'" Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="Gmail Username" Target="GMAIL_USERNAME" Default="" Mode="" Description="If Relay Mode is 'gmail'" Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="Gmail App Password" Target="GMAIL_APP_PASSWORD" Default="" Mode="" Description="If Relay Mode is 'gmail'" Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="Custom Relay Host" Target="CUSTOM_RELAYHOST" Default="" Mode="" Description="If Relay Mode is 'custom'. Format: [smtp.provider.com]:587" Type="Variable" Display="advanced" Required="false" Mask="false" />
+  <Config Name="Custom Relay Username" Target="CUSTOM_USERNAME" Default="" Mode="" Description="If Relay Mode is 'custom'" Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="Custom Relay Password" Target="CUSTOM_PASSWORD" Default="" Mode="" Description="If Relay Mode is 'custom'" Type="Variable" Display="advanced" Required="false" Mask="true" />
+
+  <!-- ADVANCED: EXTERNAL DB -->
+  <Config 
+    Name="Advanced: External DB_URI" 
+    Target="DB_URI" 
+    Default="" 
+    Mode="" 
+    Description="Leave BLANK to use the internal auto-configuring database. Fill this with a postgresql:// connection string to disable the internal DB and route outside the container." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+  <Config 
+    Name="Advanced: External Redis URL" 
+    Target="REDIS_URL" 
+    Default="" 
+    Mode="" 
+    Description="Leave BLANK to use the internal Redis queue. Fill this in to disable the internal queue and route outside." 
+    Type="Variable" 
+    Display="advanced" 
+    Required="false" 
+    Mask="true"
+  />
+  
+  <Config Name="Disable Registration" Target="DISABLE_REGISTRATION" Default="1" Mode="" Description="Set to 1 to block public registration (recommended)." Type="Variable" Display="advanced" Required="false" Mask="false" />
+
+  <!-- ADVANCED: ACT AS IDENTITY PROVIDER -->
+  <Config Name="IdP: Enable SimpleLogin SSO" Target="ENABLE_OIDC_SERVER" Default="0" Mode="" Description="Set to 1 to allow other apps to u0027Login with SimpleLoginu0027. This automatically generates the required JWT RS256 keys on boot." Type="Variable" Display="advanced" Required="false" Mask="false" />
+
+  <!-- ADVANCED: APPLE SIGN-IN -->
+  <Config Name="Apple: API Secret" Target="APPLE_API_SECRET" Default="" Mode="" Description="If you want to allow iOS users to sign in with Apple. Requires Apple Developer Portal setup." Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="Apple: MacApp API Secret" Target="MACAPP_APPLE_API_SECRET" Default="" Mode="" Description="If using the native Mac app." Type="Variable" Display="advanced" Required="false" Mask="true" />
+
+  <!-- ADVANCED: DATA BREACH SCANNING (HIBP) -->
+  <Config Name="HIBP: API Key" Target="HIBP_API_KEYS" Default="" Mode="" Description="Have I Been Pwned API Key. If provided, SimpleLogin will scan your aliases for data breaches." Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="HIBP: Scan Interval" Target="HIBP_SCAN_INTERVAL_DAYS" Default="7" Mode="" Description="How often (in days) to check HIBP for breaches." Type="Variable" Display="advanced" Required="false" Mask="false" />
+
+  <!-- ADVANCED: SINGLE SIGN-ON (OIDC) -->
+  <Config Name="SSO: OIDC Discovery URL" Target="OIDC_WELL_KNOWN_URL" Default="" Mode="" Description="Enter the well-known URL for your self-hosted IdP (e.g. Tailscale tsidp, Authelia, Authentik). Example: https://auth.lan/.well-known/openid-configuration" Type="Variable" Display="advanced" Required="false" Mask="false" />
+  <Config Name="SSO: OIDC Client ID" Target="OIDC_CLIENT_ID" Default="" Mode="" Description="Client ID for your self-hosted OIDC provider." Type="Variable" Display="advanced" Required="false" Mask="false" />
+  <Config Name="SSO: OIDC Client Secret" Target="OIDC_CLIENT_SECRET" Default="" Mode="" Description="Client Secret for your self-hosted OIDC provider." Type="Variable" Display="advanced" Required="false" Mask="true" />
+  <Config Name="SSO: OIDC Scopes" Target="OIDC_SCOPES" Default="openid email profile" Mode="" Description="Scopes requested from the OIDC provider." Type="Variable" Display="advanced" Required="false" Mask="false" />
+  <Config Name="SSO: OIDC Name Field" Target="OIDC_NAME_FIELD" Default="name" Mode="" Description="The field in the OIDC user info response to use for the user name." Type="Variable" Display="advanced" Required="false" Mask="false" />
+
+  <!-- ADVANCED: ANTI-SPAM -->
+  <Config Name="Anti-Spam: Enable SpamAssassin" Target="ENABLE_SPAM_ASSASSIN" Default="0" Mode="" Description="Set to 1 to enable. Requires a separate, external SpamAssassin container running on your network (too heavy to bundle here)." Type="Variable" Display="advanced" Required="false" Mask="false" />
+  <Config Name="Anti-Spam: SpamAssassin IP" Target="SPAMASSASSIN_HOST" Default="" Mode="" Description="The IP address of your external SpamAssassin container (e.g., 192.168.1.50)." Type="Variable" Display="advanced" Required="false" Mask="false" />
+
+  <!-- ADVANCED: TELEMETRY (SELF-HOSTED) -->
+  <Config Name="Telemetry: Plausible Host" Target="PLAUSIBLE_HOST" Default="" Mode="" Description="URL of your self-hosted Plausible Analytics instance (e.g., http://plausible:8000). Leave blank to disable." Type="Variable" Display="advanced" Required="false" Mask="false" />
+  <Config Name="Telemetry: Plausible Domain" Target="PLAUSIBLE_DOMAIN" Default="" Mode="" Description="Domain name tracked in Plausible." Type="Variable" Display="advanced" Required="false" Mask="false" />
+  <Config Name="Telemetry: Sentry DSN" Target="SENTRY_DSN" Default="" Mode="" Description="DSN URL for your self-hosted Sentry instance. Leave blank to disable." Type="Variable" Display="advanced" Required="false" Mask="true" />
+
+
+  <!-- ADVANCED: PGP ENCRYPTION -->
+  <Config Name="PGP: Keyring Directory" Target="/pgp" Default="/mnt/user/appdata/simplelogin-aio/pgp" Mode="rw" Description="Persistent directory for your GnuPG keyring. Used to encrypt forwarded emails before they reach your real inbox." Type="Path" Display="advanced" Required="false" Mask="false" />
+  <Config Name="PGP: Auto-Generate Server Key" Target="AUTO_GENERATE_PGP" Default="0" Mode="" Description="Set to 1 to automatically generate a 4096-bit RSA server key for signing outgoing forwards. Safe to enable, but only useful for advanced users. Defaults to 0 (Disabled)." Type="Variable" Display="advanced" Required="false" Mask="false" />
+
+  <Config Name="PGP: Private Key Path" Target="PGP_SENDER_PRIVATE_KEY_PATH" Default="" Mode="" Description="Internal container path to your specific private PGP key (e.g., /pgp/my-private-key.asc) if you want SimpleLogin to sign outbound forwards." Type="Variable" Display="advanced" Required="false" Mask="false" />
+
 </Container>

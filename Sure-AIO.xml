@@ -2,54 +2,150 @@
 <Container version="2">
   <Name>Sure-AIO</Name>
   <Repository>ghcr.io/jsonbored/sure-aio:latest</Repository>
-  <Registry>https://github.com/we-promise/sure</Registry>
+  <Registry>ghcr.io/jsonbored/sure-aio</Registry>
   <Network>bridge</Network>
   <MyIP/>
-  <Shell>bash</Shell>
+  <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/we-promise/sure/discussions</Support>
+  <Support>https://github.com/JSONbored/sure-aio/issues</Support>
   <Project>https://github.com/we-promise/sure</Project>
-  <Overview>Sure: The personal finance app for everyone. Community fork of Maybe Finance. This AIO version bundles the Rails web server and Sidekiq worker into a single container using s6-overlay.</Overview>
-  <Category>Finance: Personal:</Category>
+  <Overview>Sure (formerly Maybe Finance) is a self-hosted personal finance app.&#xD;
+&#xD;
+[b]All-In-One (AIO) Edition[/b]&#xD;
+The absolute easiest way to deploy Sure on Unraid. This is a "mega-container" that internally manages the Rails Server, Sidekiq Worker, PostgreSQL 15, and Redis. It requires NO external database setups and NO custom networks. Just click install.&#xD;
+&#xD;
+[b]Initial Setup:[/b]&#xD;
+1. Generate a SECRET_KEY_BASE (Run `openssl rand -hex 64` in your Unraid terminal) and paste it below.&#xD;
+2. Click "Apply".&#xD;
+3. Wait for the WebUI. Databases are auto-provisioned securely inside the container.</Overview>
+  <Category>Tools: Finance: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
-  <TemplateURL/>
-  <Icon>https://raw.githubusercontent.com/we-promise/sure/main/public/favicon.ico</Icon>
+  <TemplateURL>https://github.com/JSONbored/awesome-unraid/raw/master/sure-aio.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/master/icons/sure.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
   <DateInstalled/>
   <DonateText/>
   <DonateLink/>
-  <Config Name="Web Port" Target="3000" Default="3000" Mode="tcp" Description="Web interface port." Type="Port" Display="always" Required="true" Mask="false"/>
-  <Config Name="App URL" Target="APP_DOMAIN" Default="" Mode="" Description="TIER 1: The full URL where your instance is hosted (e.g., https://sure.yourdomain.com)." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Secret Key Base" Target="SECRET_KEY_BASE" Default="" Mode="" Description="TIER 1: Secret key for encryption. Generate a unique 128-char hex string (e.g., with 'openssl rand -hex 64')." Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="Default Currency" Target="DEFAULT_CURRENCY" Default="USD" Mode="" Description="TIER 1: Default currency code (e.g., USD, EUR, GBP)." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Onboarding State" Target="ONBOARDING_STATE" Default="open" Mode="" Description="TIER 1: Controls user registration flow (open, closed, invite_only)." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Timezone" Target="TZ" Default="America/Denver" Mode="" Description="TIER 1: Your local timezone. Example: America/Denver." Type="Variable" Display="always" Required="false" Mask="false"/>
-  <Config Name="Postgres Host" Target="DB_HOST" Default="postgres-shared" Mode="" Description="TIER 2: Standard Mode - Host for postgres-shared." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Postgres Port" Target="DB_PORT" Default="5432" Mode="" Description="TIER 2: Standard Mode - Port for postgres-shared." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Postgres User" Target="POSTGRES_USER" Default="postgres" Mode="" Description="TIER 2: Standard Mode - PostgreSQL username." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Postgres Password" Target="POSTGRES_PASSWORD" Default="postgres" Mode="" Description="TIER 2: Standard Mode - PostgreSQL password." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Redis URL" Target="REDIS_URL" Default="redis://redis-shared:6379/1" Mode="" Description="TIER 2: Standard Mode - Full Redis connection string (e.g., redis://redis-shared:6379/1)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Storage Path" Target="/rails/storage" Default="/mnt/user/appdata/sure-aio/storage" Mode="rw" Description="TIER 3: Power Mode - Persistent path for application data." Type="Path" Display="advanced" Required="true" Mask="false"/>
-  <Config Name="OpenAI Token" Target="OPENAI_ACCESS_TOKEN" Default="" Mode="" Description="TIER 3: Power Mode - Optional token for AI insights." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Twelve Data API Key" Target="TWELVE_DATA_API_KEY" Default="" Mode="" Description="TIER 3: Power Mode - API key for market data (twelvedata.com)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Exchange Rate Provider" Target="EXCHANGE_RATE_PROVIDER" Default="yahoo_finance" Mode="" Description="TIER 3: Power Mode - Data provider (twelve_data or yahoo_finance)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="SMTP Address" Target="SMTP_ADDRESS" Default="" Mode="" Description="TIER 3: Power Mode - SMTP server address." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="SMTP Port" Target="SMTP_PORT" Default="465" Mode="" Description="TIER 3: Power Mode - SMTP server port." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="SMTP Username" Target="SMTP_USERNAME" Default="" Mode="" Description="TIER 3: Power Mode - SMTP username." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="SMTP Password" Target="SMTP_PASSWORD" Default="" Mode="" Description="TIER 3: Power Mode - SMTP password." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Email Sender" Target="EMAIL_SENDER" Default="" Mode="" Description="TIER 3: Power Mode - Email address to send from." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Brandfetch Client ID" Target="BRAND_FETCH_CLIENT_ID" Default="" Mode="" Description="TIER 3: Power Mode - Optional for merchant logos." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Product Name" Target="PRODUCT_NAME" Default="Sure" Mode="" Description="TIER 3: Power Mode - Customize product branding name." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Brand Name" Target="BRAND_NAME" Default="Sure" Mode="" Description="TIER 3: Power Mode - Customize brand name." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="PostHog Key" Target="POSTHOG_KEY" Default="" Mode="" Description="TIER 3: Power Mode - Optional analytics key." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="PostHog Host" Target="POSTHOG_HOST" Default="" Mode="" Description="TIER 3: Power Mode - Optional analytics host." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Active Record Primary Key" Target="ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY" Default="" Mode="" Description="TIER 3: Power Mode - Encryption key (auto-generated if blank)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Active Record Deterministic Key" Target="ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY" Default="" Mode="" Description="TIER 3: Power Mode - Deterministic key (auto-generated if blank)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Active Record Key Salt" Target="ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT" Default="" Mode="" Description="TIER 3: Power Mode - Key salt (auto-generated if blank)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Rails Log Level" Target="RAILS_LOG_LEVEL" Default="info" Mode="" Description="TIER 3: Power Mode - Logging verbosity (debug, info, warn, error)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Rails Serve Static" Target="RAILS_SERVE_STATIC_FILES" Default="true" Mode="" Description="TIER 3: Power Mode - Required for AIO mode server static assets." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Rails Environment" Target="RAILS_ENV" Default="production" Mode="" Description="TIER 3: Power Mode - Deployment environment." Type="Variable" Display="advanced" Required="true" Mask="false"/>
-  <Config Name="Self Hosted Mode" Target="SELF_HOSTED" Default="true" Mode="" Description="TIER 3: Power Mode - Must be true for community fork self-hosting." Type="Variable" Display="advanced" Required="true" Mask="false"/>
+  <Description/>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>3000</HostPort>
+        <ContainerPort>3000</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/sure-aio/system</HostDir>
+      <ContainerDir>/rails/storage</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/sure-aio/postgres</HostDir>
+      <ContainerDir>/var/lib/postgresql/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/sure-aio/redis</HostDir>
+      <ContainerDir>/var/lib/redis</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>true</Value>
+      <Name>SELF_HOSTED</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yahoo_finance</Value>
+      <Name>EXCHANGE_RATE_PROVIDER</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>yahoo_finance</Value>
+      <Name>SECURITIES_PROVIDER</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+
+  <!-- Core Required -->
+  <Config Name="Web UI Port" Target="3000" Default="3000" Mode="tcp" Description="The main web interface port." Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="Secret Key Base" Target="SECRET_KEY_BASE" Default="" Mode="" Description="Critical: Run 'openssl rand -hex 64' in your Unraid terminal and paste the randomized hash here." Type="Variable" Display="always" Required="true" Mask="true"/>
+  
+  <!-- Internal Volumes -->
+  <Config Name="App Volumes - Rails Storage" Target="/rails/storage" Default="/mnt/user/appdata/sure-aio/system" Mode="rw" Description="Internal rails file storage." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/sure-aio/system</Config>
+  <Config Name="App Volumes - Postgres DB" Target="/var/lib/postgresql/data" Default="/mnt/user/appdata/sure-aio/postgres" Mode="rw" Description="Internal PostgreSQL database storage mapped externally so you don't lose data." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/sure-aio/postgres</Config>
+  <Config Name="App Volumes - Redis Cache" Target="/var/lib/redis" Default="/mnt/user/appdata/sure-aio/redis" Mode="rw" Description="Internal Redis memory cache." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/sure-aio/redis</Config>
+
+  <!-- Advanced: Overrides & Proxy -->
+  <Config Name="App Domain" Target="APP_DOMAIN" Default="" Mode="" Description="The domain your Sure instance is hosted at (used for email links)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Onboarding State" Target="ONBOARDING_STATE" Default="open" Mode="" Description="Controls user registration. Use 'open', 'closed', or 'invite_only'." Type="Variable" Display="advanced" Required="false" Mask="false">open</Config>
+  <Config Name="Assume SSL" Target="RAILS_ASSUME_SSL" Default="true" Mode="" Description="Set to 'true' if you are putting this behind a reverse proxy like Nginx Proxy Manager or Cloudflare Tunnels." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Disable SSL Enforcing" Target="DISABLE_SSL" Default="false" Mode="" Description="Set to 'true' to completely disable SSL enforcement." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <!-- Advanced: External Databases (Override AIO defaults) -->
+  <Config Name="[External DB] DB Host Override" Target="DB_HOST" Default="" Mode="" Description="Optional: To use an external Postgres database instead of the internal one, enter its IP/Hostname here." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[External DB] DB Port Override" Target="DB_PORT" Default="" Mode="" Description="Optional: External database port." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[External DB] DB User Override" Target="POSTGRES_USER" Default="" Mode="" Description="Optional: External database user." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[External DB] DB Password Override" Target="POSTGRES_PASSWORD" Default="" Mode="" Description="Optional: External database password." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[External DB] Redis URL Override" Target="REDIS_URL" Default="" Mode="" Description="Optional: To use an external Redis instead of the internal one, enter URL here." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <!-- Advanced: Encryption & Names -->
+  <Config Name="[System] Product Name" Target="PRODUCT_NAME" Default="" Mode="" Description="Custom product name in UI." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[System] Brand Name" Target="BRAND_NAME" Default="" Mode="" Description="Custom brand name in UI." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[DB Encryption] Primary Key" Target="ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY" Default="" Mode="" Description="(Optional) Explicit DB encryption key. If blank, derives from SECRET_KEY_BASE." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[DB Encryption] Deterministic Key" Target="ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY" Default="" Mode="" Description="(Optional) Deterministic key for Active Record Encryption." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[DB Encryption] Derivation Salt" Target="ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT" Default="" Mode="" Description="(Optional) Key derivation salt." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+
+  <!-- Advanced: AI & Intelligence -->
+  <Config Name="[AI] OpenAI / Ollama Token" Target="OPENAI_ACCESS_TOKEN" Default="" Mode="" Description="API Key for OpenAI. If using a local Ollama container, enter 'ollama-local'." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[AI] OpenAI URI Base" Target="OPENAI_URI_BASE" Default="" Mode="" Description="Leave blank for official OpenAI. For local LLMs, enter your endpoint (e.g., 'http://ollama:11434/v1')." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[AI] Model Name" Target="OPENAI_MODEL" Default="" Mode="" Description="If using Ollama, you MUST define the model here (e.g., 'llama3.1:13b' or 'gemma2:7b')." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <!-- Advanced: External AI Assistant (OpenClaw / MCP) -->
+  <Config Name="[Ext. AI] Assistant Type" Target="ASSISTANT_TYPE" Default="" Mode="" Description="Set to 'external' to route all chat to an external agent via MCP." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Ext. AI] Assistant URL" Target="EXTERNAL_ASSISTANT_URL" Default="" Mode="" Description="URL for the external agent (e.g. https://your-openclaw/v1/chat/completions)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Ext. AI] Assistant Token" Target="EXTERNAL_ASSISTANT_TOKEN" Default="" Mode="" Description="Auth token for the external agent." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Ext. AI] Agent ID" Target="EXTERNAL_ASSISTANT_AGENT_ID" Default="" Mode="" Description="Optional Agent ID for OpenClaw routing." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Ext. AI] MCP User Email" Target="MCP_USER_EMAIL" Default="" Mode="" Description="Required if using Ext. AI: Email of an existing Sure user." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Ext. AI] MCP API Token" Target="MCP_API_TOKEN" Default="" Mode="" Description="Required if using Ext. AI: Bearer token for agent callbacks to /mcp." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+
+  <!-- Advanced: Telemetry (Langfuse / Posthog) -->
+  <Config Name="[Telemetry] PostHog Key" Target="POSTHOG_KEY" Default="" Mode="" Description="PostHog API Key." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Telemetry] PostHog Host" Target="POSTHOG_HOST" Default="" Mode="" Description="PostHog Host URL." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Telemetry] Langfuse Host" Target="LANGFUSE_HOST" Default="" Mode="" Description="Langfuse instance URL for LLM observability." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Telemetry] Langfuse Public Key" Target="LANGFUSE_PUBLIC_KEY" Default="" Mode="" Description="Langfuse Public Key." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Telemetry] Langfuse Secret Key" Target="LANGFUSE_SECRET_KEY" Default="" Mode="" Description="Langfuse Secret Key." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+
+  <!-- Advanced: External Providers -->
+  <Config Name="[API] Brandfetch Client ID" Target="BRAND_FETCH_CLIENT_ID" Default="" Mode="" Description="Brandfetch OAuth key to auto-grab logos for banks and merchants." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[API] Twelve Data Key" Target="TWELVE_DATA_API_KEY" Default="" Mode="" Description="Optional API Key for Twelve Data (exchange rates/stocks) if you don't want to use the default free Yahoo Finance option." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  
+  <!-- Advanced: Enterprise Auth -->
+  <Config Name="[Auth] OIDC Client ID" Target="OIDC_CLIENT_ID" Default="" Mode="" Description="OpenID Connect Client ID (Authentik/Authelia)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Auth] OIDC Client Secret" Target="OIDC_CLIENT_SECRET" Default="" Mode="" Description="OpenID Connect Client Secret." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Auth] OIDC Issuer" Target="OIDC_ISSUER" Default="" Mode="" Description="OpenID Connect Issuer URL." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Auth] OIDC Redirect URI" Target="OIDC_REDIRECT_URI" Default="" Mode="" Description="OpenID Connect Redirect URI." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <!-- Advanced: Active Storage (S3 / R2) -->
+  <Config Name="[Storage] Provider Strategy" Target="ACTIVE_STORAGE_SERVICE" Default="" Mode="" Description="Change from local disk to: 'amazon', 'cloudflare', or 'generic_s3'." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Storage] Access Key ID" Target="S3_ACCESS_KEY_ID" Default="" Mode="" Description="S3 Access Key (Also map to CLOUDFLARE_ACCESS_KEY_ID or GENERIC_S3_ACCESS_KEY_ID based on strategy)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Storage] Secret Access Key" Target="S3_SECRET_ACCESS_KEY" Default="" Mode="" Description="S3 Secret Access Key." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Storage] Region" Target="S3_REGION" Default="" Mode="" Description="S3 Region (defaults to us-east-1)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Storage] Bucket Name" Target="S3_BUCKET" Default="" Mode="" Description="Target Bucket." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Storage] Custom Endpoint" Target="GENERIC_S3_ENDPOINT" Default="" Mode="" Description="(Generic S3 Only) Custom Minio/S3 endpoint URL." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <!-- Advanced: SMTP -->
+  <Config Name="[Email] SMTP Address" Target="SMTP_ADDRESS" Default="" Mode="" Description="Hostname for your SMTP server." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Email] SMTP Port" Target="SMTP_PORT" Default="465" Mode="" Description="Port for your SMTP server." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Email] SMTP Username" Target="SMTP_USERNAME" Default="" Mode="" Description="Username for your SMTP server." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Email] SMTP Password" Target="SMTP_PASSWORD" Default="" Mode="" Description="Password for your SMTP server." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Email] Sender Address" Target="EMAIL_SENDER" Default="" Mode="" Description="The email address your app will send mail from (e.g., finance@mydomain.com)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
 </Container>
