@@ -4,12 +4,13 @@ A curated collection of impeccable, privacy-focused Unraid CA templates.
 
 ## 📦 Templates Included
 - [sure-aio](https://github.com/JSONbored/sure-aio)
+- [khoj-aio](https://github.com/JSONbored/khoj-aio)
 - [simplelogin-aio](https://github.com/JSONbored/simplelogin-aio)
 - [nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio)
 - [mem0-aio](https://github.com/JSONbored/mem0-aio)
 
 ## 📈 Star History
-[![Star History Chart](https://api.star-history.com/svg?repos=JSONbored/awesome-unraid,JSONbored/sure-aio,JSONbored/simplelogin-aio,JSONbored/nanoclaw-aio,JSONbored/mem0-aio&theme=dark)](https://star-history.com/#JSONbored/awesome-unraid&JSONbored/sure-aio&JSONbored/simplelogin-aio&JSONbored/nanoclaw-aio&JSONbored/mem0-aio&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=JSONbored/awesome-unraid,JSONbored/sure-aio,JSONbored/khoj-aio,JSONbored/simplelogin-aio,JSONbored/nanoclaw-aio,JSONbored/mem0-aio&theme=dark)](https://star-history.com/#JSONbored/awesome-unraid&JSONbored/sure-aio&JSONbored/khoj-aio&JSONbored/simplelogin-aio&JSONbored/nanoclaw-aio&JSONbored/mem0-aio&Date)
 
 ---
 
