@@ -21,7 +21,7 @@ This template automatically handles the Docker-in-Docker setup and Node.js boots
   <Category>Tools: AI: HomeAutomation:</Category>
   <WebUI/>
   <TemplateURL>https://github.com/JSONbored/nanoclaw-aio/raw/master/NanoClaw-AIO.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/dh7/NanoClaw/main/assets/nanoclaw-logo.png</Icon>
+  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/nanoclaw.png</Icon>
   <ExtraParams>--security-opt apparmor=unconfined --cap-add=SYS_ADMIN</ExtraParams>
   <PostArgs/>
   <CPUset/>
