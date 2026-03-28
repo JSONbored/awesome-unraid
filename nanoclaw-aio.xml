@@ -2,13 +2,13 @@
 <Container version="2">
   <Name>nanoclaw-aio</Name>
   <Repository>ghcr.io/jsonbored/nanoclaw-aio:latest</Repository>
-  <Registry>ghcr.io/jsonbored/nanoclaw-aio</Registry>
+  <Registry>https://ghcr.io/jsonbored/nanoclaw-aio</Registry>
   <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/JSONbored/nanoclaw-aio/issues</Support>
-  <Project>https://nanoclaw.dev/</Project>
+  <Project>https://github.com/JSONbored/nanoclaw-aio</Project>
   <Overview>NanoClaw is a lightweight alternative to OpenClaw that runs in containers for security. Connects to WhatsApp, Telegram, Slack, Discord, Gmail and other messaging apps, has memory, scheduled jobs, and runs directly on Anthropic's Agents SDK.&#xD;
 &#xD;
 [b]All-In-One (AIO) Edition[/b]&#xD;

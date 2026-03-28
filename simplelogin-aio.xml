@@ -2,12 +2,12 @@
 <Container version="2">
   <Name>simplelogin-aio</Name>
   <Repository>ghcr.io/jsonbored/simplelogin-aio:latest</Repository>
-  <Registry>https://github.com/JSONbored/simplelogin-aio</Registry>
+  <Registry>https://ghcr.io/jsonbored/simplelogin-aio</Registry>
   <Network>bridge</Network>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <Privileged>false</Privileged>
   <Support>https://github.com/JSONbored/simplelogin-aio/issues</Support>
-  <Project>https://simplelogin.io/</Project>
+  <Project>https://github.com/JSONbored/simplelogin-aio</Project>
   <Overview>
 SimpleLogin is an open-source email alias service. It allows users to create disposable email addresses to protect their real identity from spam and data breaches. 
 

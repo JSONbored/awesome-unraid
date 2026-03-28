@@ -2,13 +2,13 @@
 <Container version="2">
   <Name>mem0-aio</Name>
   <Repository>ghcr.io/jsonbored/mem0-aio:latest</Repository>
-  <Registry>ghcr.io/jsonbored/mem0-aio</Registry>
+  <Registry>https://ghcr.io/jsonbored/mem0-aio</Registry>
   <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/JSONbored/mem0-aio/issues</Support>
-  <Project>https://mem0.ai/</Project>
+  <Project>https://github.com/JSONbored/mem0-aio</Project>
   <Overview>Mem0 (OpenMemory) is a Universal Memory Layer for AI Agents. It provides an intelligent memory layer using an MCP server and dashboard, allowing AI models to remember user preferences and adapt continuously.&#xD;
 &#xD;
 [b]All-In-One (AIO) Edition[/b]&#xD;

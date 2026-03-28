@@ -2,13 +2,13 @@
 <Container version="2">
   <Name>sure-aio</Name>
   <Repository>ghcr.io/jsonbored/sure-aio:latest</Repository>
-  <Registry>ghcr.io/jsonbored/sure-aio</Registry>
+  <Registry>https://ghcr.io/jsonbored/sure-aio</Registry>
   <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/JSONbored/sure-aio/issues</Support>
-  <Project>https://github.com/we-promise/sure</Project>
+  <Project>https://github.com/JSONbored/sure-aio</Project>
   <Overview>Sure (formerly Maybe Finance) is a self-hosted personal finance app.&#xD;
 &#xD;
 [b]All-In-One (AIO) Edition[/b]&#xD;
