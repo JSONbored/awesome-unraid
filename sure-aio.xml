@@ -21,7 +21,7 @@ The absolute easiest way to deploy Sure on Unraid. This is a "mega-container" th
   <Category>Tools: Finance: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
   <TemplateURL>https://github.com/JSONbored/awesome-unraid/raw/master/sure-aio.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/sure.png</Icon>
+  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/sure.svg</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>

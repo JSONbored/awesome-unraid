@@ -21,7 +21,7 @@ This template uses `s6-overlay` to internally bundle and manage the Python API B
   <Category>Tools: AI: HomeAutomation:</Category>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
   <TemplateURL>https://github.com/JSONbored/mem0-aio/raw/main/unraid/Mem0-AIO.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/mem0.png</Icon>
+  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/mem0.jpeg</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
