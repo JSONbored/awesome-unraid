@@ -9,9 +9,13 @@ Only fully tested, optimized, and complete templates are listed here.
 
 | Application | Description | XML Template | Repository |
 | :--- | :--- | :--- | :--- |
-| **SimpleLogin AIO** | Open-source email routing service. A complete AIO setup including Postfix. | [`SimpleLogin-AIO.xml`](./SimpleLogin-AIO.xml) | [JSONbored/simplelogin-aio](https://github.com/JSONbored/simplelogin-aio) |
-| **Sure AIO** | Self-hosted personal finance app (formerly Maybe Finance). A complete AIO setup including Rails, PostgreSQL, and Redis. | [`Sure-AIO.xml`](./Sure-AIO.xml) | [JSONbored/sure-aio](https://github.com/JSONbored/sure-aio) |
-| **NanoClaw AIO** | Lightweight, container-isolated AI Agent framework supporting Telegram, WhatsApp, and more. | [`NanoClaw-AIO.xml`](./NanoClaw-AIO.xml) | [JSONbored/nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio) |
+| **simplelogin-aio** | Open-source email routing service. A complete AIO setup including Postfix. | [`simplelogin-aio.xml`](./simplelogin-aio.xml) | [JSONbored/simplelogin-aio](https://github.com/JSONbored/simplelogin-aio) |
+| **sure-aio** | Self-hosted personal finance app (formerly Maybe Finance). A complete AIO setup including Rails, PostgreSQL, and Redis. | [`sure-aio.xml`](./sure-aio.xml) | [JSONbored/sure-aio](https://github.com/JSONbored/sure-aio) |
+| **nanoclaw-aio** | Lightweight, container-isolated AI Agent framework supporting Telegram, WhatsApp, and more. | [`nanoclaw-aio.xml`](./nanoclaw-aio.xml) | [JSONbored/nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio) |
+
+## 📈 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=JSONbored/awesome-unraid,JSONbored/simplelogin-aio,JSONbored/sure-aio,JSONbored/nanoclaw-aio&type=Date)](https://star-history.com/#JSONbored/awesome-unraid&JSONbored/simplelogin-aio&JSONbored/sure-aio&JSONbored/nanoclaw-aio&Date)
 
 ---
 
