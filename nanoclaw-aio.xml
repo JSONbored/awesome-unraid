@@ -20,7 +20,7 @@ This template automatically handles the Docker-in-Docker setup and Node.js boots
 3. Start the container and check the logs for initialization status.</Overview>
   <Category>Tools: AI: HomeAutomation:</Category>
   <WebUI/>
-  <TemplateURL>https://github.com/JSONbored/nanoclaw-aio/raw/master/NanoClaw-AIO.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/nanoclaw-aio.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/nanoclaw.webp</Icon>
   <ExtraParams>--security-opt apparmor=unconfined --cap-add=SYS_ADMIN</ExtraParams>
   <PostArgs/>
