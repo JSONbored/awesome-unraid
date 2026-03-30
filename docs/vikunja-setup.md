@@ -1,1 +1,0 @@
-# vikunja Setup Guide

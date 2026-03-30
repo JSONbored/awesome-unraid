@@ -1,10 +1,12 @@
 
----
+# Icons
 
-## 👨‍💻 About the Creator
+This directory contains the shared icon assets referenced by the published Unraid
+templates in the repo root.
 
-Built with 🖤 by **[JSONbored](https://github.com/JSONbored)**.
+Guidelines:
 
-- 🌐 **Portfolio & Services:** [aethereal.dev](https://aethereal.dev)
-- 📅 **Book a Call:** [cal.com/aethereal](https://cal.com/aethereal) 
-- ☕ **Support my work:** [Sponsor on GitHub](https://github.com/sponsors/JSONbored)
+- keep filenames stable once published when possible
+- prefer a single canonical icon per app template
+- remove stale placeholder notes when an icon has been added for real
+- keep icon filenames aligned with the XML `Icon` URLs

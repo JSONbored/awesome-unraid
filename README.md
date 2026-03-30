@@ -1,23 +1,36 @@
-# 👻 Awesome Unraid (JSONbored)
+# Awesome Unraid
 
-A curated collection of impeccable, privacy-focused Unraid CA templates.
+Published Unraid XML templates and shared icons for the JSONbored AIO app repos.
 
-## 📦 Templates Included
+This repo is the distribution layer for Community Applications style templates. The
+source of truth for app behavior, CI, Dockerfiles, and detailed app docs lives in
+the individual AIO repos. This repo stores the synced XML and icon assets that
+Unraid users actually import.
+
+## Included Templates
+
 - [sure-aio](https://github.com/JSONbored/sure-aio)
+- [signoz-aio](https://github.com/JSONbored/signoz-aio)
 - [khoj-aio](https://github.com/JSONbored/khoj-aio)
 - [simplelogin-aio](https://github.com/JSONbored/simplelogin-aio)
 - [nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio)
 - [mem0-aio](https://github.com/JSONbored/mem0-aio)
 
-## 📈 Star History
-[![Star History Chart](https://api.star-history.com/svg?repos=JSONbored/awesome-unraid,JSONbored/sure-aio,JSONbored/khoj-aio,JSONbored/simplelogin-aio,JSONbored/nanoclaw-aio,JSONbored/mem0-aio&theme=dark)](https://star-history.com/#JSONbored/awesome-unraid&JSONbored/sure-aio&JSONbored/khoj-aio&JSONbored/simplelogin-aio&JSONbored/nanoclaw-aio&JSONbored/mem0-aio&Date)
+## How This Repo Fits Together
 
----
+- Root `*.xml` files are the published Unraid templates.
+- `icons/` contains the shared icon assets referenced by those templates.
+- The app repos sync their XML and icon updates here.
+- The sync model is intentionally simple: app repos should only need the
+  `SYNC_TOKEN` secret. Target paths should be hardcoded per repo rather than
+  relying on GitHub repository variables.
 
-## 👨‍💻 About the Creator
+## Maintenance Notes
 
-Built with 🖤 by **[JSONbored](https://github.com/JSONbored)**.
+- Keep template metadata aligned with the source AIO repos.
+- Prefer raw `awesome-unraid/main/...` URLs for `TemplateURL` and `Icon`.
+- Remove stale templates, docs, and icons instead of leaving placeholders behind.
 
-- 🌐 **Portfolio & Services:** [aethereal.dev](https://aethereal.dev)
-- 📅 **Book a Call:** [cal.com/aethereal](https://cal.com/aethereal) 
-- ☕ **Support my work:** [Sponsor on GitHub](https://github.com/sponsors/JSONbored)
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=JSONbored/awesome-unraid,JSONbored/sure-aio,JSONbored/signoz-aio,JSONbored/khoj-aio,JSONbored/simplelogin-aio,JSONbored/nanoclaw-aio,JSONbored/mem0-aio&theme=dark)](https://star-history.com/#JSONbored/awesome-unraid&JSONbored/sure-aio&JSONbored/signoz-aio&JSONbored/khoj-aio&JSONbored/simplelogin-aio&JSONbored/nanoclaw-aio&JSONbored/mem0-aio&Date)
