@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>simplelogin-aio</Name>
+  <Name>SimpleLogin-AIO</Name>
   <Repository>ghcr.io/jsonbored/simplelogin-aio:latest</Repository>
   <Registry>https://ghcr.io/jsonbored/simplelogin-aio</Registry>
   <Network>bridge</Network>
@@ -9,23 +9,30 @@
   <Support>https://github.com/JSONbored/simplelogin-aio/issues</Support>
   <Project>https://github.com/JSONbored/simplelogin-aio</Project>
   <Overview>
-SimpleLogin is an open-source email alias service. It allows users to create disposable email addresses to protect their real identity from spam and data breaches. 
+SimpleLogin is an open-source email alias service that lets you create forwarding addresses to protect your real inbox from spam, tracking, and data breaches.
 
-This **All-in-One (AIO)** template is explicitly designed for Unraid beginners. 
-You do **NOT** need to set up any external databases (no separate PostgreSQL or Redis containers required). Everything needed to run SimpleLogin, including the Postfix MTA router and database persistence, is automatically provisioned inside this single container and safely mapped to your appdata folder.
+This All-In-One template packages the full self-hosted stack into one Unraid container:
+- SimpleLogin web UI
+- background jobs
+- inbound email handler
+- Postfix
+- PostgreSQL
+- Redis
 
-First-Run Steps:
-1. Provide your domain name in the App URL and Email Domain fields.
-2. Provide your chosen SMTP Relay credentials (so you can send emails out, even if your ISP blocks port 25).
-3. Click Apply. 
-4. The container will take about 30 seconds on first boot to self-generate its internal secure databases and DKIM keys. 
-5. Read the container logs after it starts to grab your automatically generated DKIM DNS records!
+Beginner path:
+1. Set App URL, Email Domain, Support Email, and Flask Secret.
+2. Pick an SMTP relay mode if your ISP blocks outbound port 25.
+3. Forward inbound TCP port 25 from your router to Unraid.
+4. Start the container and wait for first-boot initialization to finish.
+5. Add the required DNS records from the setup guide.
 
-*Advanced Users:* If you want to use external databases, simply fill out the hidden "Advanced: External DB_URI" variable. Otherwise, leave it blank for zero-configuration mode.
+Advanced users can still point the container at external PostgreSQL and Redis by setting DB_URI and REDIS_URL. Otherwise, leave them blank and the internal services stay self-contained inside this single image.
+
+Current upstream packaging is amd64/x86_64 only.
   </Overview>
   <Category>Network:Email Privacy:Anti-Tracking</Category>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/simplelogin.jpeg</Icon>
-  <TemplateURL>https://raw.githubusercontent.com/JSONbored/simplelogin-aio/main/SimpleLogin-AIO.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
   <Beta>True</Beta>
   <ExtraSearchTerms>email, alias, proxy, privacy, proton, forwarding, self-contained</ExtraSearchTerms>
 
@@ -35,7 +42,7 @@ First-Run Steps:
     Target="/appdata" 
     Default="/mnt/user/appdata/simplelogin-aio" 
     Mode="rw" 
-    Description="The master folder where the internal database, Redis queue, and DKIM keys are stored safely on your array. Back this folder up!" 
+    Description="Primary persistent directory for PostgreSQL, Redis, uploaded files, generated keys, and SimpleLogin state. Back this folder up." 
     Type="Path" 
     Display="always" 
     Required="true" 
@@ -59,7 +66,7 @@ First-Run Steps:
     Target="25" 
     Default="25" 
     Mode="tcp" 
-    Description="Public SMTP port. You must forward Port 25 from your router to this Unraid server's IP address so the internet can deliver mail to your aliases." 
+    Description="Inbound SMTP port. Forward TCP port 25 from your router or firewall to the Unraid host so the internet can deliver mail to your aliases." 
     Type="Port" 
     Display="always" 
     Required="true" 
@@ -72,7 +79,7 @@ First-Run Steps:
     Target="URL" 
     Default="http://app.mydomain.com" 
     Mode="" 
-    Description="The public-facing URL you will use to access the dashboard. Expected format: http(s)://app.domain.com" 
+    Description="Public URL for the SimpleLogin dashboard. Example: https://app.example.com" 
     Type="Variable" 
     Display="always" 
     Required="true" 
@@ -105,7 +112,7 @@ First-Run Steps:
     Target="FLASK_SECRET" 
     Default="" 
     Mode="" 
-    Description="A random passcode used to secure browser cookies. Type some random gibberish here." 
+    Description="Long random secret used for Flask sessions and application security. Use a unique high-entropy value." 
     Type="Variable" 
     Display="always" 
     Required="true" 
@@ -118,7 +125,7 @@ First-Run Steps:
     Target="RELAY_MODE" 
     Default="direct" 
     Mode="" 
-    Description="Most ISPs block outbound Port 25, so you can't send mail directly. Select an external relay provider here to route your outgoing alias emails, and fill in the credentials in the Advanced view." 
+    Description="Choose how outbound mail should leave the container. Most residential ISPs block outbound port 25, so a relay provider is usually the safest choice." 
     Type="Variable" 
     Display="always" 
     Required="true" 
@@ -147,7 +154,7 @@ First-Run Steps:
     Target="DB_URI" 
     Default="" 
     Mode="" 
-    Description="Leave BLANK to use the internal auto-configuring database. Fill this with a postgresql:// connection string to disable the internal DB and route outside the container." 
+    Description="Leave blank to use the internal PostgreSQL instance. Set a full postgresql:// connection string only if you want an external database." 
     Type="Variable" 
     Display="advanced" 
     Required="false" 
@@ -158,7 +165,7 @@ First-Run Steps:
     Target="REDIS_URL" 
     Default="" 
     Mode="" 
-    Description="Leave BLANK to use the internal Redis queue. Fill this in to disable the internal queue and route outside." 
+    Description="Leave blank to use the internal Redis instance. Set a full redis:// URL only if you want an external queue/cache." 
     Type="Variable" 
     Display="advanced" 
     Required="false" 
