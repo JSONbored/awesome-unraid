@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>signoz-aio</Name>
+  <Repository>ghcr.io/jsonbored/signoz-aio:latest</Repository>
+  <Registry>https://ghcr.io/jsonbored/signoz-aio</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/JSONbored/signoz-aio/issues</Support>
+  <Project>https://github.com/JSONbored/signoz-aio</Project>
+  <Overview>SigNoz is a self-hosted observability platform for traces, metrics, and logs.&#xD;
+[center][b][color=#ff8c00]JSONbored Verified AIO Template[/color][/b][/center]
+
+This Unraid AIO template packages the official SigNoz Docker stack into a single container with sensible defaults for a first deployment. It internally manages SigNoz, the SigNoz OTEL collector, ClickHouse, and ZooKeeper, so you do not need to translate the upstream multi-container compose stack yourself. Advanced users can also override the metadata database and ClickHouse endpoints with supported upstream-backed settings.&#xD;
+&#xD;
+[b]All-In-One (AIO) Edition[/b]&#xD;
+Install it, keep the defaults, and point your OpenTelemetry senders at the published OTLP ports. Advanced settings are available for power users, but they are intentionally limited to real upstream-backed options instead of speculative extras.&#xD;
+&#xD;
+[b]Initial Setup:[/b]&#xD;
+1. Click Apply.&#xD;
+2. Wait for first startup to complete. This image boots multiple internal services, so the first run is heavier than a typical single-service container.&#xD;
+3. Open the WebUI on port 8080.&#xD;
+4. Send telemetry to OTLP gRPC on 4317 or OTLP HTTP on 4318.&#xD;
+5. Optional: enable the built-in local host agent if you want this same Unraid machine to forward host metrics, Docker metrics, and Docker logs into SigNoz automatically.&#xD;
+&#xD;
+[b]Resource Note:[/b] ClickHouse makes SigNoz powerful, but also heavier on RAM, disk, and startup time than lighter AIO apps.</Overview>
+  <Category>Monitoring: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/signoz-aio.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/signoz.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Description/>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8080</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>4317</HostPort>
+        <ContainerPort>4317</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>4318</HostPort>
+        <ContainerPort>4318</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/signoz-aio</HostDir>
+      <ContainerDir>/appdata</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Name>TZ</Name>
+      <Value>UTC</Value>
+    </Variable>
+  </Environment>
+
+  <Config Name="SigNoz UI Port" Target="8080" Default="8080" Mode="tcp" Description="Main SigNoz UI and API port." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="OTLP gRPC Port" Target="4317" Default="4317" Mode="tcp" Description="OTLP gRPC ingest port for agents, SDKs, and collectors sending telemetry into SigNoz." Type="Port" Display="always" Required="true" Mask="false">4317</Config>
+  <Config Name="OTLP HTTP Port" Target="4318" Default="4318" Mode="tcp" Description="OTLP HTTP ingest port for telemetry senders that use HTTP instead of gRPC." Type="Port" Display="always" Required="true" Mask="false">4318</Config>
+  <Config Name="AppData - SigNoz Root" Target="/appdata" Default="/mnt/user/appdata/signoz-aio" Mode="rw" Description="Single persistent root that stores ClickHouse data, ZooKeeper state, generated config, and SigNoz SQLite metadata by default." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/signoz-aio</Config>
+  <Config Name="Enable Local Host Agent" Target="SIGNOZ_ENABLE_HOST_AGENT" Default="false" Mode="" Description="Set to true to let this same container also collect local host metrics, Docker metrics, and Docker logs from this Unraid machine when the default host mounts are present." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="Timezone" Target="TZ" Default="UTC" Mode="" Description="Container timezone." Type="Variable" Display="advanced" Required="false" Mask="false">UTC</Config>
+  <Config Name="[Metadata DB] Provider" Target="SIGNOZ_SQLSTORE_PROVIDER" Default="sqlite" Mode="" Description="Advanced. Metadata database backend for organizations, users, dashboards, and settings. Leave at sqlite for the built-in self-contained install, or set to postgres to use an external PostgreSQL database." Type="Variable" Display="advanced" Required="false" Mask="false">sqlite</Config>
+  <Config Name="[Metadata DB] SQLite Path" Target="SIGNOZ_SQLSTORE_SQLITE_PATH" Default="/appdata/signoz/signoz.db" Mode="" Description="Advanced. SQLite file path for SigNoz metadata when the metadata DB provider is set to sqlite." Type="Variable" Display="advanced" Required="false" Mask="false">/appdata/signoz/signoz.db</Config>
+  <Config Name="[Metadata DB] PostgreSQL DSN" Target="SIGNOZ_SQLSTORE_POSTGRES_DSN" Default="" Mode="" Description="Advanced. PostgreSQL connection string used when SIGNOZ_SQLSTORE_PROVIDER=postgres. Example: postgres://signoz:your_password@postgres:5432/signoz?sslmode=disable" Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Auth] Provision Root User" Target="SIGNOZ_USER_ROOT_ENABLED" Default="false" Mode="" Description="Advanced. Set to true to provision a SigNoz root admin user on startup. This works with either SQLite or PostgreSQL metadata storage." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="[Auth] Root User Email" Target="SIGNOZ_USER_ROOT_EMAIL" Default="" Mode="" Description="Advanced. Root user email address used when root user provisioning is enabled." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Auth] Root User Password" Target="SIGNOZ_USER_ROOT_PASSWORD" Default="" Mode="" Description="Advanced. Root user password used when root user provisioning is enabled." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Auth] Root User Org Name" Target="SIGNOZ_USER_ROOT_ORG_NAME" Default="default" Mode="" Description="Advanced. Organization name for the provisioned root user." Type="Variable" Display="advanced" Required="false" Mask="false">default</Config>
+  <Config Name="[Auth] Root User Org ID" Target="SIGNOZ_USER_ROOT_ORG_ID" Default="" Mode="" Description="Advanced. Optional predetermined UUIDv7 for the root user's organization." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Host Agent] Host Root Path" Target="/hostfs" Default="/" Mode="ro" Description="Advanced. Host root mount used by the optional local host agent for host metrics collection. Leave at the default when enabling the local host agent on Unraid." Type="Path" Display="advanced" Required="false" Mask="false">/</Config>
+  <Config Name="[Host Agent] Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Advanced. Docker socket mount used by the optional local host agent for Docker metrics collection." Type="Path" Display="advanced" Required="false" Mask="false">/var/run/docker.sock</Config>
+  <Config Name="[Host Agent] Docker Container Logs Path" Target="/var/lib/docker/containers" Default="/var/lib/docker/containers" Mode="ro" Description="Advanced. Docker containers log directory used by the optional local host agent for container log collection." Type="Path" Display="advanced" Required="false" Mask="false">/var/lib/docker/containers</Config>
+  <Config Name="Tokenizer JWT Secret" Target="SIGNOZ_TOKENIZER_JWT_SECRET" Default="" Mode="" Description="Optional. Leave blank to auto-generate a persistent secret on first boot and save it under /appdata/config/generated.env." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[ClickHouse] Use External ClickHouse" Target="SIGNOZ_USE_EXTERNAL_CLICKHOUSE" Default="false" Mode="" Description="Advanced. Set to true to disable the bundled ClickHouse and ZooKeeper services and use external ClickHouse endpoints instead. When enabled, configure the ClickHouse DSN and healthcheck URL options below." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="[ClickHouse] Base DSN" Target="SIGNOZ_TELEMETRYSTORE_CLICKHOUSE_DSN" Default="tcp://127.0.0.1:9000" Mode="" Description="Advanced. Base ClickHouse DSN used by SigNoz. Leave at the default for the bundled database, or point it at your external ClickHouse endpoint." Type="Variable" Display="advanced" Required="false" Mask="false">tcp://127.0.0.1:9000</Config>
+  <Config Name="[ClickHouse] Healthcheck URL" Target="SIGNOZ_CLICKHOUSE_HEALTHCHECK_URL" Default="http://127.0.0.1:8123/ping" Mode="" Description="Advanced. HTTP healthcheck URL used before SigNoz and the collector start. Change this when using external ClickHouse." Type="Variable" Display="advanced" Required="false" Mask="false">http://127.0.0.1:8123/ping</Config>
+  <Config Name="[Host Agent] Prometheus Targets" Target="SIGNOZ_HOST_AGENT_PROMETHEUS_TARGETS" Default="" Mode="" Description="Advanced. Optional comma-separated Prometheus scrape targets for the built-in local host agent, for example: node-exporter:9100,cadvisor:8080." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Host Agent] Prometheus Metrics Path" Target="SIGNOZ_HOST_AGENT_PROMETHEUS_METRICS_PATH" Default="/metrics" Mode="" Description="Advanced. Metrics path used for the built-in host agent's Prometheus scrape targets." Type="Variable" Display="advanced" Required="false" Mask="false">/metrics</Config>
+  <Config Name="[Host Agent] Prometheus Scrape Interval" Target="SIGNOZ_HOST_AGENT_PROMETHEUS_SCRAPE_INTERVAL" Default="30s" Mode="" Description="Advanced. Scrape interval used for Prometheus targets defined for the built-in host agent." Type="Variable" Display="advanced" Required="false" Mask="false">30s</Config>
+  <Config Name="[Collector] OTEL Resource Attributes" Target="OTEL_RESOURCE_ATTRIBUTES" Default="host.name=signoz-host,os.type=linux" Mode="" Description="Advanced OpenTelemetry resource attributes injected into the internal collector. Useful if you want a clearer default host or environment label." Type="Variable" Display="advanced" Required="false" Mask="false">host.name=signoz-host,os.type=linux</Config>
+  <Config Name="[Collector] Low Cardinal Exception Grouping" Target="LOW_CARDINAL_EXCEPTION_GROUPING" Default="false" Mode="" Description="Advanced upstream collector option for ClickHouse trace exception grouping. Leave at false unless you intentionally want the alternate grouping behavior." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="[Collector] ClickHouse Base DSN Override" Target="SIGNOZ_OTEL_COLLECTOR_CLICKHOUSE_DSN" Default="" Mode="" Description="Advanced. Optional collector-specific ClickHouse base DSN override. Leave blank to inherit the main ClickHouse base DSN." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Collector] ClickHouse Timeout" Target="SIGNOZ_OTEL_COLLECTOR_TIMEOUT" Default="10m" Mode="" Description="Advanced timeout used by the internal SigNoz collector for ClickHouse operations and migrations." Type="Variable" Display="advanced" Required="false" Mask="false">10m</Config>
+  <Config Name="[Collector] ClickHouse Cluster Name" Target="SIGNOZ_OTEL_COLLECTOR_CLICKHOUSE_CLUSTER" Default="cluster" Mode="" Description="Advanced cluster name used by the SigNoz collector migrations. The official external ClickHouse setup requires the cluster name to remain cluster unless you know exactly what you are changing." Type="Variable" Display="advanced" Required="false" Mask="false">cluster</Config>
+  <Config Name="[Collector] ClickHouse Replication Mode" Target="SIGNOZ_OTEL_COLLECTOR_CLICKHOUSE_REPLICATION" Default="false" Mode="" Description="Advanced replication setting used by the SigNoz collector migrations." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="[ZooKeeper] Auto-Purge Interval" Target="ZOO_AUTOPURGE_INTERVAL" Default="1" Mode="" Description="Advanced internal housekeeping interval in hours for ZooKeeper snapshot and log cleanup. The default matches the official SigNoz Docker deployment." Type="Variable" Display="advanced" Required="false" Mask="false">1</Config>
+</Container>

@@ -25,7 +25,7 @@ First-Run Steps:
   </Overview>
   <Category>Network:Email Privacy:Anti-Tracking</Category>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/simplelogin.jpeg</Icon>
-  <TemplateURL>https://raw.githubusercontent.com/JSONbored/simplelogin-aio/main/SimpleLogin-AIO.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
   <Beta>True</Beta>
   <ExtraSearchTerms>email, alias, proxy, privacy, proton, forwarding, self-contained</ExtraSearchTerms>
 
