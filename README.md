@@ -39,6 +39,8 @@ used by CA when showing repository and author information.
 
 This repository is intended to be a continuously updated catalog on `main`, not a formal release-managed artifact repository.
 
+`CHANGELOG.md` may still be refreshed automatically to summarize catalog changes, but this repo does not cut formal GitHub Releases.
+
 For app-specific release history, use the individual AIO repositories.
 
 ## Star History

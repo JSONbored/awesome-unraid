@@ -1,0 +1,50 @@
+name: Update Catalog Changelog
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - CHANGELOG.md
+
+jobs:
+  update-changelog:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Install git-cliff
+        env:
+          GIT_CLIFF_VERSION: 2.12.0
+        run: |
+          archive="git-cliff-${GIT_CLIFF_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          curl -fsSL -o "/tmp/${archive}" "https://github.com/orhun/git-cliff/releases/download/v${GIT_CLIFF_VERSION}/${archive}"
+          tar -xzf "/tmp/${archive}" -C /tmp
+          install "/tmp/git-cliff-${GIT_CLIFF_VERSION}/git-cliff" /usr/local/bin/git-cliff
+
+      - name: Generate changelog
+        env:
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git-cliff --config cliff.toml --unreleased --output CHANGELOG.md
+
+      - name: Create changelog PR
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
+        with:
+          commit-message: "chore(changelog): update catalog history"
+          title: "chore(changelog): update catalog history"
+          body: |
+            This PR refreshes `CHANGELOG.md` for the current `main` catalog state.
+
+            - updates the rolling catalog changelog with `git-cliff`
+            - does not create tags or GitHub Releases
+          branch: "changelog/update-catalog-history"
+          delete-branch: true

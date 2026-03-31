@@ -17,6 +17,7 @@ This repository is the central Unraid catalog for the broader AIO portfolio.
 ## Release model
 
 - This repo is a continuously updated catalog on `main`, not a formal release-managed artifact repo.
+- `CHANGELOG.md` may still be refreshed automatically to summarize catalog history.
 - Keep changelog-friendly Conventional Commit titles and PR titles so catalog history stays readable.
 
 ## Catalog expectations
