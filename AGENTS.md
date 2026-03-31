@@ -16,9 +16,8 @@ This repository is the central Unraid catalog for the broader AIO portfolio.
 
 ## Release model
 
-- This repo uses normal semver releases such as `v0.1.0`.
-- Formal changelog updates and GitHub Releases are release-driven.
-- Keep changelog-friendly Conventional Commit titles and PR titles.
+- This repo is a continuously updated catalog on `main`, not a formal release-managed artifact repo.
+- Keep changelog-friendly Conventional Commit titles and PR titles so catalog history stays readable.
 
 ## Catalog expectations
 
