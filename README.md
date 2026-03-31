@@ -35,6 +35,12 @@ used by CA when showing repository and author information.
 - Prefer raw `awesome-unraid/main/...` URLs for `TemplateURL` and `Icon`.
 - Remove stale templates, docs, and icons instead of leaving placeholders behind.
 
+## Releases
+
+This catalog should use normal semver releases such as `v0.1.0`.
+
+See [docs/releases.md](/Users/shadowbook/Documents/awesome-unraid/docs/releases.md) for the protected-branch-safe changelog and release flow.
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=JSONbored/awesome-unraid,JSONbored/sure-aio,JSONbored/signoz-aio,JSONbored/khoj-aio,JSONbored/simplelogin-aio,JSONbored/nanoclaw-aio,JSONbored/mem0-aio&theme=dark)](https://star-history.com/#JSONbored/awesome-unraid&JSONbored/sure-aio&JSONbored/signoz-aio&JSONbored/khoj-aio&JSONbored/simplelogin-aio&JSONbored/nanoclaw-aio&JSONbored/mem0-aio&Date)
