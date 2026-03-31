@@ -7,6 +7,9 @@ source of truth for app behavior, CI, Dockerfiles, and detailed app docs lives i
 the individual AIO repos. This repo stores the synced XML and icon assets that
 Unraid users actually import.
 
+It also contains the repository-level Community Applications maintainer profile
+used by CA when showing repository and author information.
+
 ## Included Templates
 
 - [sure-aio](https://github.com/JSONbored/sure-aio)
@@ -19,6 +22,7 @@ Unraid users actually import.
 ## How This Repo Fits Together
 
 - Root `*.xml` files are the published Unraid templates.
+- `ca_profile.xml` defines the repository maintainer profile for Community Applications.
 - `icons/` contains the shared icon assets referenced by those templates.
 - The app repos sync their XML and icon updates here.
 - The sync model is intentionally simple: app repos should only need the
