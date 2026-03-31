@@ -2,9 +2,11 @@
 <Maintainer>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/profile.png</Icon>
   <Profile>
-    JSONbored publishes beginner-friendly All-in-One Unraid containers for powerful self-hosted apps that normally require multi-container setup, manual dependency wiring, or advanced compose translation. The goal is to make advanced software easier to discover, install, update, and support on real homelabs without hiding important power-user options.
+    JSONbored publishes Unraid-first All-in-One containers for self-hosted software that normally requires multi-container setup, manual dependency wiring, or compose-heavy deployment. The focus is practical homelab usability: simpler installation, sane defaults, honest documentation about tradeoffs, and support for advanced users who want to override pieces of the stack.
   </Profile>
-  <WebPage>https://github.com/JSONbored/awesome-unraid</WebPage>
+  <WebPage>https://aethereal.dev</WebPage>
+  <Twitter>https://x.com/jsonbored</Twitter>
+  <Forum>https://forums.unraid.net/profile/261555-jsonbored/</Forum>
   <DonateLink>https://github.com/sponsors/JSONbored</DonateLink>
   <DonateText>If these AIO templates save you time, please consider supporting ongoing maintenance through GitHub Sponsors or Ko-fi.</DonateText>
 </Maintainer>
