@@ -11,3 +11,5 @@ Notable changes are typically driven by:
 - sync and maintenance cleanup
 
 For app-specific release history, use the individual AIO repositories.
+
+This catalog is maintained continuously on `main` and does not require formal GitHub Releases.

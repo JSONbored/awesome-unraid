@@ -35,11 +35,13 @@ used by CA when showing repository and author information.
 - Prefer raw `awesome-unraid/main/...` URLs for `TemplateURL` and `Icon`.
 - Remove stale templates, docs, and icons instead of leaving placeholders behind.
 
-## Releases
+## Catalog History
 
-This catalog should use normal semver releases such as `v0.1.0`.
+This repository is intended to be a continuously updated catalog on `main`, not a formal release-managed artifact repository.
 
-See [docs/releases.md](/Users/shadowbook/Documents/awesome-unraid/docs/releases.md) for the protected-branch-safe changelog and release flow.
+`CHANGELOG.md` may still be refreshed automatically to summarize catalog changes, but this repo does not cut formal GitHub Releases.
+
+For app-specific release history, use the individual AIO repositories.
 
 ## Star History
 
