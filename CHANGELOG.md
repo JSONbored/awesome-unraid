@@ -49,6 +49,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Auto-sync mem0-aio assets from upstream
 - Auto-sync sure-aio.xml from upstream
 - Auto-sync simplelogin-aio.xml from upstream
+- Auto-sync sure-aio.xml from upstream
 
 
 ### Other Changes
