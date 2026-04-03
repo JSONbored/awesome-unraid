@@ -10,18 +10,21 @@ Unraid users actually import.
 It also contains the repository-level Community Applications maintainer profile
 used by CA when showing repository and author information.
 
-## Included Templates
+## Current CA-Published Template
 
 - [sure-aio](https://github.com/JSONbored/sure-aio)
-- [signoz-aio](https://github.com/JSONbored/signoz-aio)
-- [khoj-aio](https://github.com/JSONbored/khoj-aio)
-- [simplelogin-aio](https://github.com/JSONbored/simplelogin-aio)
-- [nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio)
-- [mem0-aio](https://github.com/JSONbored/mem0-aio)
+
+## In Progress
+
+- [signoz-aio](https://github.com/JSONbored/signoz-aio) - in progress
+- [khoj-aio](https://github.com/JSONbored/khoj-aio) - in progress
+- [simplelogin-aio](https://github.com/JSONbored/simplelogin-aio) - in progress
+- [nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio) - in progress
+- [mem0-aio](https://github.com/JSONbored/mem0-aio) - in progress
 
 ## How This Repo Fits Together
 
-- Root `*.xml` files are the published Unraid templates.
+- Root `*.xml` files are the currently published Unraid templates.
 - `ca_profile.xml` defines the repository maintainer profile for Community Applications.
 - `icons/` contains the shared icon assets referenced by those templates.
 - The app repos sync their XML and icon updates here.
@@ -33,6 +36,7 @@ used by CA when showing repository and author information.
 
 - Keep template metadata aligned with the source AIO repos.
 - Prefer raw `awesome-unraid/main/...` URLs for `TemplateURL` and `Icon`.
+- Keep only CA-ready templates on `main`.
 - Remove stale templates, docs, and icons instead of leaving placeholders behind.
 
 ## Catalog History
