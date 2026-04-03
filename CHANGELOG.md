@@ -24,6 +24,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Update maintainer profile metadata
 - Add repository guidance
 - Add sure-aio screenshots
+- Limit CA repo to sure-aio
 
 
 ### Features
@@ -50,6 +51,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Auto-sync mem0-aio assets from upstream
 - Auto-sync sure-aio.xml from upstream
 - Auto-sync simplelogin-aio.xml from upstream
+- Auto-sync sure-aio.xml from upstream
 - Auto-sync sure-aio.xml from upstream
 - Auto-sync sure-aio.xml from upstream
 
