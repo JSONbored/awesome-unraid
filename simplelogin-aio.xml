@@ -97,14 +97,7 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Primary Email Domain" Target="EMAIL_DOMAIN" Default="example.com" Mode="" Description="Real public alias domain, for example example.com. Do not use a private-only tailnet domain here." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Support Email" Target="SUPPORT_EMAIL" Default="support@example.com" Mode="" Description="Working mailbox used for system mail, for example support@example.com. Use an address that already exists." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Flask Secret" Target="FLASK_SECRET" Default="" Mode="" Description="Long random app secret. Generate with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct" Mode="" Description="Outbound mail mode. Leave at direct only if your host can really send on TCP 25. Otherwise choose a relay provider." Type="Variable" Display="always" Required="false" Mask="false">
-    <Option Value="direct">Direct Delivery</Option>
-    <Option Value="brevo">Brevo</Option>
-    <Option Value="protonmail">Proton Mail SMTP Token</Option>
-    <Option Value="gmail">Gmail App Password</Option>
-    <Option Value="mailgun">Mailgun</Option>
-    <Option Value="custom">Custom SMTP Relay</Option>
-  </Config>
+  <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct|brevo|protonmail|gmail|mailgun|custom" Mode="" Description="Outbound mail mode. Use a relay provider if your ISP blocks outbound TCP 25." Type="Variable" Display="always" Required="true" Mask="false">direct</Config>
 
   <!-- Relay credentials -->
   <Config Name="Brevo Username" Target="BREVO_USERNAME" Default="" Mode="" Description="Brevo SMTP username, usually your account email. Required when RELAY_MODE=brevo." Type="Variable" Display="advanced" Required="false" Mask="true"/>
