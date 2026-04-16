@@ -17,9 +17,10 @@
 [b]Quick Install (Beginners)[/b]&#xD;
 1. Install this template in Unraid.&#xD;
 2. Set [code]URL[/code], [code]EMAIL_DOMAIN[/code], [code]SUPPORT_EMAIL[/code], and [code]FLASK_SECRET[/code].&#xD;
-3. Choose an outbound relay mode if your ISP blocks outbound TCP 25.&#xD;
-4. Forward inbound TCP 25 from your router/firewall to the Unraid host if you want internet mail delivery.&#xD;
-5. Start the container, wait for first boot to finish, then add the required DNS records from the setup guide.&#xD;
+3. Leave registration enabled for first boot, create your first account in the web UI, then disable registration later in Advanced View if you want a private instance.&#xD;
+4. Choose an outbound relay mode if your ISP blocks outbound TCP 25.&#xD;
+5. Forward inbound TCP 25 from your router/firewall to the Unraid host if you want internet mail delivery.&#xD;
+6. Start the container, wait for first boot to finish, then add the required DNS records from the setup guide.&#xD;
 &#xD;
 [b]Power Users (Advanced View)[/b]&#xD;
 - Advanced View exposes the full official upstream self-hosting environment surface plus wrapper-specific relay and AIO controls.&#xD;
@@ -92,11 +93,11 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="SMTP Inbound Port" Target="25" Default="25" Mode="tcp" Description="Inbound SMTP port. Forward TCP 25 from your router or firewall to the Unraid host if you want aliases to receive internet mail." Type="Port" Display="always" Required="true" Mask="false">25</Config>
 
   <!-- Core required -->
-  <Config Name="App URL" Target="URL" Default="https://app.example.com" Mode="" Description="Public HTTPS URL for the dashboard, for example https://mail.example.com." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Primary Email Domain" Target="EMAIL_DOMAIN" Default="example.com" Mode="" Description="Primary alias domain, for example example.com." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Support Email" Target="SUPPORT_EMAIL" Default="support@example.com" Mode="" Description="From address for system mail, for example support@example.com." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="App URL" Target="URL" Default="https://app.example.com" Mode="" Description="Canonical HTTPS URL for the dashboard, for example https://app.example.com. This does not need to be the same as your SMTP/MX hostname." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Primary Email Domain" Target="EMAIL_DOMAIN" Default="example.com" Mode="" Description="Real public alias domain, for example example.com. Do not use a private-only tailnet domain here." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Support Email" Target="SUPPORT_EMAIL" Default="support@example.com" Mode="" Description="Working mailbox used for system mail, for example support@example.com. Use an address that already exists." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Flask Secret" Target="FLASK_SECRET" Default="" Mode="" Description="Long random app secret. Generate with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct" Mode="" Description="Outbound mail mode. Use a relay provider if your ISP blocks outbound TCP 25." Type="Variable" Display="always" Required="true" Mask="false">
+  <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct" Mode="" Description="Outbound mail mode. Leave at direct only if your host can really send on TCP 25. Otherwise choose a relay provider." Type="Variable" Display="always" Required="false" Mask="false">
     <Option Value="direct">Direct Delivery</Option>
     <Option Value="brevo">Brevo</Option>
     <Option Value="protonmail">Proton Mail SMTP Token</Option>
@@ -108,7 +109,7 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <!-- Relay credentials -->
   <Config Name="Brevo Username" Target="BREVO_USERNAME" Default="" Mode="" Description="Brevo SMTP username, usually your account email. Required when RELAY_MODE=brevo." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Brevo Password" Target="BREVO_PASSWORD" Default="" Mode="" Description="Brevo SMTP key or password. Required when RELAY_MODE=brevo." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Proton Mail SMTP Token" Target="PROTONMAIL_TOKEN" Default="" Mode="" Description="Proton Mail Bridge SMTP token. Required when RELAY_MODE=protonmail." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Proton Mail SMTP Token" Target="PROTONMAIL_TOKEN" Default="" Mode="" Description="Proton SMTP token. Required when RELAY_MODE=protonmail. The username stays SUPPORT_EMAIL." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Gmail Username" Target="GMAIL_USERNAME" Default="" Mode="" Description="Full Gmail address used for relay auth. Required when RELAY_MODE=gmail." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Gmail App Password" Target="GMAIL_APP_PASSWORD" Default="" Mode="" Description="16-character Gmail app password. Required when RELAY_MODE=gmail." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Mailgun Username" Target="MAILGUN_USERNAME" Default="" Mode="" Description="Mailgun SMTP username, usually postmaster@yourdomain. Required when RELAY_MODE=mailgun." Type="Variable" Display="advanced" Required="false" Mask="true"/>
@@ -118,25 +119,43 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Custom Relay Password" Target="CUSTOM_PASSWORD" Default="" Mode="" Description="SMTP password for your custom relay. Required when RELAY_MODE=custom." Type="Variable" Display="advanced" Required="false" Mask="true"/>
 
   <!-- AIO core overrides -->
-  <Config Name="External PostgreSQL DB_URI" Target="DB_URI" Default="" Mode="" Description="Leave blank for the bundled database. External format: postgresql://user:pass@host:5432/dbname" Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="External Redis URL" Target="REDIS_URL" Default="" Mode="" Description="Leave blank for the bundled Redis. External format: redis://:pass@host:6379/0" Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="External PostgreSQL DB_URI" Target="DB_URI" Default="" Mode="" Description="Leave blank for the bundled database. When set to an external host, the bundled PostgreSQL stays idle. Format: postgresql://user:pass@host:5432/dbname" Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="External Redis URL" Target="REDIS_URL" Default="" Mode="" Description="Leave blank for the bundled Redis. When set to an external host, the bundled Redis stays idle. Format: redis://:pass@host:6379/0" Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Postfix Server Override" Target="POSTFIX_SERVER" Default="127.0.0.1" Mode="" Description="Advanced escape hatch. Leave at 127.0.0.1 to keep the bundled Postfix path." Type="Variable" Display="advanced" Required="false" Mask="false">127.0.0.1</Config>
   <Config Name="Postfix Port Override" Target="POSTFIX_PORT" Default="25" Mode="" Description="Advanced escape hatch. Leave at 25 for the bundled Postfix path." Type="Variable" Display="advanced" Required="false" Mask="false">25</Config>
   <Config Name="DNS Nameservers" Target="NAMESERVERS" Default="1.1.1.1,1.0.0.1" Mode="" Description="Comma-separated resolvers used for lookups, for example 1.1.1.1,1.0.0.1." Type="Variable" Display="advanced" Required="false" Mask="false">1.1.1.1,1.0.0.1</Config>
   <Config Name="Custom Temp Directory" Target="TEMP_DIR" Default="" Mode="" Description="Optional temp directory path inside the container or a mounted path." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Words File Path" Target="WORDS_FILE_PATH" Default="/code/local_data/test_words.txt" Mode="" Description="Advanced path override for the words file used for random alias generation. Use /custom-assets if you mount your own file." Type="Variable" Display="advanced" Required="false" Mask="false">/code/local_data/test_words.txt</Config>
-  <Config Name="Local File Uploads" Target="LOCAL_FILE_UPLOAD" Default="true" Mode="" Description="Leave true for local file storage inside /appdata." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Local File Uploads" Target="LOCAL_FILE_UPLOAD" Default="true" Mode="" Description="Leave true for local file storage inside /appdata." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="true">True</Option>
+    <Option Value="false">False</Option>
+  </Config>
   <Config Name="GnuPG Home" Target="GNUPGHOME" Default="/pgp" Mode="" Description="GnuPG home directory path used for PGP features." Type="Variable" Display="advanced" Required="false" Mask="false">/pgp</Config>
   <Config Name="Partner API Token Secret" Target="PARTNER_API_TOKEN_SECRET" Default="" Mode="" Description="Optional partner token secret. Generate with: openssl rand -hex 32. Blank uses FLASK_SECRET." Type="Variable" Display="advanced" Required="false" Mask="true"/>
 
   <!-- Security and registration -->
-  <Config Name="Disable Registration" Target="DISABLE_REGISTRATION" Default="1" Mode="" Description="Set to 1 to block public registration after your initial setup." Type="Variable" Display="advanced" Required="false" Mask="false">1</Config>
-  <Config Name="Disable Onboarding Emails" Target="DISABLE_ONBOARDING" Default="true" Mode="" Description="Recommended for self-hosted installs." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
-  <Config Name="Disable Alias Suffix" Target="DISABLE_ALIAS_SUFFIX" Default="1" Mode="" Description="Set to 1 to disable the default random-word alias suffix requirement." Type="Variable" Display="advanced" Required="false" Mask="false">1</Config>
-  <Config Name="Enable SPF Enforcement" Target="ENFORCE_SPF" Default="true" Mode="" Description="Enable SPF enforcement using the extra headers provided by Postfix." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
-  <Config Name="Print Emails Instead of Sending" Target="NOT_SEND_EMAIL" Default="false" Mode="" Description="For testing only. When true, email bodies are logged instead of sent." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Disable Registration" Target="DISABLE_REGISTRATION" Default="false" Mode="" Description="Leave false for first boot so you can create the first account. After that, switch to true and restart to close registration." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
+  <Config Name="Disable Onboarding Emails" Target="DISABLE_ONBOARDING" Default="true" Mode="" Description="Recommended for self-hosted installs." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="true">True</Option>
+    <Option Value="false">False</Option>
+  </Config>
+  <Config Name="Disable Alias Suffix" Target="DISABLE_ALIAS_SUFFIX" Default="true" Mode="" Description="Recommended for self-hosted installs to allow cleaner aliases without the random suffix." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="true">True</Option>
+    <Option Value="false">False</Option>
+  </Config>
+  <Config Name="Enable SPF Enforcement" Target="ENFORCE_SPF" Default="true" Mode="" Description="Enable SPF enforcement using the extra headers provided by Postfix." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="true">True</Option>
+    <Option Value="false">False</Option>
+  </Config>
+  <Config Name="Print Emails Instead of Sending" Target="NOT_SEND_EMAIL" Default="false" Mode="" Description="For testing only. When true, email bodies are logged instead of sent." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="Enable Colored Logs" Target="COLOR_LOG" Default="" Mode="" Description="Optional colored log output for debugging." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Admin Email" Target="ADMIN_EMAIL" Default="" Mode="" Description="General stats and admin alert email recipient." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Admin Email" Target="ADMIN_EMAIL" Default="" Mode="" Description="General stats and admin alert email recipient. This is not a login credential." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Support Name" Target="SUPPORT_NAME" Default="" Mode="" Description="Display name used alongside SUPPORT_EMAIL." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Postmaster Address" Target="POSTMASTER" Default="" Mode="" Description="Postmaster email used by some mail-related features." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Max Free Plan Email Count" Target="MAX_NB_EMAIL_FREE_PLAN" Default="10" Mode="" Description="Max number of emails a non-premium user can generate." Type="Variable" Display="advanced" Required="false" Mask="false">10</Config>
@@ -149,7 +168,7 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="hCaptcha Site Key" Target="HCAPTCHA_SITEKEY" Default="" Mode="" Description="hCaptcha site key from your hCaptcha site. Set both hCaptcha fields to enable." Type="Variable" Display="advanced" Required="false" Mask="false"/>
 
   <!-- Alias domains and routing -->
-  <Config Name="Email Servers With Priority" Target="EMAIL_SERVERS_WITH_PRIORITY" Default="[(10, &quot;mail.example.com.&quot;)]" Mode="" Description="MX records custom domains should use. Example: [(10, &quot;mail.example.com.&quot;)]" Type="Variable" Display="advanced" Required="false" Mask="false">[(10, "mail.example.com.")]</Config>
+  <Config Name="Email Servers With Priority" Target="EMAIL_SERVERS_WITH_PRIORITY" Default="" Mode="" Description="Leave blank to auto-use mail.EMAIL_DOMAIN. Set this only if your MX host should be something else, for example [(10, &quot;mx.example.com.&quot;)]." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Other Alias Domains" Target="OTHER_ALIAS_DOMAINS" Default="" Mode="" Description="JSON list of extra alias domains. Example: [&quot;example.net&quot;,&quot;example.org&quot;]" Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Alias Domains Override" Target="ALIAS_DOMAINS" Default="" Mode="" Description="Full alias-domain override as a JSON list. If set, it replaces OTHER_ALIAS_DOMAINS." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Premium Alias Domains" Target="PREMIUM_ALIAS_DOMAINS" Default="" Mode="" Description="JSON list of premium-only domains. Example: [&quot;vip.example.com&quot;]" Type="Variable" Display="advanced" Required="false" Mask="false"/>
@@ -168,7 +187,10 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Proton Client ID" Target="PROTON_CLIENT_ID" Default="" Mode="" Description="Proton OAuth client ID." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Proton Client Secret" Target="PROTON_CLIENT_SECRET" Default="" Mode="" Description="Proton OAuth client secret." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Proton Base URL" Target="PROTON_BASE_URL" Default="" Mode="" Description="Proton API base URL override." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Proton Validate Certs" Target="PROTON_VALIDATE_CERTS" Default="true" Mode="" Description="Certificate verification for Proton integration." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Proton Validate Certs" Target="PROTON_VALIDATE_CERTS" Default="true" Mode="" Description="Certificate verification for Proton integration." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="true">True</Option>
+    <Option Value="false">False</Option>
+  </Config>
   <Config Name="Connect With Proton" Target="CONNECT_WITH_PROTON" Default="" Mode="" Description="Enable Proton login integration." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Proton Cookie Name" Target="CONNECT_WITH_PROTON_COOKIE_NAME" Default="" Mode="" Description="Cookie name for Proton login integration." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="OIDC Icon" Target="CONNECT_WITH_OIDC_ICON" Default="" Mode="" Description="Font Awesome icon slug for generic OIDC login button." Type="Variable" Display="advanced" Required="false" Mask="false"/>
@@ -179,7 +201,10 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="OIDC Client Secret" Target="OIDC_CLIENT_SECRET" Default="" Mode="" Description="OIDC client secret." Type="Variable" Display="advanced" Required="false" Mask="true"/>
 
   <!-- OpenID provider / JWT -->
-  <Config Name="Enable SimpleLogin OIDC Provider" Target="ENABLE_OIDC_SERVER" Default="0" Mode="" Description="Set to 1 to enable SimpleLogin as an OpenID provider." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Enable SimpleLogin OIDC Provider" Target="ENABLE_OIDC_SERVER" Default="0" Mode="" Description="Set to 1 to enable SimpleLogin as an OpenID provider." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="0">Disabled</Option>
+    <Option Value="1">Enabled</Option>
+  </Config>
   <Config Name="OpenID Private Key Path" Target="OPENID_PRIVATE_KEY_PATH" Default="" Mode="" Description="Optional OpenID private key path. Blank auto-generates when ENABLE_OIDC_SERVER=1." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="OpenID Public Key Path" Target="OPENID_PUBLIC_KEY_PATH" Default="" Mode="" Description="Optional OpenID public key path matching the private key above." Type="Variable" Display="advanced" Required="false" Mask="false"/>
 
@@ -196,13 +221,19 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Flask Profiler Password" Target="FLASK_PROFILER_PASSWORD" Default="" Mode="" Description="Optional Flask profiler password." Type="Variable" Display="advanced" Required="false" Mask="true"/>
 
   <!-- Anti-spam and breach checks -->
-  <Config Name="Enable SpamAssassin" Target="ENABLE_SPAM_ASSASSIN" Default="0" Mode="" Description="Set to 1 to enable SpamAssassin integration." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Enable SpamAssassin" Target="ENABLE_SPAM_ASSASSIN" Default="0" Mode="" Description="Set to 1 to enable SpamAssassin integration." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="0">Disabled</Option>
+    <Option Value="1">Enabled</Option>
+  </Config>
   <Config Name="SpamAssassin Host" Target="SPAMASSASSIN_HOST" Default="" Mode="" Description="SpamAssassin server host or IP." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="HIBP Scan Interval Days" Target="HIBP_SCAN_INTERVAL_DAYS" Default="7" Mode="" Description="How often to check Have I Been Pwned data." Type="Variable" Display="advanced" Required="false" Mask="false">7</Config>
   <Config Name="HIBP API Keys" Target="HIBP_API_KEYS" Default="" Mode="" Description="JSON list of HIBP API keys. Example: [&quot;key1&quot;,&quot;key2&quot;]" Type="Variable" Display="advanced" Required="false" Mask="true"/>
 
   <!-- PGP and DKIM -->
-  <Config Name="Auto-Generate PGP Server Key" Target="AUTO_GENERATE_PGP" Default="0" Mode="" Description="Set to 1 to auto-generate a PGP server key pair." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Auto-Generate PGP Server Key" Target="AUTO_GENERATE_PGP" Default="0" Mode="" Description="Set to 1 to auto-generate a PGP server key pair." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="0">Disabled</Option>
+    <Option Value="1">Enabled</Option>
+  </Config>
   <Config Name="PGP Sender Private Key Path" Target="PGP_SENDER_PRIVATE_KEY_PATH" Default="" Mode="" Description="Optional path to a private PGP key used to sign forwarding emails. Use /custom-assets or /pgp if you provide your own key." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="DKIM Private Key Path" Target="DKIM_PRIVATE_KEY_PATH" Default="/dkim.key" Mode="" Description="Advanced DKIM private key path override. Leave at /dkim.key for the wrapper-managed default." Type="Variable" Display="advanced" Required="false" Mask="false">/dkim.key</Config>
 
@@ -235,16 +266,28 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Paddle Coupon ID" Target="PADDLE_COUPON_ID" Default="" Mode="" Description="Optional Paddle coupon product ID." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Proton Extra Header Name" Target="PROTON_EXTRA_HEADER_NAME" Default="" Mode="" Description="Optional Proton integration header name override." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Proton Extra Header Value" Target="PROTON_EXTRA_HEADER_VALUE" Default="" Mode="" Description="Optional Proton integration header value." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Prevent Linked Proton Change" Target="PROTON_PREVENT_CHANGE_LINKED_ACCOUNT" Default="false" Mode="" Description="Presence-based upstream flag. Set true to prevent linked Proton account changes." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Prevent Linked Proton Change" Target="PROTON_PREVENT_CHANGE_LINKED_ACCOUNT" Default="false" Mode="" Description="Presence-based upstream flag. Set true to prevent linked Proton account changes." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="Sentry Trace Rate" Target="SENTRY_TRACE_RATE" Default="" Mode="" Description="Optional Sentry trace sample rate. Example: 0.001" Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Postfix Backup Servers" Target="POSTFIX_BACKUP_SERVERS" Default="" Mode="" Description="Comma-separated backup outbound SMTP servers." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Postfix Submission TLS" Target="POSTFIX_SUBMISSION_TLS" Default="false" Mode="" Description="Presence-based upstream flag. Set true to use Postfix submission with TLS on port 587." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Postfix Submission TLS" Target="POSTFIX_SUBMISSION_TLS" Default="false" Mode="" Description="Presence-based upstream flag. Set true to use Postfix submission with TLS on port 587." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="Postfix Timeout" Target="POSTFIX_TIMEOUT" Default="" Mode="" Description="Postfix send timeout in seconds." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Postfix Connect Timeout" Target="POSTFIX_CONNECT_TIMEOUT" Default="" Mode="" Description="Postfix connect timeout in seconds." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Proton MX Servers" Target="PROTON_MX_SERVERS" Default="" Mode="" Description="Comma-separated Proton MX servers." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Proton Email Domains" Target="PROTON_EMAIL_DOMAINS" Default="" Mode="" Description="Comma-separated Proton email domains." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Load PGP In Email Handler" Target="LOAD_PGP_EMAIL_HANDLER" Default="false" Mode="" Description="Presence-based upstream flag for niche local PGP loading behavior." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
-  <Config Name="Apple Webhook Secret Check" Target="APPLE_WEBHOOK_SECRET_CHECK_ENABLED" Default="false" Mode="" Description="Presence-based upstream flag to validate Apple webhook shared secret." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Load PGP In Email Handler" Target="LOAD_PGP_EMAIL_HANDLER" Default="false" Mode="" Description="Presence-based upstream flag for niche local PGP loading behavior." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
+  <Config Name="Apple Webhook Secret Check" Target="APPLE_WEBHOOK_SECRET_CHECK_ENABLED" Default="false" Mode="" Description="Presence-based upstream flag to validate Apple webhook shared secret." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="Max Spam Score" Target="MAX_SPAM_SCORE" Default="" Mode="" Description="SpamAssassin spam score threshold for forwarded mail." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Max Reply Spam Score" Target="MAX_REPLY_PHASE_SPAM_SCORE" Default="" Mode="" Description="SpamAssassin spam score threshold for reply-phase mail." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="PGP Signer Address" Target="PGP_SIGNER" Default="" Mode="" Description="Optional signer address used for outgoing encrypted email." Type="Variable" Display="advanced" Required="false" Mask="false"/>
@@ -253,15 +296,24 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="HIBP API RPM" Target="HIBP_API_RPM" Default="" Mode="" Description="Have I Been Pwned requests-per-minute limit." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Skip HIBP For Partner Aliases" Target="HIBP_SKIP_PARTNER_ALIAS" Default="" Mode="" Description="Optional HIBP behavior override for partner aliases." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Save Unsent Directory" Target="SAVE_UNSENT_DIR" Default="" Mode="" Description="Optional directory where unsent emails are stored." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Rspamd Signs DKIM" Target="RSPAMD_SIGN_DKIM" Default="false" Mode="" Description="Presence-based upstream flag indicating DKIM signing is handled by Rspamd." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Rspamd Signs DKIM" Target="RSPAMD_SIGN_DKIM" Default="false" Mode="" Description="Presence-based upstream flag indicating DKIM signing is handled by Rspamd." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="Twilio Auth Token" Target="TWILIO_AUTH_TOKEN" Default="" Mode="" Description="Optional Twilio auth token for phone-related integrations." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Phone Provider 1 Secret" Target="PHONE_PROVIDER_1_SECRET" Default="" Mode="" Description="Optional phone provider secret." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Phone Provider 2 Header" Target="PHONE_PROVIDER_2_HEADER" Default="" Mode="" Description="Optional phone provider header name." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Phone Provider 2 Secret" Target="PHONE_PROVIDER_2_SECRET" Default="" Mode="" Description="Optional phone provider secret." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Zendesk Host" Target="ZENDESK_HOST" Default="" Mode="" Description="Optional Zendesk host for support integrations." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Zendesk API Token" Target="ZENDESK_API_TOKEN" Default="" Mode="" Description="Optional Zendesk API token." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="Zendesk Enabled" Target="ZENDESK_ENABLED" Default="false" Mode="" Description="Presence-based upstream flag to enable Zendesk integration." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
-  <Config Name="DMARC Check Enabled" Target="DMARC_CHECK_ENABLED" Default="false" Mode="" Description="Presence-based upstream flag to enable DMARC checks." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Zendesk Enabled" Target="ZENDESK_ENABLED" Default="false" Mode="" Description="Presence-based upstream flag to enable Zendesk integration." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
+  <Config Name="DMARC Check Enabled" Target="DMARC_CHECK_ENABLED" Default="false" Mode="" Description="Presence-based upstream flag to enable DMARC checks." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="VERP Prefix" Target="VERP_PREFIX" Default="" Mode="" Description="VERP prefix override." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="VERP Email Secret" Target="VERP_EMAIL_SECRET" Default="" Mode="" Description="Custom VERP secret. Generate with: openssl rand -hex 32. Must be at least 32 chars." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Transactional Bounce Prefix" Target="TRANSACTIONAL_BOUNCE_PREFIX" Default="" Mode="" Description="Optional transactional bounce prefix." Type="Variable" Display="advanced" Required="false" Mask="false"/>
@@ -270,17 +322,29 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Disable Create Contacts For Free Users" Target="DISABLE_CREATE_CONTACTS_FOR_FREE_USERS" Default="" Mode="" Description="Optional upstream behavior override for free-user contact creation." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Alias Random Suffix Length" Target="ALIAS_RAND_SUFFIX_LENGTH" Default="" Mode="" Description="Length of generated alias random suffix." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Event Webhook URL" Target="EVENT_WEBHOOK" Default="" Mode="" Description="Optional event webhook destination URL." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Event Webhook Skip Verify SSL" Target="EVENT_WEBHOOK_SKIP_VERIFY_SSL" Default="false" Mode="" Description="Presence-based upstream flag to skip SSL verification for the event webhook." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
-  <Config Name="Event Webhook Disabled" Target="EVENT_WEBHOOK_DISABLE" Default="false" Mode="" Description="Presence-based upstream flag to disable event webhooks." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Event Webhook Skip Verify SSL" Target="EVENT_WEBHOOK_SKIP_VERIFY_SSL" Default="false" Mode="" Description="Presence-based upstream flag to skip SSL verification for the event webhook." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
+  <Config Name="Event Webhook Disabled" Target="EVENT_WEBHOOK_DISABLE" Default="false" Mode="" Description="Presence-based upstream flag to disable event webhooks." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="Event Webhook Enabled User IDs" Target="EVENT_WEBHOOK_ENABLED_USER_IDS" Default="" Mode="" Description="Comma-separated user IDs allowed to emit event webhooks." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Event Listener DB URI" Target="EVENT_LISTENER_DB_URI" Default="" Mode="" Description="Optional dedicated DB URI for the event listener." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Max API Keys" Target="MAX_API_KEYS" Default="" Mode="" Description="Maximum number of API keys per user." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Memory Store URI" Target="MEM_STORE_URI" Default="" Mode="" Description="Optional memory store URI override." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Recovery Code HMAC Secret" Target="RECOVERY_CODE_HMAC_SECRET" Default="" Mode="" Description="Recovery-code HMAC secret. Generate with: openssl rand -hex 32. Must be at least 16 chars." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Min Rspamd Score For Failed DMARC" Target="MIN_RSPAMD_SCORE_FOR_FAILED_DMARC" Default="" Mode="" Description="Rspamd score threshold for quarantining DMARC-failed email." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Enable All Reverse Alias Replacement" Target="ENABLE_ALL_REVERSE_ALIAS_REPLACEMENT" Default="false" Mode="" Description="Presence-based upstream flag to replace all reverse aliases." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Enable All Reverse Alias Replacement" Target="ENABLE_ALL_REVERSE_ALIAS_REPLACEMENT" Default="false" Mode="" Description="Presence-based upstream flag to replace all reverse aliases." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="Max Reverse Alias Replacements" Target="MAX_NB_REVERSE_ALIAS_REPLACEMENT" Default="" Mode="" Description="Maximum reverse aliases replaced when the related feature is enabled." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Disable Rate Limit" Target="DISABLE_RATE_LIMIT" Default="false" Mode="" Description="Presence-based upstream flag to disable rate limiting." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Disable Rate Limit" Target="DISABLE_RATE_LIMIT" Default="false" Mode="" Description="Presence-based upstream flag to disable rate limiting." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="Alias Create Rate Limit Free" Target="ALIAS_CREATE_RATE_LIMIT_FREE" Default="" Mode="" Description="Free-user alias create rate limits in hits,seconds:hits,seconds format." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Alias Create Rate Limit Paid" Target="ALIAS_CREATE_RATE_LIMIT_PAID" Default="" Mode="" Description="Paid-user alias create rate limits in hits,seconds:hits,seconds format." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Alias Restore One Rate Limit" Target="ALIAS_RESTORE_ONE_RATE_LIMIT" Default="" Mode="" Description="Single-alias restore rate limits in hits,seconds:hits,seconds format." Type="Variable" Display="advanced" Required="false" Mask="false"/>
@@ -298,15 +362,29 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="MAC Key Hex" Target="MAC_KEY_HEX" Default="" Mode="" Description="Hex-encoded MAC key. Generate with: openssl rand -hex 32" Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Abuser HKDF Salt" Target="ABUSER_HKDF_SALT" Default="" Mode="" Description="Hex-encoded HKDF salt. Generate with: openssl rand -hex 32" Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Invalid MX IPs" Target="INVALID_MX_IPS" Default="" Mode="" Description="Comma-separated invalid MX IPs ignored by validation logic." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Use Rust PGP" Target="USE_RUST_PGP" Default="false" Mode="" Description="Presence-based upstream flag to use the Rust PGP implementation." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Use Rust PGP" Target="USE_RUST_PGP" Default="false" Mode="" Description="Presence-based upstream flag to use the Rust PGP implementation." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="SMTP Size Limit" Target="SMTP_SIZE_LIMIT" Default="" Mode="" Description="Maximum SMTP message size in bytes." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Partner Support URL" Target="PARTNER_SUPPORT_URL" Default="" Mode="" Description="Optional partner support URL shown by the app." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Admin FIDO Required" Target="ADMIN_FIDO_REQUIRED" Default="" Mode="" Description="Admin FIDO requirement. Valid values: none, any, hardware." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Admin FIDO Required" Target="ADMIN_FIDO_REQUIRED" Default="" Mode="" Description="Admin FIDO requirement. Valid values: none, any, hardware." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="">Default</Option>
+    <Option Value="none">None</Option>
+    <Option Value="any">Any FIDO Device</Option>
+    <Option Value="hardware">Hardware FIDO Only</Option>
+  </Config>
   <Config Name="Admin Grace Period" Target="ADMIN_GRACE_PERIOD" Default="" Mode="" Description="Admin grace period in seconds before FIDO enforcement." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Drop PGP Key Attachments On Reply" Target="DROP_PGP_KEY_ATTACHMENTS_ON_REPLY" Default="false" Mode="" Description="Presence-based upstream flag to drop PGP key attachments on reply." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Drop PGP Key Attachments On Reply" Target="DROP_PGP_KEY_ATTACHMENTS_ON_REPLY" Default="false" Mode="" Description="Presence-based upstream flag to drop PGP key attachments on reply." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
   <Config Name="UpCloud Username" Target="UPCLOUD_USERNAME" Default="" Mode="" Description="Optional UpCloud username for niche upstream integrations." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="UpCloud Password" Target="UPCLOUD_PASSWORD" Default="" Mode="" Description="Optional UpCloud password for niche upstream integrations." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="UpCloud DB ID" Target="UPCLOUD_DB_ID" Default="" Mode="" Description="Optional UpCloud database ID for niche upstream integrations." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Store Transactional Emails" Target="STORE_TRANSACTIONAL_EMAILS" Default="false" Mode="" Description="Presence-based upstream flag to store transactional emails." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Store Transactional Emails" Target="STORE_TRANSACTIONAL_EMAILS" Default="false" Mode="" Description="Presence-based upstream flag to store transactional emails." Type="Variable" Display="advanced" Required="false" Mask="false">
+    <Option Value="false">False</Option>
+    <Option Value="true">True</Option>
+  </Config>
 
 </Container>
