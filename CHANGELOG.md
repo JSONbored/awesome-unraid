@@ -54,6 +54,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Auto-sync sure-aio.xml from upstream
 - Auto-sync sure-aio.xml from upstream
 - Auto-sync sure-aio.xml from upstream
+- Auto-sync sure-aio.xml from upstream
 
 
 ### Other Changes
