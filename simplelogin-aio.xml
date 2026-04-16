@@ -96,7 +96,7 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Primary Email Domain" Target="EMAIL_DOMAIN" Default="example.com" Mode="" Description="Primary alias domain, for example example.com." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Support Email" Target="SUPPORT_EMAIL" Default="support@example.com" Mode="" Description="From address for system mail, for example support@example.com." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Flask Secret" Target="FLASK_SECRET" Default="" Mode="" Description="Long random app secret. Generate with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct" Mode="" Description="Outbound mail mode. Use a relay provider if your ISP blocks outbound TCP 25." Type="Variable" Display="always" Required="true" Mask="false">direct|brevo|protonmail|gmail|mailgun|custom</Config>
+  <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct|brevo|protonmail|gmail|mailgun|custom" Mode="" Description="Outbound mail mode. Use a relay provider if your ISP blocks outbound TCP 25." Type="Variable" Display="always" Required="true" Mask="false">direct</Config>
 
   <!-- Relay credentials -->
   <Config Name="Brevo Username" Target="BREVO_USERNAME" Default="" Mode="" Description="Brevo SMTP username, usually your account email. Required when RELAY_MODE=brevo." Type="Variable" Display="advanced" Required="false" Mask="true"/>
