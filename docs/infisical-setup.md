@@ -1,1 +1,0 @@
-# infisical Setup Guide

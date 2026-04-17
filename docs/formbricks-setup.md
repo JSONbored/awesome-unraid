@@ -1,1 +1,0 @@
-# formbricks Setup Guide
