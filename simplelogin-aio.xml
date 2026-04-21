@@ -31,28 +31,12 @@
 - Current upstream packaging is [code]linux/amd64[/code] only.&#xD;
 - This is still a real self-hosted mail stack. DNS, deliverability, router/firewall port forwarding, and sender reputation still matter.&#xD;
 - For the simplest operation, keep the internal Postgres/Redis/Postfix defaults and only set the small required config set above.</Overview>
-  <Changes>[b]Latest release[/b]&#xD;
-- v4.80.1-aio.1&#xD;
-[b]Dependency Updates[/b]&#xD;
-- Bump dockerfile frontend digest&#xD;
-&#xD;
-&#xD;
-[b]Documentation[/b]&#xD;
-- Clarify in-app SimpleLogin feature coverage&#xD;
-&#xD;
-&#xD;
-[b]Features[/b]&#xD;
-- Align simplelogin-aio with sure-aio parity&#xD;
-&#xD;
-&#xD;
-[b]Fixes[/b]&#xD;
-- Skip no-op release drafts&#xD;
-- Make releases manual and gate heavy workflows&#xD;
-- Harden publish and changelog range&#xD;
-- Expose full upstream env surface&#xD;
-&#xD;
-&#xD;
-Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-aio/releases]GitHub Releases[/url]</Changes>
+  <Changes>### 2026-04-16&#xD;
+- Release v4.80.1-aio.1.&#xD;
+- Expose the broader upstream self-hosted config surface.&#xD;
+- Improve release workflow behavior and changelog handling.&#xD;
+- Clarify in-app feature coverage and wrapper behavior.&#xD;
+</Changes>
   <Category>Network:Privacy Network:Web</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
