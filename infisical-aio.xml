@@ -32,35 +32,30 @@
 - The bundled Mailpit inbox is for local or lab use. It is not a production mail relay and should not be confused with real deliverability infrastructure.&#xD;
 - [code]SITE_URL[/code] matters. If you set it wrong, browser flows, links, email behavior, and some integrations will break in subtle ways.&#xD;
 - If you enable automatic bootstrap, you are creating a highly privileged instance-admin identity during first boot. Treat those credentials carefully.</Overview>
-  <Changes>### 2026-04-21&#xD;
-### Documentation&#xD;
-- Add banner star history and security metadata by @JSONbored&#xD;
-&#xD;
-&#xD;
-### Features&#xD;
-- Expose metrics port and CA cert knob by @JSONbored&#xD;
-&#xD;
-&#xD;
-### Fixes&#xD;
-- Pin bundled database and redis support line by @JSONbored&#xD;
-- Harden infisical aio runtime and tooling by @JSONbored&#xD;
-- Tighten redis package version selection by @JSONbored&#xD;
-- Correct qemu action pin by @JSONbored&#xD;
-&#xD;
-&#xD;
-### Other Changes&#xD;
-- Initial commit by @JSONbored&#xD;
-- Harden Infisical AIO template and container packaging by @JSONbored&#xD;
-- Use `Reinforce Infisical AIO runtime and template checks` by @JSONbored&#xD;
-- Improve build pipeline and README by @JSONbored&#xD;
-- Merge branch 'main' into codex/initial-scaffold by @JSONbored&#xD;
-- Merge branch 'main' into codex/audit-env-surface-and-validation by @JSONbored&#xD;
-&#xD;
-&#xD;
-&#xD;
-### New Contributors&#xD;
-- @JSONbored made their first contribution in [#3](https://github.com/JSONbored/infisical-aio/pull/3)</Changes>
-  <Category>Network:Security Tools:Utilities</Category>
+  <Changes>### 2026-04-25&#xD;
+- Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
+- Optimize pytest gating and Trunk uploads by @JSONbored&#xD;
+- Preserve changelog history and publish release commits by @JSONbored&#xD;
+- Capture integration diagnostics on pytest failure by @JSONbored&#xD;
+- Remove automation flag and align publish flow by @JSONbored&#xD;
+- Centralize trunk config and gate release tags by @JSONbored&#xD;
+- Accept squash release titles by @JSONbored&#xD;
+- Pin package tags to release targets by @JSONbored&#xD;
+- Fetch history for release tag lookup by @JSONbored&#xD;
+- Consolidate pytest workflow steps by @JSONbored&#xD;
+- Update pytest and trunk analytics uploader by @JSONbored&#xD;
+- Derive template changes from changelog by @JSONbored&#xD;
+- Add security category to infisical xml by @JSONbored&#xD;
+- Make derived repo validator portable by @JSONbored&#xD;
+- Use workflow file selector for CI checks by @JSONbored&#xD;
+- Classify local action changes by @JSONbored&#xD;
+- Fail fast on init errors by @JSONbored&#xD;
+- Refactor CI and release automation for pytest validation by @JSONbored&#xD;
+- Merge branch 'main' into codex/release-target-immutability by @JSONbored&#xD;
+- Use docker volumes for runtime persistence by @JSONbored&#xD;
+- Cover action and container contracts by @JSONbored&#xD;
+- Split extended matrix cases by @JSONbored</Changes>
+  <Category>Network:Security Security Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/infisical-aio.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/infisical.png</Icon>
@@ -146,7 +141,7 @@
   <Config Name="[Redis] REDIS_READ_REPLICAS" Target="REDIS_READ_REPLICAS" Default="" Mode="" Description="Advanced upstream Infisical environment variable `REDIS_READ_REPLICAS`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Redis] REDIS_CLUSTER_ENABLE_TLS" Target="REDIS_CLUSTER_ENABLE_TLS" Default="" Mode="" Description="Advanced upstream Infisical environment variable `REDIS_CLUSTER_ENABLE_TLS`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Redis] REDIS_CLUSTER_AWS_ELASTICACHE_DNS_LOOKUP_MODE" Target="REDIS_CLUSTER_AWS_ELASTICACHE_DNS_LOOKUP_MODE" Default="" Mode="" Description="Advanced upstream Infisical environment variable `REDIS_CLUSTER_AWS_ELASTICACHE_DNS_LOOKUP_MODE`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
-  <Config Name="[Audit Logs] AUDIT_LOGS_DB_CONNECTION_URI" Target="AUDIT_LOGS_DB_CONNECTION_URI" Default="" Mode="" Description="Advanced upstream Infisical environment variable `AUDIT_LOGS_DB_CONNECTION_URI`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="[Audit Logs] AUDIT_LOGS_DB_CONNECTION_URI" Target="AUDIT_LOGS_DB_CONNECTION_URI" Default="" Mode="" Description="Advanced upstream Infisical environment variable `AUDIT_LOGS_DB_CONNECTION_URI`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Audit Logs] AUDIT_LOGS_DB_ROOT_CERT" Target="AUDIT_LOGS_DB_ROOT_CERT" Default="" Mode="" Description="Advanced upstream Infisical environment variable `AUDIT_LOGS_DB_ROOT_CERT`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Audit Logs] CLICKHOUSE_URL" Target="CLICKHOUSE_URL" Default="" Mode="" Description="Advanced upstream Infisical environment variable `CLICKHOUSE_URL`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Audit Logs] CLICKHOUSE_AUDIT_LOG_INSERT_SETTINGS" Target="CLICKHOUSE_AUDIT_LOG_INSERT_SETTINGS" Default="" Mode="" Description="Advanced upstream Infisical environment variable `CLICKHOUSE_AUDIT_LOG_INSERT_SETTINGS`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
@@ -265,7 +260,7 @@
   <Config Name="[Advanced] PARAMS_FOLDER_SECRET_DETECTION_ENTROPY" Target="PARAMS_FOLDER_SECRET_DETECTION_ENTROPY" Default="" Mode="" Description="Advanced upstream Infisical environment variable `PARAMS_FOLDER_SECRET_DETECTION_ENTROPY`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Platform] INFISICAL_PRIMARY_INSTANCE_URL" Target="INFISICAL_PRIMARY_INSTANCE_URL" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INFISICAL_PRIMARY_INSTANCE_URL`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[HSM] HSM_LIB_PATH" Target="HSM_LIB_PATH" Default="" Mode="" Description="Advanced upstream Infisical environment variable `HSM_LIB_PATH`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
-  <Config Name="[HSM] HSM_PIN" Target="HSM_PIN" Default="" Mode="" Description="Advanced upstream Infisical environment variable `HSM_PIN`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="[HSM] HSM_PIN" Target="HSM_PIN" Default="" Mode="" Description="Advanced upstream Infisical environment variable `HSM_PIN`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[HSM] HSM_KEY_LABEL" Target="HSM_KEY_LABEL" Default="" Mode="" Description="Advanced upstream Infisical environment variable `HSM_KEY_LABEL`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[HSM] HSM_SLOT" Target="HSM_SLOT" Default="" Mode="" Description="Advanced upstream Infisical environment variable `HSM_SLOT`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Advanced] USE_PG_QUEUE" Target="USE_PG_QUEUE" Default="false|true" Mode="" Description="Advanced upstream Infisical environment variable `USE_PG_QUEUE`." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
@@ -298,7 +293,7 @@
   <Config Name="[App Connections] INF_APP_CONNECTION_GITHUB_RADAR_APP_WEBHOOK_SECRET" Target="INF_APP_CONNECTION_GITHUB_RADAR_APP_WEBHOOK_SECRET" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITHUB_RADAR_APP_WEBHOOK_SECRET`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_GITLAB_OAUTH_CLIENT_ID" Target="INF_APP_CONNECTION_GITLAB_OAUTH_CLIENT_ID" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITLAB_OAUTH_CLIENT_ID`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_GITLAB_OAUTH_CLIENT_SECRET" Target="INF_APP_CONNECTION_GITLAB_OAUTH_CLIENT_SECRET" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITLAB_OAUTH_CLIENT_SECRET`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
-  <Config Name="[App Connections] INF_APP_CONNECTION_GCP_SERVICE_ACCOUNT_CREDENTIAL" Target="INF_APP_CONNECTION_GCP_SERVICE_ACCOUNT_CREDENTIAL" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GCP_SERVICE_ACCOUNT_CREDENTIAL`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="[App Connections] INF_APP_CONNECTION_GCP_SERVICE_ACCOUNT_CREDENTIAL" Target="INF_APP_CONNECTION_GCP_SERVICE_ACCOUNT_CREDENTIAL" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GCP_SERVICE_ACCOUNT_CREDENTIAL`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_AZURE_CLIENT_ID" Target="INF_APP_CONNECTION_AZURE_CLIENT_ID" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_AZURE_CLIENT_ID`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_AZURE_CLIENT_SECRET" Target="INF_APP_CONNECTION_AZURE_CLIENT_SECRET" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_AZURE_CLIENT_SECRET`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_AZURE_APP_CONFIGURATION_CLIENT_ID" Target="INF_APP_CONNECTION_AZURE_APP_CONFIGURATION_CLIENT_ID" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_AZURE_APP_CONFIGURATION_CLIENT_ID`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
