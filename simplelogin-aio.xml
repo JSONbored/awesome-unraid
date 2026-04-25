@@ -31,28 +31,15 @@
 - Current upstream packaging is [code]linux/amd64[/code] only.&#xD;
 - This is still a real self-hosted mail stack. DNS, deliverability, router/firewall port forwarding, and sender reputation still matter.&#xD;
 - For the simplest operation, keep the internal Postgres/Redis/Postfix defaults and only set the small required config set above.</Overview>
-  <Changes>[b]Latest release[/b]&#xD;
-- v4.80.1-aio.1&#xD;
-[b]Dependency Updates[/b]&#xD;
+  <Changes>### 2026-04-16&#xD;
+- Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
 - Bump dockerfile frontend digest&#xD;
-&#xD;
-&#xD;
-[b]Documentation[/b]&#xD;
 - Clarify in-app SimpleLogin feature coverage&#xD;
-&#xD;
-&#xD;
-[b]Features[/b]&#xD;
 - Align simplelogin-aio with sure-aio parity&#xD;
-&#xD;
-&#xD;
-[b]Fixes[/b]&#xD;
 - Skip no-op release drafts&#xD;
 - Make releases manual and gate heavy workflows&#xD;
 - Harden publish and changelog range&#xD;
-- Expose full upstream env surface&#xD;
-&#xD;
-&#xD;
-Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-aio/releases]GitHub Releases[/url]</Changes>
+- Expose full upstream env surface</Changes>
   <Category>Network:Privacy Network:Web</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
@@ -97,7 +84,7 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Primary Email Domain" Target="EMAIL_DOMAIN" Default="example.com" Mode="" Description="Real public alias domain, for example example.com. Do not use a private-only tailnet domain here." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Support Email" Target="SUPPORT_EMAIL" Default="support@example.com" Mode="" Description="Working mailbox used for system mail, for example support@example.com. Use an address that already exists." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Flask Secret" Target="FLASK_SECRET" Default="" Mode="" Description="Long random app secret. Generate with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct|brevo|protonmail|gmail|mailgun|custom" Mode="" Description="Outbound mail mode. Use a relay provider if your ISP blocks outbound TCP 25." Type="Variable" Display="always" Required="true" Mask="false">direct</Config>
+  <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct|brevo|protonmail|gmail|mailgun|custom" Mode="" Description="Outbound mail mode. Choose one of the built-in dropdown values only: direct, brevo, protonmail, gmail, mailgun, or custom. Use a relay provider if your ISP blocks outbound TCP 25." Type="Variable" Display="always" Required="true" Mask="false">direct</Config>
 
   <!-- Relay credentials -->
   <Config Name="Brevo Username" Target="BREVO_USERNAME" Default="" Mode="" Description="Brevo SMTP username, usually your account email. Required when RELAY_MODE=brevo." Type="Variable" Display="advanced" Required="false" Mask="true"/>
@@ -295,7 +282,7 @@ Full changelog and release notes: [url=https://github.com/JSONbored/simplelogin-
   <Config Name="Use Rust PGP" Target="USE_RUST_PGP" Default="false|true" Mode="" Description="Presence-based upstream flag to use the Rust PGP implementation." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
   <Config Name="SMTP Size Limit" Target="SMTP_SIZE_LIMIT" Default="" Mode="" Description="Maximum SMTP message size in bytes." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Partner Support URL" Target="PARTNER_SUPPORT_URL" Default="" Mode="" Description="Optional partner support URL shown by the app." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Admin FIDO Required" Target="ADMIN_FIDO_REQUIRED" Default="|none|any|hardware" Mode="" Description="Admin FIDO requirement. Valid values: none, any, hardware." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="Admin FIDO Required" Target="ADMIN_FIDO_REQUIRED" Default="none|any|hardware" Mode="" Description="Admin FIDO requirement. Choose one of the built-in dropdown values only: none, any, or hardware. Leave this at none unless you already intend to enforce admin FIDO or security keys." Type="Variable" Display="advanced" Required="false" Mask="false">none</Config>
   <Config Name="Admin Grace Period" Target="ADMIN_GRACE_PERIOD" Default="" Mode="" Description="Admin grace period in seconds before FIDO enforcement." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Drop PGP Key Attachments On Reply" Target="DROP_PGP_KEY_ATTACHMENTS_ON_REPLY" Default="false|true" Mode="" Description="Presence-based upstream flag to drop PGP key attachments on reply." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
   <Config Name="UpCloud Username" Target="UPCLOUD_USERNAME" Default="" Mode="" Description="Optional UpCloud username for niche upstream integrations." Type="Variable" Display="advanced" Required="false" Mask="false"/>

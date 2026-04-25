@@ -16,89 +16,57 @@
 &#xD;
 [b]Quick Install (Beginners)[/b]&#xD;
 1. Install the template and leave the default appdata path in place.&#xD;
-2. If you want OpenAI immediately, set [code]OPENAI_API_KEY[/code].&#xD;
-3. If you prefer local or alternate providers, you can leave the key blank, start the container, and then configure Ollama or another provider from the UI.&#xD;
-4. Open the Web UI, finish provider configuration, and optionally expose the direct API port only if you need external MCP clients.&#xD;
+2. For the fastest hosted path, set [code]OPENAI_API_KEY[/code].&#xD;
+3. For the normal local-LLM homelab path, set [code]OLLAMA_BASE_URL[/code] to your external Ollama root URL and set the Ollama chat/embed models you actually have pulled.&#xD;
+4. Start the container and open the Web UI. The wrapper will auto-default to Ollama when [code]OLLAMA_BASE_URL[/code] is set and no explicit provider overrides are supplied.&#xD;
+5. Only expose the direct API port if you need external MCP/API clients.&#xD;
 &#xD;
-[b]Power Users (Advanced View)[/b]&#xD;
-- Advanced View exposes the practical upstream OpenMemory self-hosted environment surface plus AIO defaults for the bundled SQLite + Qdrant path.&#xD;
-- You can keep the internal defaults, or point OpenMemory at Ollama, Anthropic, Groq, Together, DeepSeek, Azure OpenAI, Bedrock-compatible providers, and external vector backends such as pgvector, Weaviate, Redis, Milvus, Elasticsearch, OpenSearch, Chroma, or FAISS.&#xD;
-- Leave defaults in place for the easiest install. Only set the overrides you actually need.&#xD;
+[b]Advanced View[/b]&#xD;
+- Leave storage defaults in place for the bundled SQLite + Qdrant path.&#xD;
+- If you use external vector storage, configure exactly one backend. The wrapper rejects competing selectors such as Redis plus PGVector plus external Qdrant because OpenMemory can only initialize one vector store at a time.&#xD;
+- Provider overrides are available for native Ollama, OpenAI-compatible endpoints, hosted model providers, and supported external vector stores, but only set the fields your chosen path needs.&#xD;
 &#xD;
 [b]Important Notes[/b]&#xD;
 - This wrapper is meant to simplify first boot on Unraid, not remove the real complexity of model/provider credentials and external-service tuning.&#xD;
-- Actual memory generation still requires a valid LLM/embedder configuration. Leaving [code]OPENAI_API_KEY[/code] blank only keeps first boot simple; it does not make the app fully usable until you configure a provider.&#xD;
-- The embedded Qdrant service is intentionally bundled because that is the critical dependency for the beginner AIO path.</Overview>
-  <Changes>[b]Latest release[/b]&#xD;
-- v1.0.9-aio.1&#xD;
-[b]Dependency Updates[/b]&#xD;
-- Update non-major infrastructure updates by @renovate[bot]&#xD;
-- Update node.js to v24 by @renovate[bot]&#xD;
-- Pin ubuntu docker tag to 186072b by @renovate[bot]&#xD;
-- Update docker/build-push-action action to v7 by @renovate[bot]&#xD;
-- Update docker/setup-buildx-action action to v4 by @renovate[bot]&#xD;
-- Update docker/setup-qemu-action action to v4 by @renovate[bot]&#xD;
-- Update docker/metadata-action action to v6 by @renovate[bot]&#xD;
-- Update docker/login-action action to v4 by @renovate[bot]&#xD;
-&#xD;
-&#xD;
-[b]Documentation[/b]&#xD;
-- Add repository guidance by @JSONbored&#xD;
-&#xD;
-&#xD;
-[b]Features[/b]&#xD;
-- Initial commit for Mem0 AIO Unraid template with s6-overlay by @JSONbored&#xD;
-- Complete AIO docker build for mem0 openmemory with all s6 hooks and awesome-unraid xml by @JSONbored&#xD;
-- Add git-cliff release workflow by @JSONbored&#xD;
-&#xD;
-&#xD;
-[b]Fixes[/b]&#xD;
-- Tighten changelog spacing by @JSONbored&#xD;
-- Make releases manual and gate heavy workflows by @JSONbored&#xD;
-- Harden publish and changelog range by @JSONbored&#xD;
-&#xD;
-&#xD;
-[b]Maintenance[/b]&#xD;
-- Standardize README, add FUNDING.yml, and clean up legacy files by @JSONbored&#xD;
-- Prepare for clean submodule by @JSONbored&#xD;
-- Standardize template by @JSONbored&#xD;
-- Add template sync workflow by @JSONbored&#xD;
-- Revert to verifiable bot identity for non-repudiation by @JSONbored&#xD;
-&#xD;
-&#xD;
-[b]Other Changes[/b]&#xD;
-- Force rebuild to publish docker image by @JSONbored&#xD;
-- Security &amp; CI: Fix node24 deprecation and package write permissions by @JSONbored&#xD;
-- Link Mem0 as recursive submodule and update CI to include submodules in build by @JSONbored&#xD;
-- Adjust Dockerfile COPY paths to match actual OpenMemory submodule structure by @JSONbored&#xD;
-- Harden mem0-aio and add smoke testing by @JSONbored&#xD;
-- Harden mem0-aio workflows and upstream tracking by @JSONbored&#xD;
-- Add Codex repo memory notes by @JSONbored&#xD;
-- Add renovate.json by @renovate[bot]&#xD;
-- Merge branch 'main' into codex/harden-mem0-aio by @JSONbored&#xD;
-- Reduce smoke-test CI usage by @JSONbored&#xD;
-- Standardize funding and security docs by @JSONbored&#xD;
-- Add standard community templates by @JSONbored&#xD;
-- Consolidate CI workflows by @JSONbored&#xD;
-- Consolidate CI workflows by @JSONbored&#xD;
-- Merge main into consolidate-ci-workflows by @JSONbored&#xD;
-- Merge remote-tracking branch 'origin/main' into codex/reduce-smoke-ci by @JSONbored&#xD;
-- Fix awesome-unraid sync for protected main by @JSONbored&#xD;
-- Standardize upstream-aligned image tags by @JSONbored&#xD;
-&#xD;
-&#xD;
-&#xD;
-[b]New Contributors[/b]&#xD;
-- @JSONbored made their first contribution in [#21](https://github.com/JSONbored/mem0-aio/pull/21)&#xD;
-- @renovate[bot] made their first contribution&#xD;
-&#xD;
-Full changelog and release notes: [url=https://github.com/JSONbored/mem0-aio/releases]GitHub Releases[/url]</Changes>
+- Actual memory generation still requires a valid LLM/embedder configuration. Leaving [code]OPENAI_API_KEY[/code] blank is fine if you are using Ollama, but you still need to provide a reachable Ollama endpoint and valid model names.&#xD;
+- Native Ollama uses the root API URL such as [code]http://host.docker.internal:11434[/code], not an OpenAI-compatible [code]/v1[/code] path. If your reverse proxy adds auth and only exposes an OpenAI-style [code]/v1[/code] endpoint, use the advanced OpenAI-compatible base URL fields instead of the native Ollama provider path.&#xD;
+- The embedded Qdrant service is intentionally bundled for the beginner AIO path; it is skipped only when one valid external vector backend is configured.</Overview>
+  <Changes>### 2026-04-25&#xD;
+- Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
+- Optimize pytest gating and Trunk uploads by @JSONbored&#xD;
+- Preserve changelog history and publish release commits by @JSONbored&#xD;
+- Capture integration diagnostics on pytest failure by @JSONbored&#xD;
+- Remove automation flag and align publish flow by @JSONbored&#xD;
+- Centralize trunk config and gate release tags by @JSONbored&#xD;
+- Accept squash release titles by @JSONbored&#xD;
+- Target the release commit on merged PRs by @JSONbored&#xD;
+- Fetch history for release tag lookup by @JSONbored&#xD;
+- Consolidate pytest workflow steps by @JSONbored&#xD;
+- Update trunk-io/analytics-uploader action to v2 by @renovate[bot]&#xD;
+- Update dependency pytest to v9 [security] by @renovate[bot]&#xD;
+- Update ubuntu docker tag to v26 by @renovate[bot]&#xD;
+- Format changelog by @JSONbored&#xD;
+- Make derived repo validator portable by @JSONbored&#xD;
+- Use workflow file selector for CI checks by @JSONbored&#xD;
+- Add authenticated qdrant support by @JSONbored&#xD;
+- Classify local action changes by @JSONbored&#xD;
+- Merge branch 'main' into codex/ci-diagnostics-fixes by @JSONbored&#xD;
+- Merge branch 'main' into codex/release-target-immutability by @JSONbored&#xD;
+- Harden vector store selection and Unraid template guidance by @JSONbored&#xD;
+- Replace smoke tests with pytest by @JSONbored&#xD;
+- Unify validation under pytest by @JSONbored&#xD;
+- Use docker volumes for runtime persistence by @JSONbored&#xD;
+- Require external backend coverage by @JSONbored&#xD;
+- Clean container-owned backend storage by @JSONbored&#xD;
+- Cover action and container contracts by @JSONbored&#xD;
+- Require init fail-fast contract by @JSONbored&#xD;
+- Cover invalid vector store config by @JSONbored</Changes>
   <Category>AI: Productivity: Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/mem0-aio.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/mem0.jpeg</Icon>
   <ExtraSearchTerms>ai memory mcp llm openmemory qdrant ollama anthropic groq deepseek embeddings vector database</ExtraSearchTerms>
-  <Requires>OpenMemory still needs a valid LLM/embedder setup for actual memory generation. For the easiest first boot, keep the bundled storage defaults and add provider credentials only for the models you intend to use.</Requires>
+  <Requires>OpenMemory still needs a valid LLM/embedder setup for actual memory generation. For the easiest first boot, keep bundled storage defaults and either set OPENAI_API_KEY or point the app at a reachable native Ollama endpoint with chat and embedding models you already have pulled. External vector storage is advanced: configure exactly one backend.</Requires>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
@@ -133,40 +101,43 @@ Full changelog and release notes: [url=https://github.com/JSONbored/mem0-aio/rel
   <Config Name="API / MCP Port" Target="8765" Default="8765" Mode="tcp" Description="Direct API and MCP port. The UI works without exposing this externally, but external MCP clients may need it." Type="Port" Display="advanced" Required="false" Mask="false">8765</Config>
   <Config Name="AppData - OpenMemory Storage" Target="/mem0/storage" Default="/mnt/user/appdata/mem0-aio/storage" Mode="rw" Description="Persistent storage for the SQLite database, embedded Qdrant data, and AIO state." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mem0-aio/storage</Config>
 
-  <Config Name="OpenAI API Key" Target="OPENAI_API_KEY" Default="" Mode="" Description="Optional on first boot. Required if you want OpenAI as the default provider. If blank, the container still boots so you can configure Ollama or another provider from the UI." Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="OpenAI API Key" Target="OPENAI_API_KEY" Default="" Mode="" Description="Optional hosted-provider quick start. Leave blank if you plan to use Ollama instead." Type="Variable" Display="always" Required="false" Mask="true"/>
   <Config Name="Default User ID" Target="USER" Default="default_user" Mode="" Description="Default user namespace used by the API and MCP server." Type="Variable" Display="always" Required="false" Mask="false">default_user</Config>
+  <Config Name="Ollama Base URL" Target="OLLAMA_BASE_URL" Default="" Mode="" Description="Native external Ollama root URL. Example: http://host.docker.internal:11434 or http://192.168.1.10:11434. When set, the wrapper auto-defaults to Ollama if no explicit provider override is supplied." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Ollama Chat Model" Target="LLM_MODEL" Default="" Mode="" Description="Optional Ollama chat model override. Set this to a model you already have pulled on your Ollama server. Example: llama3.1:latest or mistral:7b" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Ollama Embed Model" Target="EMBEDDER_MODEL" Default="" Mode="" Description="Optional Ollama embedding model override. Set this to a model you already have pulled on your Ollama server. Example: nomic-embed-text" Type="Variable" Display="always" Required="false" Mask="false"/>
 
   <Config Name="[UI] Browser API URL" Target="NEXT_PUBLIC_API_URL" Default="/openmemory-api" Mode="" Description="Default same-origin proxy path for the web UI. Leave this alone unless you intentionally want the browser to call a different API URL directly." Type="Variable" Display="advanced" Required="false" Mask="false">/openmemory-api</Config>
   <Config Name="[UI] Public User ID" Target="NEXT_PUBLIC_USER_ID" Default="default_user" Mode="" Description="Default user ID shown in the browser client. Usually keep this aligned with USER." Type="Variable" Display="advanced" Required="false" Mask="false">default_user</Config>
 
-  <Config Name="[LLM] Provider" Target="LLM_PROVIDER" Default="openai|anthropic|azure_openai|ollama|together|groq|litellm|mistralai|google_ai|aws_bedrock|gemini|deepseek|xai|lmstudio|langchain" Mode="" Description="LLM provider choice based on the current upstream OpenMemory UI provider list." Type="Variable" Display="advanced" Required="false" Mask="false">openai</Config>
-  <Config Name="[LLM] Model" Target="LLM_MODEL" Default="" Mode="" Description="Optional model name override. Leave blank to let OpenMemory use its provider default." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[LLM] Provider" Target="LLM_PROVIDER" Default="auto|openai|anthropic|azure_openai|ollama|together|groq|litellm|mistralai|google_ai|aws_bedrock|gemini|deepseek|xai|lmstudio|langchain" Mode="" Description="Advanced provider override. Leave this on auto for the normal wrapper behavior: OpenAI when no Ollama URL is set, or Ollama when OLLAMA_BASE_URL is set." Type="Variable" Display="advanced" Required="false" Mask="false">auto</Config>
   <Config Name="[LLM] API Key" Target="LLM_API_KEY" Default="" Mode="" Description="Optional provider-specific API key if you are not using OPENAI_API_KEY or if you want the LLM to use a different secret." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="[LLM] Base URL" Target="LLM_BASE_URL" Default="" Mode="" Description="Optional custom API base URL for OpenAI-compatible or provider-specific endpoints." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[LLM] Ollama Base URL" Target="OLLAMA_BASE_URL" Default="" Mode="" Description="Optional Ollama URL. Example: http://host.docker.internal:11434" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[LLM] Base URL" Target="LLM_BASE_URL" Default="" Mode="" Description="Optional custom LLM API base URL for OpenAI-compatible or provider-specific endpoints. Use this for auth-protected OpenAI-style proxies, usually ending in /v1." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="[LLM] Ollama Host Override" Target="OLLAMA_HOST" Default="" Mode="" Description="Optional host override used by upstream Docker Ollama auto-detection. Example: host.docker.internal" Type="Variable" Display="advanced" Required="false" Mask="false"/>
 
-  <Config Name="[Embedder] Provider" Target="EMBEDDER_PROVIDER" Default="openai|azure_openai|ollama|huggingface|vertexai|gemini|lmstudio|together|langchain|aws_bedrock" Mode="" Description="Embedder provider choice based on the current upstream OpenMemory UI provider list." Type="Variable" Display="advanced" Required="false" Mask="false">openai</Config>
-  <Config Name="[Embedder] Model" Target="EMBEDDER_MODEL" Default="" Mode="" Description="Optional embedder model override. Leave blank to let OpenMemory use its provider default." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Embedder] Provider" Target="EMBEDDER_PROVIDER" Default="auto|openai|azure_openai|ollama|huggingface|vertexai|gemini|lmstudio|together|langchain|aws_bedrock" Mode="" Description="Advanced embedder provider override. Leave this on auto for the normal wrapper behavior so the embedder follows the matching OpenAI or Ollama path." Type="Variable" Display="advanced" Required="false" Mask="false">auto</Config>
   <Config Name="[Embedder] API Key" Target="EMBEDDER_API_KEY" Default="" Mode="" Description="Optional provider-specific embedder API key." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="[Embedder] Base URL" Target="EMBEDDER_BASE_URL" Default="" Mode="" Description="Optional custom embedder API base URL." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Embedder] Base URL" Target="EMBEDDER_BASE_URL" Default="" Mode="" Description="Optional custom embedder API base URL. Use this for OpenAI-compatible or separate embedding endpoints, including auth-protected proxies that expose /v1." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Embedder] Dimensions Override" Target="EMBEDDER_DIMENSIONS" Default="" Mode="" Description="Optional explicit embedding dimension override for vector-store setup. Usually leave blank and let the wrapper auto-detect it, but set this if your embedder is custom or auto-detection cannot determine the correct size." Type="Variable" Display="advanced" Required="false" Mask="false"/>
 
   <Config Name="[Storage] DATABASE_URL" Target="DATABASE_URL" Default="sqlite:////mem0/storage/openmemory.db" Mode="" Description="Advanced override for the API database connection. Leave the default SQLite path for normal AIO usage." Type="Variable" Display="advanced" Required="false" Mask="false">sqlite:////mem0/storage/openmemory.db</Config>
   <Config Name="[Legacy] API_KEY Alias" Target="API_KEY" Default="" Mode="" Description="Legacy upstream alias used by older OpenMemory examples that referenced env:API_KEY. Leave blank unless you intentionally depend on that older pattern." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="[Vector Store:Qdrant] Host" Target="QDRANT_HOST" Default="127.0.0.1" Mode="" Description="Default embedded Qdrant host. Leave unchanged for the bundled AIO path." Type="Variable" Display="advanced" Required="false" Mask="false">127.0.0.1</Config>
-  <Config Name="[Vector Store:Qdrant] Port" Target="QDRANT_PORT" Default="6333" Mode="" Description="Default embedded Qdrant port. Leave unchanged for the bundled AIO path." Type="Variable" Display="advanced" Required="false" Mask="false">6333</Config>
+  <Config Name="[Vector Store:Qdrant] URL" Target="QDRANT_URL" Default="" Mode="" Description="External Qdrant URL, for example http://qdrant:6333 or https://qdrant.example.com. Use this instead of external QDRANT_HOST when auth or HTTPS is involved. Do not combine with Redis, PGVector, or other vector backends." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:Qdrant] Host" Target="QDRANT_HOST" Default="127.0.0.1" Mode="" Description="Bundled Qdrant host by default. Leave as 127.0.0.1 for the AIO path; set to an external host only when Qdrant is the one external vector backend you want." Type="Variable" Display="advanced" Required="false" Mask="false">127.0.0.1</Config>
+  <Config Name="[Vector Store:Qdrant] Port" Target="QDRANT_PORT" Default="6333" Mode="" Description="Qdrant port for the bundled or selected external Qdrant backend." Type="Variable" Display="advanced" Required="false" Mask="false">6333</Config>
+  <Config Name="[Vector Store:Qdrant] API Key" Target="QDRANT_API_KEY" Default="" Mode="" Description="API key for authenticated external Qdrant. Requires QDRANT_URL or an external QDRANT_HOST; the bundled Qdrant service is not started with API-key auth." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="[Vector Store:Qdrant] Disable Telemetry" Target="QDRANT__TELEMETRY_DISABLED" Default="true|false" Mode="" Description="Controls Qdrant usage-statistics reporting for the bundled embedded vector store. Default is true so the AIO image stays privacy-first by default." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
-  <Config Name="[Vector Store:Chroma] Host" Target="CHROMA_HOST" Default="" Mode="" Description="Optional external Chroma host. When set with CHROMA_PORT, OpenMemory will use Chroma instead of Qdrant." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:Chroma] Port" Target="CHROMA_PORT" Default="" Mode="" Description="Optional external Chroma port." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:Weaviate] Cluster URL" Target="WEAVIATE_CLUSTER_URL" Default="" Mode="" Description="Optional full Weaviate cluster URL. If set, it takes precedence over WEAVIATE_HOST and WEAVIATE_PORT." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:Weaviate] Host" Target="WEAVIATE_HOST" Default="" Mode="" Description="Optional external Weaviate host." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:Weaviate] Port" Target="WEAVIATE_PORT" Default="" Mode="" Description="Optional external Weaviate port." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:Redis] URL" Target="REDIS_URL" Default="" Mode="" Description="Optional Redis-backed vector-store URL. Example: redis://:password@host:6379/0" Type="Variable" Display="advanced" Required="false" Mask="true"/>
-  <Config Name="[Vector Store:PGVector] Host" Target="PG_HOST" Default="" Mode="" Description="Optional external PostgreSQL/pgvector host." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:PGVector] Port" Target="PG_PORT" Default="" Mode="" Description="Optional external PostgreSQL/pgvector port." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:PGVector] Database" Target="PG_DB" Default="" Mode="" Description="Optional external PostgreSQL database name for pgvector." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:PGVector] User" Target="PG_USER" Default="" Mode="" Description="Optional external PostgreSQL username for pgvector." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="[Vector Store:PGVector] Password" Target="PG_PASSWORD" Default="" Mode="" Description="Optional external PostgreSQL password for pgvector." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Vector Store:Chroma] Host" Target="CHROMA_HOST" Default="" Mode="" Description="External Chroma host. Requires CHROMA_PORT and must be the only external vector backend configured." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:Chroma] Port" Target="CHROMA_PORT" Default="" Mode="" Description="External Chroma port. Requires CHROMA_HOST." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:Weaviate] Cluster URL" Target="WEAVIATE_CLUSTER_URL" Default="" Mode="" Description="External Weaviate cluster URL. Use this or WEAVIATE_HOST/WEAVIATE_PORT, and do not combine with another vector backend." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:Weaviate] Host" Target="WEAVIATE_HOST" Default="" Mode="" Description="External Weaviate host. Requires WEAVIATE_PORT unless WEAVIATE_CLUSTER_URL is set." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:Weaviate] Port" Target="WEAVIATE_PORT" Default="" Mode="" Description="External Weaviate port. Requires WEAVIATE_HOST unless WEAVIATE_CLUSTER_URL is set." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:Redis] URL" Target="REDIS_URL" Default="" Mode="" Description="Redis-backed vector-store URL. Example: redis://:password@host:6379/0. This selects Redis as the vector backend; do not combine with PGVector or Qdrant." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Vector Store:PGVector] Host" Target="PG_HOST" Default="" Mode="" Description="External PostgreSQL/pgvector host. Requires PG_PORT and must be the only external vector backend configured." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:PGVector] Port" Target="PG_PORT" Default="" Mode="" Description="External PostgreSQL/pgvector port. Required when any PG_* vector-store setting is used." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:PGVector] Database" Target="PG_DB" Default="" Mode="" Description="External PostgreSQL database name for pgvector. Defaults to mem0 when PGVector is selected and this is blank." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:PGVector] User" Target="PG_USER" Default="" Mode="" Description="External PostgreSQL username for pgvector. Defaults to mem0 when PGVector is selected and this is blank." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:PGVector] Password" Target="PG_PASSWORD" Default="" Mode="" Description="External PostgreSQL password for pgvector. Defaults to mem0 when PGVector is selected and this is blank." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="[Vector Store:Milvus] Host" Target="MILVUS_HOST" Default="" Mode="" Description="Optional external Milvus host." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="[Vector Store:Milvus] Port" Target="MILVUS_PORT" Default="" Mode="" Description="Optional external Milvus port." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="[Vector Store:Milvus] Token" Target="MILVUS_TOKEN" Default="" Mode="" Description="Optional Milvus token for authenticated deployments." Type="Variable" Display="advanced" Required="false" Mask="true"/>
@@ -175,8 +146,14 @@ Full changelog and release notes: [url=https://github.com/JSONbored/mem0-aio/rel
   <Config Name="[Vector Store:Elasticsearch] Port" Target="ELASTICSEARCH_PORT" Default="" Mode="" Description="Optional external Elasticsearch port." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="[Vector Store:Elasticsearch] User" Target="ELASTICSEARCH_USER" Default="" Mode="" Description="Optional Elasticsearch username." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="[Vector Store:Elasticsearch] Password" Target="ELASTICSEARCH_PASSWORD" Default="" Mode="" Description="Optional Elasticsearch password." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Vector Store:Elasticsearch] Use SSL" Target="ELASTICSEARCH_USE_SSL" Default="true|false" Mode="" Description="Whether the Elasticsearch HTTP endpoint uses HTTPS. Default is true because modern Elasticsearch containers usually expose HTTPS." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="[Vector Store:Elasticsearch] Verify Certs" Target="ELASTICSEARCH_VERIFY_CERTS" Default="true|false" Mode="" Description="Whether to verify Elasticsearch TLS certificates. Default is false because many self-hosted homelab deployments use self-signed certs." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
   <Config Name="[Vector Store:OpenSearch] Host" Target="OPENSEARCH_HOST" Default="" Mode="" Description="Optional external OpenSearch host." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="[Vector Store:OpenSearch] Port" Target="OPENSEARCH_PORT" Default="" Mode="" Description="Optional external OpenSearch port." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:OpenSearch] User" Target="OPENSEARCH_USER" Default="" Mode="" Description="Optional OpenSearch username." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Vector Store:OpenSearch] Password" Target="OPENSEARCH_PASSWORD" Default="" Mode="" Description="Optional OpenSearch password." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Vector Store:OpenSearch] Use SSL" Target="OPENSEARCH_USE_SSL" Default="true|false" Mode="" Description="Whether the OpenSearch HTTP endpoint uses HTTPS. Default is true because modern OpenSearch containers usually expose HTTPS." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="[Vector Store:OpenSearch] Verify Certs" Target="OPENSEARCH_VERIFY_CERTS" Default="true|false" Mode="" Description="Whether to verify OpenSearch TLS certificates. Leave false for self-signed homelab deployments." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
   <Config Name="[Vector Store:FAISS] Path" Target="FAISS_PATH" Default="" Mode="" Description="Optional FAISS storage path inside the container or a mounted host path." Type="Variable" Display="advanced" Required="false" Mask="false"/>
 
   <Config Name="[Backup Export] User ID Filter" Target="EXPORT_USER_ID" Default="" Mode="" Description="Optional one-shot filter for the bundled upstream export helper script. Only set this if you intentionally run the export tooling inside the container." Type="Variable" Display="advanced" Required="false" Mask="false"/>

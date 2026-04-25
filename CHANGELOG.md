@@ -26,6 +26,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Add repository guidance
 - Add sure-aio screenshots
 - Limit CA repo to sure-aio
+- Sync mem0-aio template assets
 
 
 ### Features
