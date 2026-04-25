@@ -27,6 +27,11 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Add sure-aio screenshots
 - Limit CA repo to sure-aio
 - Sync mem0-aio template assets
+- Sync mem0-aio template assets
+- Sync infisical-aio template assets (#34)
+- Sync mem0-aio template assets
+- Sync mem0-aio template assets
+- Sync infisical-aio template assets
 
 
 ### Features
