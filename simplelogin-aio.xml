@@ -31,15 +31,45 @@
 - Current upstream packaging is [code]linux/amd64[/code] only.&#xD;
 - This is still a real self-hosted mail stack. DNS, deliverability, router/firewall port forwarding, and sender reputation still matter.&#xD;
 - For the simplest operation, keep the internal Postgres/Redis/Postfix defaults and only set the small required config set above.</Overview>
-  <Changes>### 2026-04-16&#xD;
+  <Changes>### 2026-04-25&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Bump dockerfile frontend digest&#xD;
-- Clarify in-app SimpleLogin feature coverage&#xD;
-- Align simplelogin-aio with sure-aio parity&#xD;
-- Skip no-op release drafts&#xD;
-- Make releases manual and gate heavy workflows&#xD;
-- Harden publish and changelog range&#xD;
-- Expose full upstream env surface</Changes>
+- Allow manual awesome-unraid sync&#xD;
+- Require Trunk uploads and PR integration&#xD;
+- Gate releases on validated CI and template checks&#xD;
+- Run integration tests for release metadata commits&#xD;
+- Align release and pytest tooling with fleet&#xD;
+- Preserve changelog history and publish release commits&#xD;
+- Capture integration diagnostics on pytest failure&#xD;
+- Standardize fleet tool configuration&#xD;
+- Centralize fleet plugin config&#xD;
+- Centralize trunk config and gate release tags&#xD;
+- Accept squash release titles&#xD;
+- Pin package tags to release targets&#xD;
+- Fetch history for release tag lookup&#xD;
+- Consolidate pytest workflow steps&#xD;
+- Update trunk-io/analytics-uploader action to v2&#xD;
+- Update dependency pytest to v9 [security]&#xD;
+- Clarify config field instructions&#xD;
+- Tighten CA metadata&#xD;
+- Add donation links&#xD;
+- Add buy me a coffee&#xD;
+- Unblock first login and tighten required fields&#xD;
+- Support encoded external database credentials&#xD;
+- Sync relay mode with catalog&#xD;
+- Enforce catalog-safe option syntax&#xD;
+- Handle admin fido env quirks&#xD;
+- Harden simplelogin AIO runtime and template&#xD;
+- Make derived repo validator portable&#xD;
+- Use workflow file selector for CI checks&#xD;
+- Classify local action changes&#xD;
+- Fail fast on init errors&#xD;
+- Merge branch 'main' into codex/manual-awesome-sync&#xD;
+- Migrate smoke tests to pytest&#xD;
+- Merge branch 'main' into codex/ci-diagnostics-fixes&#xD;
+- Merge branch 'main' into codex/release-target-immutability&#xD;
+- Use docker volumes for runtime persistence&#xD;
+- Add derived repo guardrail validation&#xD;
+- Cover action and container contracts</Changes>
   <Category>Network:Privacy Network:Web</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
