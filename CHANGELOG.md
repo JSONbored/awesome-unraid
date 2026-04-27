@@ -48,6 +48,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Point template Icon tags to raw GitHub master/main URLs
 - Tighten changelog spacing
 - Drop automated sync noise
+- Use official SigNoz icon
 
 
 ### Maintenance
