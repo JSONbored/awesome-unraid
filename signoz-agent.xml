@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>signoz-agent</Name>
+  <Repository>ghcr.io/jsonbored/signoz-agent:latest</Repository>
+  <Registry>https://ghcr.io/jsonbored/signoz-agent</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/JSONbored/signoz-aio/issues</Support>
+  <Project>https://github.com/JSONbored/signoz-aio</Project>
+  <Overview>SigNoz Agent is a lightweight OpenTelemetry collector companion for signoz-aio.&#xD;
+[center][b][color=#ff8c00]JSONbored Verified Companion Template[/color][/b][/center]
+
+This Unraid template runs a separate collector that can receive local application telemetry, scrape optional Prometheus targets, collect optional host metrics, collect optional Docker metrics, and tail optional Docker container logs before forwarding telemetry to your main SigNoz endpoint.&#xD;
+&#xD;
+[b]When to use this:[/b]&#xD;
+Use signoz-agent on remote Unraid servers, separate Docker hosts, or any machine where you want collection separated from the main signoz-aio backend. If you only need same-box collection on the server running signoz-aio, the built-in local host agent inside signoz-aio is usually simpler.&#xD;
+&#xD;
+[b]Initial Setup:[/b]&#xD;
+1. Enter your SigNoz OTLP endpoint. For signoz-aio on another host, use HOST_OR_IP:4317 with the default gRPC exporter.&#xD;
+2. Click Apply.&#xD;
+3. Point local apps at this agent on OTLP gRPC port 4317 or OTLP HTTP port 4318.&#xD;
+4. Optional: enable host metrics, Docker metrics, Docker logs, or Prometheus targets in Advanced View and explicitly set the matching mounts or target list.&#xD;
+&#xD;
+[b]Security Note:[/b] Host root, Docker socket, and Docker log mounts are blank by default. Enable only the collection sources you need. Docker socket access can expose Docker control access to this collector container.</Overview>
+  <Changes>### 2026-04-28&#xD;
+- Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
+- Add initial signoz-agent companion template</Changes>
+  <Category>Monitoring: Tools:Utilities</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/signoz-agent.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/signoz.png</Icon>
+  <ExtraSearchTerms>observability monitoring telemetry opentelemetry otel collector agent traces metrics logs prometheus docker hostmetrics signoz</ExtraSearchTerms>
+  <Requires>Requires a reachable SigNoz OTLP endpoint, usually your main signoz-aio instance or a remote SigNoz deployment. If signoz-agent is installed on the same Unraid host as signoz-aio, the default 4317 and 4318 host ports will conflict unless one template is adjusted. Host root, Docker socket, and Docker log mounts are blank by default; explicitly configure only the host access you need. Mounting /var/run/docker.sock can expose Docker control access to the collector container.</Requires>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText>Support JSONbored on GitHub Sponsors.</DonateText>
+  <DonateLink>https://github.com/sponsors/JSONbored</DonateLink>
+  <Description/>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>4317</HostPort>
+        <ContainerPort>4317</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+      <Port>
+        <HostPort>4318</HostPort>
+        <ContainerPort>4318</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/signoz-agent</HostDir>
+      <ContainerDir>/appdata</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Name>TZ</Name>
+      <Value>UTC</Value>
+    </Variable>
+  </Environment>
+
+  <Config Name="SigNoz OTLP Endpoint" Target="SIGNOZ_AGENT_ENDPOINT" Default="" Mode="" Description="Required. Destination SigNoz OTLP endpoint. For signoz-aio on another host with the default gRPC exporter, use HOST_OR_IP:4317. For HTTP/protobuf, use an http:// or https:// endpoint ending at the OTLP HTTP listener." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="OTLP gRPC Port" Target="4317" Default="4317" Mode="tcp" Description="Local OTLP gRPC receiver port for apps and collectors that send telemetry to this agent." Type="Port" Display="always" Required="true" Mask="false">4317</Config>
+  <Config Name="OTLP HTTP Port" Target="4318" Default="4318" Mode="tcp" Description="Local OTLP HTTP receiver port for apps and collectors that send telemetry to this agent." Type="Port" Display="always" Required="true" Mask="false">4318</Config>
+  <Config Name="AppData - SigNoz Agent" Target="/appdata" Default="/mnt/user/appdata/signoz-agent" Mode="rw" Description="Persistent root for generated collector configuration, status, and diagnostics." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/signoz-agent</Config>
+  <Config Name="Timezone" Target="TZ" Default="UTC" Mode="" Description="Container timezone." Type="Variable" Display="advanced" Required="false" Mask="false">UTC</Config>
+  <Config Name="[Exporter] Protocol" Target="SIGNOZ_AGENT_PROTOCOL" Default="grpc|http/protobuf" Mode="" Description="Advanced. Export protocol used to forward telemetry to SigNoz. Use grpc for signoz-aio 4317 and http/protobuf for SigNoz Cloud or 4318-style endpoints." Type="Variable" Display="advanced" Required="false" Mask="false">grpc</Config>
+  <Config Name="[Exporter] Insecure TLS" Target="SIGNOZ_AGENT_INSECURE" Default="true|false" Mode="" Description="Advanced. Set true for plain-text or self-hosted gRPC endpoints without TLS. Set false for trusted TLS endpoints." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="[Exporter] Headers" Target="SIGNOZ_AGENT_HEADERS" Default="" Mode="" Description="Advanced. Optional comma-separated exporter headers in key=value form. Values are masked because headers may contain credentials." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Exporter] SigNoz Ingestion Key" Target="SIGNOZ_AGENT_INGESTION_KEY" Default="" Mode="" Description="Advanced. Optional SigNoz ingestion key. This is added as the signoz-ingestion-key header and is masked." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="[Collector] Log Level" Target="SIGNOZ_AGENT_LOG_LEVEL" Default="info|debug|warn|error" Mode="" Description="Advanced. OpenTelemetry collector log level." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+  <Config Name="[Collector] Resource Attributes" Target="SIGNOZ_AGENT_RESOURCE_ATTRIBUTES" Default="" Mode="" Description="Advanced. Comma-separated resource attributes added to telemetry, for example host.name=unraid-remote,service.namespace=homelab." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Collector] Deployment Environment" Target="SIGNOZ_AGENT_DEPLOYMENT_ENVIRONMENT" Default="" Mode="" Description="Advanced. Optional deployment.environment resource attribute such as homelab, production, or staging." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Collector] Batch Send Size" Target="SIGNOZ_AGENT_BATCH_SEND_SIZE" Default="8192" Mode="" Description="Advanced. Collector batch send size." Type="Variable" Display="advanced" Required="false" Mask="false">8192</Config>
+  <Config Name="[Collector] Batch Timeout" Target="SIGNOZ_AGENT_BATCH_TIMEOUT" Default="5s" Mode="" Description="Advanced. Collector batch timeout." Type="Variable" Display="advanced" Required="false" Mask="false">5s</Config>
+  <Config Name="[Collector] Memory Limit MiB" Target="SIGNOZ_AGENT_MEMORY_LIMIT_MIB" Default="512" Mode="" Description="Advanced. OpenTelemetry memory limiter cap in MiB." Type="Variable" Display="advanced" Required="false" Mask="false">512</Config>
+  <Config Name="[Receiver] gRPC Listen Endpoint" Target="SIGNOZ_AGENT_OTLP_GRPC_ENDPOINT" Default="0.0.0.0:4317" Mode="" Description="Advanced. Internal OTLP gRPC receiver listen endpoint." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0:4317</Config>
+  <Config Name="[Receiver] HTTP Listen Endpoint" Target="SIGNOZ_AGENT_OTLP_HTTP_ENDPOINT" Default="0.0.0.0:4318" Mode="" Description="Advanced. Internal OTLP HTTP receiver listen endpoint." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0:4318</Config>
+  <Config Name="[Receiver] Health Endpoint" Target="SIGNOZ_AGENT_HEALTH_ENDPOINT" Default="0.0.0.0:13133" Mode="" Description="Advanced. Collector health extension endpoint. This port is not published by default." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0:13133</Config>
+  <Config Name="[Host Metrics] Enable" Target="SIGNOZ_AGENT_ENABLE_HOST_METRICS" Default="false|true" Mode="" Description="Advanced. Enables hostmetrics collection. Requires explicitly setting the Host Root Path mount below." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="[Host Metrics] Host Root Path" Target="/hostfs" Default="" Mode="ro" Description="Advanced optional host metrics mount. Leave blank unless host metrics are enabled. Set to / to mount the Unraid host root read-only." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Host Metrics] Collection Interval" Target="SIGNOZ_AGENT_HOST_COLLECTION_INTERVAL" Default="30s" Mode="" Description="Advanced. Host metrics collection interval." Type="Variable" Display="advanced" Required="false" Mask="false">30s</Config>
+  <Config Name="[Docker Metrics] Enable" Target="SIGNOZ_AGENT_ENABLE_DOCKER_METRICS" Default="false|true" Mode="" Description="Advanced. Enables Docker container metrics. Requires explicitly setting the Docker Socket mount below." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="[Docker Metrics] Docker Socket" Target="/var/run/docker.sock" Default="" Mode="ro" Description="Advanced optional Docker metrics mount. Leave blank unless Docker metrics are enabled. Mounting /var/run/docker.sock can expose Docker control access to this collector container." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Docker Metrics] Collection Interval" Target="SIGNOZ_AGENT_DOCKER_COLLECTION_INTERVAL" Default="30s" Mode="" Description="Advanced. Docker metrics collection interval." Type="Variable" Display="advanced" Required="false" Mask="false">30s</Config>
+  <Config Name="[Docker Metrics] Excluded Images" Target="SIGNOZ_AGENT_DOCKER_EXCLUDED_IMAGES" Default="" Mode="" Description="Advanced. Optional comma-separated image names to exclude from docker_stats collection, for example pause,otel/opentelemetry-collector-contrib. Container-name-specific exclusions require custom config mode." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Docker Logs] Enable" Target="SIGNOZ_AGENT_ENABLE_DOCKER_LOGS" Default="false|true" Mode="" Description="Advanced. Enables Docker JSON log tailing. Requires explicitly setting the Docker Container Logs Path mount below." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="[Docker Logs] Docker Container Logs Path" Target="/var/lib/docker/containers" Default="" Mode="ro" Description="Advanced optional Docker log mount. Leave blank unless Docker logs are enabled. Set to /var/lib/docker/containers to read local Docker JSON logs." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Prometheus] Targets" Target="SIGNOZ_AGENT_PROMETHEUS_TARGETS" Default="" Mode="" Description="Advanced. Optional comma-separated Prometheus scrape targets, for example node-exporter:9100,cadvisor:8080." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="[Prometheus] Metrics Path" Target="SIGNOZ_AGENT_PROMETHEUS_METRICS_PATH" Default="/metrics" Mode="" Description="Advanced. Prometheus metrics path used for all configured simple scrape targets." Type="Variable" Display="advanced" Required="false" Mask="false">/metrics</Config>
+  <Config Name="[Prometheus] Scrape Interval" Target="SIGNOZ_AGENT_PROMETHEUS_SCRAPE_INTERVAL" Default="30s" Mode="" Description="Advanced. Prometheus scrape interval." Type="Variable" Display="advanced" Required="false" Mask="false">30s</Config>
+  <Config Name="[Custom Config] Mode" Target="SIGNOZ_AGENT_CONFIG_MODE" Default="generated|custom" Mode="" Description="Advanced. Use generated for the Unraid-managed config. Use custom only when mounting and managing your own collector config." Type="Variable" Display="advanced" Required="false" Mask="false">generated</Config>
+  <Config Name="[Custom Config] Config Path" Target="SIGNOZ_AGENT_CUSTOM_CONFIG_PATH" Default="" Mode="" Description="Advanced. Path inside the container to a custom OpenTelemetry collector config when custom config mode is enabled." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>

@@ -26,7 +26,7 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ## At A Glance
 
-- Available templates: `6`
+- Available templates: `7`
 - In progress: `1`
 - Candidate pipeline: active research backlog.
 - Catalog assets: root XML templates, shared icons, screenshots, and the CA
@@ -46,7 +46,7 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ## Template Catalog
 
-### Available Templates (6)
+### Available Templates (7)
 
 - **[sure-aio](https://github.com/JSONbored/sure-aio)** - Self-hosted personal
   finance in the Maybe Finance family. Bundles the Sure web app, background
@@ -69,6 +69,10 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
   observability for traces, metrics, and logs. Bundles SigNoz UI/API,
   OpenTelemetry collector, ClickHouse, and ZooKeeper into one Unraid-oriented
   deployment.
+- **[signoz-agent](https://github.com/JSONbored/signoz-aio)** - Companion
+  OpenTelemetry collector for remote or separate Docker hosts. Receives OTLP,
+  optionally collects host metrics, Docker metrics, Docker logs, and Prometheus
+  targets, then forwards telemetry into `signoz-aio` or another SigNoz endpoint.
 
 ### In Progress (1)
 
