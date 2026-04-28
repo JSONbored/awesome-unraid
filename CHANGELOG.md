@@ -20,6 +20,10 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Restore catalog changelog automation
 
 
+### Dependency Updates
+- Update peter-evans/create-pull-request action to v8.1.1 (#45)
+
+
 ### Documentation
 - Update Sure-AIO description
 - Update maintainer profile metadata
