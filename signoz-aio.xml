@@ -28,16 +28,18 @@ Install it, keep the defaults, and point your OpenTelemetry senders at the publi
   <Changes>### 2026-04-28&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
 - Require explicit host agent mounts by @JSONbored in [#34](https://github.com/JSONbored/signoz-aio/pull/34)</Changes>
-  <Category>Monitoring: Tools:</Category>
+  <Category>Network:Management Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/signoz-aio.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/signoz.png</Icon>
+  <ExtraSearchTerms>observability monitoring telemetry opentelemetry otel traces metrics logs apm clickhouse dashboards alerts collector</ExtraSearchTerms>
+  <Requires>SigNoz is a heavier ClickHouse-backed observability stack; allocate at least 4GB Docker memory and expect a slower first boot than small single-service apps. Back up /appdata before upgrades. The optional local host agent requires explicitly enabling only the host and Docker mounts you need; mounting /var/run/docker.sock grants Docker control access to the container.</Requires>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
   <DateInstalled/>
-  <DonateText/>
-  <DonateLink/>
+  <DonateText>Support JSONbored on GitHub Sponsors.</DonateText>
+  <DonateLink>https://github.com/sponsors/JSONbored</DonateLink>
   <Description/>
   <Networking>
     <Mode>bridge</Mode>
