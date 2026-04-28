@@ -26,8 +26,34 @@ Use signoz-agent on remote Unraid servers, separate Docker hosts, or any machine
 [b]Security Note:[/b] Host root, Docker socket, and Docker log mounts are blank by default. Enable only the collection sources you need. Docker socket access can expose Docker control access to this collector container.</Overview>
   <Changes>### 2026-04-28&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Add initial signoz-agent companion template</Changes>
-  <Category>Monitoring: Tools:Utilities</Category>
+- Sync bundled images from SigNoz compose (#31) by @JSONbored in [#31](https://github.com/JSONbored/signoz-aio/pull/31)&#xD;
+- Update otel/opentelemetry-collector-contrib docker tag to v0.150.1 (#38) by @renovate[bot] in [#38](https://github.com/JSONbored/signoz-aio/pull/38)&#xD;
+- Standardize package tags and add release automation (#18) by @JSONbored in [#18](https://github.com/JSONbored/signoz-aio/pull/18)&#xD;
+- Rebaseline the AIO template and runtime (#27) by @JSONbored in [#27](https://github.com/JSONbored/signoz-aio/pull/27)&#xD;
+- Add signoz collector companion (#37) by @JSONbored in [#37](https://github.com/JSONbored/signoz-aio/pull/37)&#xD;
+- Skip no-op release drafts by @JSONbored in [#21](https://github.com/JSONbored/signoz-aio/pull/21)&#xD;
+- Make releases manual and gate heavy workflows by @JSONbored in [#24](https://github.com/JSONbored/signoz-aio/pull/24)&#xD;
+- Harden publish and changelog range (#26) by @JSONbored in [#26](https://github.com/JSONbored/signoz-aio/pull/26)&#xD;
+- Require explicit host agent mounts by @JSONbored in [#34](https://github.com/JSONbored/signoz-aio/pull/34)&#xD;
+- Initial commit by @JSONbored&#xD;
+- Codex/bootstrap signoz aio (#2) by @JSONbored in [#2](https://github.com/JSONbored/signoz-aio/pull/2)&#xD;
+- Codex/bootstrap signoz aio (#3) by @JSONbored in [#3](https://github.com/JSONbored/signoz-aio/pull/3)&#xD;
+- Consolidate CI workflows by @JSONbored in [#5](https://github.com/JSONbored/signoz-aio/pull/5)&#xD;
+- Update non-major infrastructure updates (#7) by @renovate[bot] in [#7](https://github.com/JSONbored/signoz-aio/pull/7)&#xD;
+- Update docker/build-push-action action to v7 (#10) by @renovate[bot] in [#10](https://github.com/JSONbored/signoz-aio/pull/10)&#xD;
+- Update docker/login-action action to v4 (#11) by @renovate[bot] in [#11](https://github.com/JSONbored/signoz-aio/pull/11)&#xD;
+- Update docker/setup-buildx-action action to v4 (#12) by @renovate[bot] in [#12](https://github.com/JSONbored/signoz-aio/pull/12)&#xD;
+- Update docker/setup-qemu-action action to v4 (#13) by @renovate[bot] in [#13](https://github.com/JSONbored/signoz-aio/pull/13)&#xD;
+- Codex/fix signoz smoke checks (#14) by @JSONbored in [#14](https://github.com/JSONbored/signoz-aio/pull/14)&#xD;
+- Update clickhouse/clickhouse-server Docker tag to v26 (#9) by @renovate[bot] in [#9](https://github.com/JSONbored/signoz-aio/pull/9)&#xD;
+- Pin dependencies (#6) by @renovate[bot] in [#6](https://github.com/JSONbored/signoz-aio/pull/6)&#xD;
+- Codex/fix signoz smoke checks (#15) by @JSONbored in [#15](https://github.com/JSONbored/signoz-aio/pull/15)&#xD;
+- Fix Signoz template sync defaults by @JSONbored in [#16](https://github.com/JSONbored/signoz-aio/pull/16)&#xD;
+- Fix awesome-unraid sync for protected main by @JSONbored in [#17](https://github.com/JSONbored/signoz-aio/pull/17)&#xD;
+- @renovate[bot] made their first contribution in [#38](https://github.com/JSONbored/signoz-aio/pull/38)&#xD;
+- @JSONbored made their first contribution in [#37](https://github.com/JSONbored/signoz-aio/pull/37)&#xD;
+- @github-actions[bot] made their first contribution in [#35](https://github.com/JSONbored/signoz-aio/pull/35)</Changes>
+  <Category>Network:Management Tools:Utilities</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/signoz-agent.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/signoz.png</Icon>
