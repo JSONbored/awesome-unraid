@@ -38,6 +38,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync infisical-aio template assets
 - Refresh awesome-unraid README
 - Add signoz agent template
+- Add Dify icon asset
 
 
 ### Features
