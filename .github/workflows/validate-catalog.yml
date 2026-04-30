@@ -1,0 +1,31 @@
+name: Validate Catalog
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-catalog:
+    name: validate-catalog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout catalog
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Checkout aio-fleet
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: JSONbored/aio-fleet
+          ref: 8794a110f3266178e8dd3d49bed3714d1978a71f
+          path: .aio-fleet
+
+      - name: Install aio-fleet
+        run: python3 -m pip install ./.aio-fleet
+
+      - name: Validate catalog
+        run: python3 -m aio_fleet --manifest .aio-fleet/fleet.yml validate-catalog --catalog-path .
