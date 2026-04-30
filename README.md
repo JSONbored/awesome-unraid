@@ -175,6 +175,8 @@ containers and support services by hand.
 - Remove stale catalog assets instead of leaving placeholders.
 - `CHANGELOG.md` may summarize catalog changes, but app-specific release history
   belongs in the individual AIO repositories.
+- Set `AIO_FLEET_BOT_TOKEN` to a repository-scoped automation token if generated
+  changelog PRs must trigger required PR validation workflows.
 
 ## Star History
 
