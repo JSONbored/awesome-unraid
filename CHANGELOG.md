@@ -20,6 +20,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Restore catalog changelog automation
 - Auto-sync dify-aio assets (#59)
 - Allow bot-token changelog PRs
+- Add manual changelog trigger
 
 
 ### Dependency Updates
