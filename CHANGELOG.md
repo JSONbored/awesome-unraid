@@ -22,6 +22,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Allow bot-token changelog PRs
 - Add manual changelog trigger
 - Publish Dify catalog template
+- Sync dify-aio catalog assets (#69)
 
 
 ### Dependency Updates
