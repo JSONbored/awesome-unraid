@@ -23,6 +23,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Add manual changelog trigger
 - Publish Dify catalog template
 - Sync dify-aio catalog assets (#69)
+- Sync infisical-aio catalog assets
 
 
 ### Dependency Updates
