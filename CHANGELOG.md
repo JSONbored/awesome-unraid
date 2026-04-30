@@ -18,6 +18,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 ### CI
 - Remove awesome-unraid release workflow
 - Restore catalog changelog automation
+- Auto-sync dify-aio assets (#59)
 
 
 ### Dependency Updates
