@@ -57,6 +57,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Tighten changelog spacing
 - Drop automated sync noise
 - Use official SigNoz icon
+- Hold Dify XML behind launch gate
 
 
 ### Maintenance
