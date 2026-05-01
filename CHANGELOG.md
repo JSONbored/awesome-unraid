@@ -45,6 +45,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Refresh awesome-unraid README
 - Add signoz agent template
 - Add Dify icon asset
+- Sync Dify setup guidance
 
 
 ### Features
