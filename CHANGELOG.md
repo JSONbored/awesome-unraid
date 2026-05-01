@@ -24,6 +24,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Publish Dify catalog template
 - Sync dify-aio catalog assets (#69)
 - Sync infisical-aio catalog assets
+- Sync sure-aio catalog assets (#77)
 
 
 ### Dependency Updates
@@ -64,6 +65,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Drop automated sync noise
 - Use official SigNoz icon
 - Hold Dify XML behind launch gate
+- Sync simplelogin template name
+- Prefer Docker Hub image metadata
 
 
 ### Maintenance
