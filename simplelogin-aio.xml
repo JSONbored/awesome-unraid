@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>SimpleLogin-AIO</Name>
+  <Name>simplelogin-aio</Name>
   <Repository>ghcr.io/jsonbored/simplelogin-aio:latest</Repository>
   <Registry>https://ghcr.io/jsonbored/simplelogin-aio</Registry>
   <Network>bridge</Network>
