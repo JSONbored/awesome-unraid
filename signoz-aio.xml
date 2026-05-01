@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>signoz-aio</Name>
-  <Repository>ghcr.io/jsonbored/signoz-aio:latest</Repository>
-  <Registry>https://ghcr.io/jsonbored/signoz-aio</Registry>
+  <Repository>jsonbored/signoz-aio:latest</Repository>
+  <Registry>https://hub.docker.com/r/jsonbored/signoz-aio</Registry>
   <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
