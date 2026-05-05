@@ -26,7 +26,7 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ## At A Glance
 
-- Available templates: `7`
+- Available templates: `8`
 - In progress: `1`
 - Candidate pipeline: active research backlog.
 - Catalog assets: root XML templates, shared icons, screenshots, and the CA
@@ -46,7 +46,7 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ## Template Catalog
 
-### Available Templates (7)
+### Available Templates (8)
 
 - **[sure-aio](https://github.com/JSONbored/sure-aio)** - Self-hosted personal
   finance in the Maybe Finance family. Bundles the Sure web app, background
@@ -65,6 +65,11 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 - **[khoj-aio](https://github.com/JSONbored/khoj-aio)** - Self-hosted AI second
   brain for chatting with documents, the web, and local or hosted LLMs. Bundles
   Khoj with PostgreSQL and `pgvector` for a practical Unraid-first install.
+- **[dify-aio](https://github.com/JSONbored/dify-aio)** - Self-hosted AI app
+  and agent workflow platform. Bundles Dify API, web, worker, plugin daemon,
+  sandbox, SSRF proxy, PostgreSQL, Redis, and vector-store services for a
+  practical Unraid-first install while keeping provider and storage overrides
+  available.
 - **[signoz-aio](https://github.com/JSONbored/signoz-aio)** - Self-hosted
   observability for traces, metrics, and logs. Bundles SigNoz UI/API,
   OpenTelemetry collector, ClickHouse, and ZooKeeper into one Unraid-oriented
@@ -104,8 +109,6 @@ containers and support services by hand.
   template.
 - **karakeep-aio** - Bookmark, note, and read-it-later archiving with Karakeep,
   Browserless, MeiliSearch, and optional AI tagging/search integrations.
-- **dify-aio** - AI app and agent workflow platform with Dify core services,
-  PostgreSQL, Redis, Weaviate, sandbox, SSRF proxy, plugin daemon, and web UI.
 - **tubearchivist-aio** - YouTube media archiving with Tube Archivist, Redis,
   Elasticsearch, download storage, cache storage, and scheduler controls.
 - **librechat-aio** - Multi-provider AI chat platform with MongoDB, MeiliSearch,
@@ -180,4 +183,4 @@ containers and support services by hand.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=JSONbored/awesome-unraid,JSONbored/sure-aio,JSONbored/simplelogin-aio,JSONbored/infisical-aio,JSONbored/mem0-aio,JSONbored/khoj-aio,JSONbored/signoz-aio,JSONbored/nanoclaw-aio&theme=dark)](https://star-history.com/#JSONbored/awesome-unraid&JSONbored/sure-aio&JSONbored/simplelogin-aio&JSONbored/infisical-aio&JSONbored/mem0-aio&JSONbored/khoj-aio&JSONbored/signoz-aio&JSONbored/nanoclaw-aio&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=jsonbored/awesome-unraid,jsonbored/sure-aio,jsonbored/simplelogin-aio,jsonbored/infisical-aio,jsonbored/mem0-aio,jsonbored/khoj-aio,jsonbored/dify-aio,jsonbored/signoz-aio&type=Date&theme=dark)](https://star-history.com/#jsonbored/awesome-unraid&jsonbored/sure-aio&jsonbored/simplelogin-aio&jsonbored/infisical-aio&jsonbored/mem0-aio&jsonbored/khoj-aio&jsonbored/dify-aio&jsonbored/signoz-aio&Date)
