@@ -26,6 +26,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync infisical-aio catalog assets
 - Sync sure-aio catalog assets (#77)
 - Sync sure-aio catalog assets (#79)
+- Sync dify-aio catalog assets
 
 
 ### Dependency Updates
