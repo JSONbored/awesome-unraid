@@ -49,6 +49,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Add signoz agent template
 - Add Dify icon asset
 - Sync Dify setup guidance
+- List dify template in catalog readme
 
 
 ### Features
