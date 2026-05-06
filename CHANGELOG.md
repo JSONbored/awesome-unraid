@@ -50,6 +50,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Add Dify icon asset
 - Sync Dify setup guidance
 - List dify template in catalog readme
+- Sync sure-aio hotfix2 catalog changes
 
 
 ### Features
