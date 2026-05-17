@@ -33,6 +33,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync simplelogin registration docs
 - Sync simplelogin release notes
 - Sync mem0 api bind address
+- Sync mem0 release notes
 
 
 ### Dependency Updates
