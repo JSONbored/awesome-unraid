@@ -25,9 +25,34 @@ Install it, keep the defaults, and point your OpenTelemetry senders at the publi
 5. Optional: enable the built-in local host agent and explicitly fill the advanced host/Docker path fields if you want this same Unraid machine to forward host metrics, Docker metrics, and Docker logs into SigNoz.&#xD;
 &#xD;
 [b]Resource Note:[/b] ClickHouse makes SigNoz powerful, but also heavier on RAM, disk, and startup time than lighter AIO apps.</Overview>
-  <Changes>### 2026-04-28&#xD;
+  <Changes>### 2026-05-05&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Require explicit host agent mounts by @JSONbored in [#34](https://github.com/JSONbored/signoz-aio/pull/34)</Changes>
+- Harden apt package installs&#xD;
+- Use shared AIO workflows (#41)&#xD;
+- Centralize workflow drift checks (#42)&#xD;
+- Pin shared validation policy&#xD;
+- Use shared AIO workflows&#xD;
+- Sync workflow path filters&#xD;
+- Sync catalog publication state&#xD;
+- Pin publish helper workflow fix&#xD;
+- Pin next-wave aio-fleet workflows&#xD;
+- Pin Docker Hub primary workflow&#xD;
+- Pin control-plane workflow foundation&#xD;
+- Update otel/opentelemetry-collector-contrib docker tag to v0.150.1 (#38)&#xD;
+- Update OpenTelemetry collector to v0.151.0&#xD;
+- Refresh SigNoz base image pins&#xD;
+- Add signoz collector companion (#37)&#xD;
+- Expose manual publish targets&#xD;
+- Sync shared validation and trunk cleanup&#xD;
+- Sync release shim path fallback&#xD;
+- Prefer Docker Hub image metadata&#xD;
+- Sync shared repository boilerplate&#xD;
+- Move shared automation to aio-fleet&#xD;
+- Declare aio-fleet ownership&#xD;
+- Bump signoz to v0.121.1&#xD;
+- Use shared derived repo validation&#xD;
+- Use shared release helper shim&#xD;
+- Rename template policy tests</Changes>
   <Category>Network:Management Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/signoz-aio.xml</TemplateURL>
