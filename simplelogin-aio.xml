@@ -17,7 +17,7 @@
 [b]Quick Install (Beginners)[/b]&#xD;
 1. Install this template in Unraid.&#xD;
 2. Set [code]URL[/code], [code]EMAIL_DOMAIN[/code], [code]SUPPORT_EMAIL[/code], and [code]FLASK_SECRET[/code].&#xD;
-3. Leave registration enabled for first boot, create your first account in the web UI, then disable registration later in Advanced View if you want a private instance.&#xD;
+3. Leave registration enabled for first boot, create your first account with a mailbox that is not on [code]EMAIL_DOMAIN[/code], then disable registration later in Advanced View if you want a private instance.&#xD;
 4. Choose an outbound relay mode if your ISP blocks outbound TCP 25.&#xD;
 5. Forward inbound TCP 25 from your router/firewall to the Unraid host if you want internet mail delivery.&#xD;
 6. Start the container, wait for first boot to finish, then add the required DNS records from the setup guide.&#xD;
@@ -75,7 +75,7 @@
 
   <!-- Core required -->
   <Config Name="App URL" Target="URL" Default="https://app.example.com" Mode="" Description="Canonical HTTPS URL for the dashboard, for example https://app.example.com. This does not need to be the same as your SMTP/MX hostname." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Primary Email Domain" Target="EMAIL_DOMAIN" Default="example.com" Mode="" Description="Real public alias domain, for example example.com. Do not use a private-only tailnet domain here." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Primary Email Domain" Target="EMAIL_DOMAIN" Default="example.com" Mode="" Description="Real public alias domain, for example example.com. Do not use a private-only tailnet domain here. First-account registration must use a separate existing mailbox, not this alias domain." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Support Email" Target="SUPPORT_EMAIL" Default="support@example.com" Mode="" Description="Working mailbox used for system mail, for example support@example.com. Use an address that already exists." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="Flask Secret" Target="FLASK_SECRET" Default="" Mode="" Description="Long random app secret. Generate with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="SMTP Relay Mode" Target="RELAY_MODE" Default="direct|brevo|protonmail|gmail|mailgun|custom" Mode="" Description="Outbound mail mode. Choose one of the built-in dropdown values only: direct, brevo, protonmail, gmail, mailgun, or custom. Use a relay provider if your ISP blocks outbound TCP 25." Type="Variable" Display="always" Required="true" Mask="false">direct</Config>
