@@ -31,36 +31,9 @@
 - Current upstream packaging is [code]linux/amd64[/code] only.&#xD;
 - This is still a real self-hosted mail stack. DNS, deliverability, router/firewall port forwarding, and sender reputation still matter.&#xD;
 - For the simplest operation, keep the internal Postgres/Redis/Postfix defaults and only set the small required config set above.</Overview>
-  <Changes>### 2026-05-05&#xD;
+  <Changes>### 2026-05-17&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Harden apt package installs&#xD;
-- Use shared AIO build workflow&#xD;
-- Centralize release workflows&#xD;
-- Repin shared workflow ref&#xD;
-- Centralize workflow drift checks&#xD;
-- Repin caller workflows&#xD;
-- Pin shared validation policy&#xD;
-- Use shared AIO workflows&#xD;
-- Sync workflow path filters&#xD;
-- Sync catalog publication state&#xD;
-- Pin publish helper workflow fix&#xD;
-- Pin next-wave aio-fleet workflows&#xD;
-- Pin Docker Hub primary workflow&#xD;
-- Pin control-plane workflow foundation&#xD;
-- Update SimpleLogin to v4.80.3&#xD;
-- Document central app test dependencies&#xD;
-- Expose manual publish targets&#xD;
-- Normalize simplelogin CA name and fleet cleanup&#xD;
-- Sync release shim path fallback&#xD;
-- Prefer Docker Hub image metadata&#xD;
-- Sync shared repository boilerplate&#xD;
-- Move shared automation to aio-fleet&#xD;
-- Declare aio-fleet ownership&#xD;
-- Bump simplelogin to v4.80.4&#xD;
-- Use shared derived repo validation&#xD;
-- Use shared release helper shim&#xD;
-- Remove legacy shared contract tests&#xD;
-- Repin workflow expectation</Changes>
+- Bump simplelogin to v4.80.6 (#73)</Changes>
   <Category>Network:Privacy Network:Web</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>

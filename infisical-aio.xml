@@ -32,36 +32,9 @@
 - The bundled Mailpit inbox is for local or lab use. It is not a production mail relay and should not be confused with real deliverability infrastructure.&#xD;
 - [code]SITE_URL[/code] matters. If you set it wrong, browser flows, links, email behavior, and some integrations will break in subtle ways.&#xD;
 - If you enable automatic bootstrap, you are creating a highly privileged instance-admin identity during first boot. Treat those credentials carefully.</Overview>
-  <Changes>### 2026-05-05&#xD;
+  <Changes>### 2026-05-17&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Harden apt package installs&#xD;
-- Use shared AIO build workflow&#xD;
-- Centralize release workflows&#xD;
-- Repin shared workflow ref&#xD;
-- Centralize workflow drift checks&#xD;
-- Repin caller workflows&#xD;
-- Pin shared validation policy&#xD;
-- Use shared AIO workflows&#xD;
-- Sync workflow path filters&#xD;
-- Sync catalog publication state&#xD;
-- Pin publish helper workflow fix&#xD;
-- Pin next-wave aio-fleet workflows&#xD;
-- Pin Docker Hub primary workflow&#xD;
-- Pin control-plane workflow foundation&#xD;
-- Bump Infisical to v0.159.22&#xD;
-- Document central app test dependencies&#xD;
-- Expose manual publish targets&#xD;
-- Sync shared validation and trunk cleanup&#xD;
-- Sync release shim path fallback&#xD;
-- Sync shared repository boilerplate&#xD;
-- Move shared automation to aio-fleet&#xD;
-- Declare aio-fleet ownership&#xD;
-- Bump infisical to v0.159.25&#xD;
-- Use shared derived repo validation&#xD;
-- Use shared release helper shim&#xD;
-- Remove legacy shared contract tests&#xD;
-- Repin workflow expectation&#xD;
-- Run shared metadata validation</Changes>
+- Update upstream pins for infisical-aio (#46)</Changes>
   <Category>Network:Security Security Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/infisical-aio.xml</TemplateURL>
