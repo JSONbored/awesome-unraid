@@ -26,7 +26,7 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ## At A Glance
 
-- Available templates: `8`
+- Available templates: `9`
 - In progress: `1`
 - Candidate pipeline: active research backlog.
 - Catalog assets: root XML templates, shared icons, screenshots, and the CA
@@ -46,11 +46,14 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ## Template Catalog
 
-### Available Templates (8)
+### Available Templates (9)
 
 - **[sure-aio](https://github.com/JSONbored/sure-aio)** - Self-hosted personal
   finance in the Maybe Finance family. Bundles the Sure web app, background
   worker, PostgreSQL, and Redis for a simpler first boot on Unraid.
+- **[sure-aio-alpha](https://github.com/JSONbored/sure-aio)** - Testing lane
+  for upstream Sure alpha prereleases and wrapper-only experiments. Uses a
+  separate image, template, port, and appdata path from stable `sure-aio`.
 - **[simplelogin-aio](https://github.com/JSONbored/simplelogin-aio)** -
   Self-hosted email aliases for protecting real inbox addresses. Bundles the web
   UI, background jobs, inbound email handler, Postfix, PostgreSQL, and Redis
