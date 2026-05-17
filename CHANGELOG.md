@@ -31,6 +31,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync aio catalog templates
 - Sync release template changes
 - Sync simplelogin registration docs
+- Sync simplelogin release notes
 
 
 ### Dependency Updates
