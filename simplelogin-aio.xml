@@ -33,7 +33,7 @@
 - For the simplest operation, keep the internal Postgres/Redis/Postfix defaults and only set the small required config set above.</Overview>
   <Changes>### 2026-05-17&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Bump simplelogin to v4.80.6 (#73)</Changes>
+- Clarify simplelogin registration mailbox</Changes>
   <Category>Network:Privacy Network:Web</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
