@@ -27,6 +27,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync sure-aio catalog assets (#77)
 - Sync sure-aio catalog assets (#79)
 - Sync dify-aio catalog assets
+- Sync security release templates
+- Sync aio catalog templates
 
 
 ### Dependency Updates
@@ -51,6 +53,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync Dify setup guidance
 - List dify template in catalog readme
 - Sync sure-aio hotfix2 catalog changes
+- Sync mem0 hardened template
 
 
 ### Features
