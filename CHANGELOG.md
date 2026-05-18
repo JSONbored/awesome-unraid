@@ -59,6 +59,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - List dify template in catalog readme
 - Sync sure-aio hotfix2 catalog changes
 - Sync mem0 hardened template
+- Document sure alpha customizations
 
 
 ### Features
@@ -68,6 +69,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Add all template builds from overnight session
 - Add NanoClaw AIO template
 - Add git-cliff release workflow
+- Add sure alpha catalog template
 
 
 ### Fixes
