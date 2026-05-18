@@ -7,7 +7,7 @@
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/JSONbored/nanoclaw-aio/issues</Support>
-  <Project>https://github.com/nanocoai/nanoclaw</Project>
+  <Project>https://github.com/JSONbored/nanoclaw-aio</Project>
   <Overview>
 NanoClaw AIO packages NanoClaw v2 as a Telegram-first Unraid container. You control the assistant from Telegram; NanoClaw stores runtime state under appdata and launches isolated helper containers from the paired jsonbored/nanoclaw-agent image when agent work needs to run.
 
@@ -20,7 +20,7 @@ First boot waits until TELEGRAM_BOT_TOKEN and one Claude credential are configur
 - Rebuild NanoClaw AIO around upstream v2.0.63.&#xD;
 - Add paired jsonbored/nanoclaw-agent:v2.0.63-agent.1 helper image.&#xD;
 - Replace runtime git-fetch behavior with build-time Telegram adapter vendoring.</Changes>
-  <Category>AI: Productivity: Tools:Utilities</Category>
+  <Category>AI Productivity Network:Messenger Tools:Utilities</Category>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/nanoclaw.webp</Icon>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/nanoclaw-aio.xml</TemplateURL>
   <Beta>True</Beta>
