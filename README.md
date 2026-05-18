@@ -26,8 +26,8 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ## At A Glance
 
-- Available templates: `9`
-- In progress: `1`
+- Available templates: `10`
+- In progress: `0`
 - Candidate pipeline: active research backlog.
 - Catalog assets: root XML templates, shared icons, screenshots, and the CA
   maintainer profile.
@@ -46,7 +46,7 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ## Template Catalog
 
-### Available Templates (9)
+### Available Templates (10)
 
 - **[sure-aio](https://github.com/JSONbored/sure-aio)** - Self-hosted personal
   finance in the Maybe Finance family. Bundles the Sure web app, background
@@ -82,14 +82,10 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
   OpenTelemetry collector for remote or separate Docker hosts. Receives OTLP,
   optionally collects host metrics, Docker metrics, Docker logs, and Prometheus
   targets, then forwards telemetry into `signoz-aio` or another SigNoz endpoint.
-
-### In Progress (1)
-
 - **[nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio)** -
-  Telegram-first agent orchestration aimed at a single-container Unraid
-  deployment with Docker socket access and persistent runtime state. This repo is
-  still being modernized and should not be treated as part of the current
-  available template set yet.
+  Telegram-first NanoClaw v2 wrapper for agent orchestration on Unraid. Stores
+  runtime state under appdata and launches nested helper containers from the
+  paired `jsonbored/nanoclaw-agent` image through the Docker socket.
 
 ## Candidate Pipeline
 
@@ -187,4 +183,4 @@ containers and support services by hand.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=jsonbored/awesome-unraid,jsonbored/sure-aio,jsonbored/simplelogin-aio,jsonbored/infisical-aio,jsonbored/mem0-aio,jsonbored/khoj-aio,jsonbored/dify-aio,jsonbored/signoz-aio&type=Date&theme=dark)](https://star-history.com/#jsonbored/awesome-unraid&jsonbored/sure-aio&jsonbored/simplelogin-aio&jsonbored/infisical-aio&jsonbored/mem0-aio&jsonbored/khoj-aio&jsonbored/dify-aio&jsonbored/signoz-aio&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=jsonbored/awesome-unraid,jsonbored/sure-aio,jsonbored/simplelogin-aio,jsonbored/infisical-aio,jsonbored/mem0-aio,jsonbored/khoj-aio,jsonbored/dify-aio,jsonbored/signoz-aio,jsonbored/nanoclaw-aio&type=Date&theme=dark)](https://star-history.com/#jsonbored/awesome-unraid&jsonbored/sure-aio&jsonbored/simplelogin-aio&jsonbored/infisical-aio&jsonbored/mem0-aio&jsonbored/khoj-aio&jsonbored/dify-aio&jsonbored/signoz-aio&jsonbored/nanoclaw-aio&Date)
