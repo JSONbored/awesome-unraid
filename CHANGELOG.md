@@ -60,6 +60,10 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync sure-aio hotfix2 catalog changes
 - Sync mem0 hardened template
 - Document sure alpha customizations
+- Note sure alpha revision tags
+- Sync sure alpha shared image tag
+- Validate readme template inventory
+- Clarify sure alpha import wording
 
 
 ### Features
