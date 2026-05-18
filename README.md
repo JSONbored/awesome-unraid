@@ -52,8 +52,9 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
   finance in the Maybe Finance family. Bundles the Sure web app, background
   worker, PostgreSQL, and Redis for a simpler first boot on Unraid.
 - **[sure-aio-alpha](https://github.com/JSONbored/sure-aio)** - Testing lane
-  for upstream Sure alpha prereleases and wrapper-only experiments. Uses a
-  separate image, template, port, and appdata path from stable `sure-aio`.
+  for upstream Sure alpha prereleases and wrapper-only experiments. Uses
+  alpha-only image tags plus a separate template, port, and appdata path from
+  stable `sure-aio`.
 - **[simplelogin-aio](https://github.com/JSONbored/simplelogin-aio)** -
   Self-hosted email aliases for protecting real inbox addresses. Bundles the web
   UI, background jobs, inbound email handler, Postfix, PostgreSQL, and Redis

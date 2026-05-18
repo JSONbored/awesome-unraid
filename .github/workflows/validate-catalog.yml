@@ -29,3 +29,6 @@ jobs:
 
       - name: Validate catalog
         run: python3 -m aio_fleet --manifest .aio-fleet/fleet.yml validate-catalog --catalog-path .
+
+      - name: Validate README inventory
+        run: python3 scripts/validate-readme-inventory.py
