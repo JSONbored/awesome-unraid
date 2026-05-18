@@ -83,9 +83,10 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
   optionally collects host metrics, Docker metrics, Docker logs, and Prometheus
   targets, then forwards telemetry into `signoz-aio` or another SigNoz endpoint.
 - **[nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio)** -
-  Telegram-first NanoClaw v2 wrapper for agent orchestration on Unraid. Stores
-  runtime state under appdata and launches nested helper containers from the
-  paired `jsonbored/nanoclaw-agent` image through the Docker socket.
+  Beta, Telegram-first NanoClaw v2 template for Claude-powered agent
+  orchestration on Unraid. Stores runtime state under appdata and launches
+  nested helper containers from the paired `jsonbored/nanoclaw-agent` image
+  through the Docker socket.
 
 ## Candidate Pipeline
 
