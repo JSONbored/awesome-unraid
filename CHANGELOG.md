@@ -35,6 +35,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync mem0 api bind address
 - Sync mem0 release notes
 - Sync sure alpha catalog package
+- Sync sure alpha catalog template
 
 
 ### Dependency Updates
