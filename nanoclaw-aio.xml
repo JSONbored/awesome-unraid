@@ -32,9 +32,7 @@
 - Persistent databases, logs, groups, env files, and channel state live under [code]/appdata[/code].</Overview>
   <Changes>### 2026-05-19&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Move the Docker socket mount behind Advanced View and mark it optional in the Unraid template while keeping the security warning explicit.&#xD;
-- Update the default helper image reference to [code]jsonbored/nanoclaw-agent:v2.0.64-agent.1[/code].&#xD;
-- Align the XML release notes and setup copy with the optional advanced Docker socket policy.</Changes>
+- Use ca-compatible nanoclaw icon</Changes>
   <Category>AI Productivity Network:Messenger Tools:Utilities</Category>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/nanoclaw.png</Icon>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/nanoclaw-aio.xml</TemplateURL>
