@@ -39,6 +39,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Update nanoclaw catalog template
 - Update dify and infisical catalog templates
 - Update nanoclaw catalog release notes
+- Update infisical catalog release
 
 
 ### Dependency Updates
