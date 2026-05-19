@@ -34,6 +34,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync simplelogin release notes
 - Sync mem0 api bind address
 - Sync mem0 release notes
+- Sync sure alpha catalog package
 
 
 ### Dependency Updates
@@ -64,6 +65,9 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync sure alpha shared image tag
 - Validate readme template inventory
 - Clarify sure alpha import wording
+- Publish nanoclaw aio template
+- Sync nanoclaw ca description
+- Refresh nanoclaw template listing
 
 
 ### Features
@@ -85,6 +89,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Hold Dify XML behind launch gate
 - Sync simplelogin template name
 - Prefer Docker Hub image metadata
+- Normalize nanoclaw ca metadata
 
 
 ### Maintenance
