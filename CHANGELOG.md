@@ -38,6 +38,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync sure alpha catalog template
 - Update nanoclaw catalog template
 - Update dify and infisical catalog templates
+- Update nanoclaw catalog release notes
 
 
 ### Dependency Updates
