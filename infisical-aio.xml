@@ -34,7 +34,7 @@
 - If you enable automatic bootstrap, you are creating a highly privileged instance-admin identity during first boot. Treat those credentials carefully.</Overview>
   <Changes>### 2026-05-19&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Bump infisical to v0.160.0</Changes>
+- Bump infisical to v0.160.1</Changes>
   <Category>Network:Security Security Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/infisical-aio.xml</TemplateURL>
@@ -305,5 +305,6 @@
   <Config Name="[Network/Security] CORS_ALLOWED_HEADERS" Target="CORS_ALLOWED_HEADERS" Default="" Mode="" Description="Advanced upstream Infisical environment variable `CORS_ALLOWED_HEADERS`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Advanced] TRUSTED_PROXY_CIDRS" Target="TRUSTED_PROXY_CIDRS" Default="" Mode="" Description="Advanced upstream Infisical environment variable `TRUSTED_PROXY_CIDRS`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Advanced] TNS_ADMIN" Target="TNS_ADMIN" Default="" Mode="" Description="Advanced upstream Infisical environment variable `TNS_ADMIN`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[Advanced] GOLANG_SIDECAR_URL" Target="GOLANG_SIDECAR_URL" Default="" Mode="" Description="Advanced upstream Infisical environment variable `GOLANG_SIDECAR_URL`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Advanced] INTERNAL_REGION" Target="INTERNAL_REGION" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INTERNAL_REGION`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
 </Container>
