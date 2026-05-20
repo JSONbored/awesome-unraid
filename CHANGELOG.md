@@ -77,6 +77,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Publish nanoclaw aio template
 - Sync nanoclaw ca description
 - Refresh nanoclaw template listing
+- Sort AIO templates alphabetically
+- List published image packages (#135)
 
 
 ### Features
@@ -87,6 +89,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Add NanoClaw AIO template
 - Add git-cliff release workflow
 - Add sure alpha catalog template
+- Add penpot-aio
 
 
 ### Fixes
