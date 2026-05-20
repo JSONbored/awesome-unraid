@@ -75,7 +75,7 @@ jobs:
           sign-commits: true
 
       - name: Verify changelog PR commits
-        if: ${{ steps.changelog-pr.outputs.pull-request-operation != 'none' }}
+        if: ${{ steps.changelog-pr.outputs.pull-request-number != '' }}
         env:
           VERIFIED: ${{ steps.changelog-pr.outputs.pull-request-commits-verified }}
         run: |
