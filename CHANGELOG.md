@@ -42,6 +42,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Update infisical catalog release
 - Update security release templates
 - Sign Fleetbot catalog PRs
+- Use Fleetbot client ID
+- Verify existing Fleetbot PRs
 
 
 ### Dependency Updates
