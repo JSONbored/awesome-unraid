@@ -48,6 +48,42 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 
 ### Available Templates (11)
 
+- **[dify-aio](https://github.com/JSONbored/dify-aio)** - Self-hosted AI app
+  and agent workflow platform. Bundles Dify API, web, worker, plugin daemon,
+  sandbox, SSRF proxy, PostgreSQL, Redis, and vector-store services for a
+  practical Unraid-first install while keeping provider and storage overrides
+  available.
+- **[infisical-aio](https://github.com/JSONbored/infisical-aio)** -
+  Self-hosted secrets management for teams, infrastructure, and application
+  credentials. Bundles Infisical with PostgreSQL, Redis, and a local Mailpit
+  inbox for reliable first boot and local email-dependent flows.
+- **[khoj-aio](https://github.com/JSONbored/khoj-aio)** - Self-hosted AI second
+  brain for chatting with documents, the web, and local or hosted LLMs. Bundles
+  Khoj with PostgreSQL and `pgvector` for a practical Unraid-first install.
+- **[mem0-aio](https://github.com/JSONbored/mem0-aio)** - Self-hosted Mem0
+  OpenMemory for AI memory retention. Bundles the OpenMemory UI/API with Qdrant
+  so users can start without wiring a separate vector database.
+- **[nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio)** -
+  Beta, Telegram-first NanoClaw v2 template for Claude-powered agent
+  orchestration on Unraid. Stores runtime state under appdata and launches
+  nested helper containers from the paired `jsonbored/nanoclaw-agent` image
+  through the Docker socket.
+- **[penpot-aio](https://github.com/JSONbored/penpot-aio)** - Self-hosted
+  design and prototyping for product teams, designers, and developers. Bundles
+  Penpot frontend, backend, exporter, MCP, PostgreSQL, Redis-compatible cache,
+  Nginx, and Mailpit for a practical one-container Unraid install.
+- **[signoz-agent](https://github.com/JSONbored/signoz-aio)** - Companion
+  OpenTelemetry collector for remote or separate Docker hosts. Receives OTLP,
+  optionally collects host metrics, Docker metrics, Docker logs, and Prometheus
+  targets, then forwards telemetry into `signoz-aio` or another SigNoz endpoint.
+- **[signoz-aio](https://github.com/JSONbored/signoz-aio)** - Self-hosted
+  observability for traces, metrics, and logs. Bundles SigNoz UI/API,
+  OpenTelemetry collector, ClickHouse, and ZooKeeper into one Unraid-oriented
+  deployment.
+- **[simplelogin-aio](https://github.com/JSONbored/simplelogin-aio)** -
+  Self-hosted email aliases for protecting real inbox addresses. Bundles the web
+  UI, background jobs, inbound email handler, Postfix, PostgreSQL, and Redis
+  while keeping DNS and deliverability tradeoffs explicit.
 - **[sure-aio](https://github.com/JSONbored/sure-aio)** - Self-hosted personal
   finance in the Maybe Finance family. Bundles the Sure web app, background
   worker, PostgreSQL, and Redis for a simpler first boot on Unraid.
@@ -55,42 +91,6 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
   for upstream Sure alpha prereleases and wrapper-only experiments. Uses a
   dedicated `sure-aio-alpha` image package plus a separate template, port, and
   appdata path from stable `sure-aio`.
-- **[simplelogin-aio](https://github.com/JSONbored/simplelogin-aio)** -
-  Self-hosted email aliases for protecting real inbox addresses. Bundles the web
-  UI, background jobs, inbound email handler, Postfix, PostgreSQL, and Redis
-  while keeping DNS and deliverability tradeoffs explicit.
-- **[infisical-aio](https://github.com/JSONbored/infisical-aio)** -
-  Self-hosted secrets management for teams, infrastructure, and application
-  credentials. Bundles Infisical with PostgreSQL, Redis, and a local Mailpit
-  inbox for reliable first boot and local email-dependent flows.
-- **[penpot-aio](https://github.com/JSONbored/penpot-aio)** - Self-hosted
-  design and prototyping for product teams, designers, and developers. Bundles
-  Penpot frontend, backend, exporter, MCP, PostgreSQL, Redis-compatible cache,
-  Nginx, and Mailpit for a practical one-container Unraid install.
-- **[mem0-aio](https://github.com/JSONbored/mem0-aio)** - Self-hosted Mem0
-  OpenMemory for AI memory retention. Bundles the OpenMemory UI/API with Qdrant
-  so users can start without wiring a separate vector database.
-- **[khoj-aio](https://github.com/JSONbored/khoj-aio)** - Self-hosted AI second
-  brain for chatting with documents, the web, and local or hosted LLMs. Bundles
-  Khoj with PostgreSQL and `pgvector` for a practical Unraid-first install.
-- **[dify-aio](https://github.com/JSONbored/dify-aio)** - Self-hosted AI app
-  and agent workflow platform. Bundles Dify API, web, worker, plugin daemon,
-  sandbox, SSRF proxy, PostgreSQL, Redis, and vector-store services for a
-  practical Unraid-first install while keeping provider and storage overrides
-  available.
-- **[signoz-aio](https://github.com/JSONbored/signoz-aio)** - Self-hosted
-  observability for traces, metrics, and logs. Bundles SigNoz UI/API,
-  OpenTelemetry collector, ClickHouse, and ZooKeeper into one Unraid-oriented
-  deployment.
-- **[signoz-agent](https://github.com/JSONbored/signoz-aio)** - Companion
-  OpenTelemetry collector for remote or separate Docker hosts. Receives OTLP,
-  optionally collects host metrics, Docker metrics, Docker logs, and Prometheus
-  targets, then forwards telemetry into `signoz-aio` or another SigNoz endpoint.
-- **[nanoclaw-aio](https://github.com/JSONbored/nanoclaw-aio)** -
-  Beta, Telegram-first NanoClaw v2 template for Claude-powered agent
-  orchestration on Unraid. Stores runtime state under appdata and launches
-  nested helper containers from the paired `jsonbored/nanoclaw-agent` image
-  through the Docker socket.
 
 ## Candidate Pipeline
 
@@ -188,4 +188,4 @@ containers and support services by hand.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=jsonbored/awesome-unraid,jsonbored/sure-aio,jsonbored/simplelogin-aio,jsonbored/infisical-aio,jsonbored/penpot-aio,jsonbored/mem0-aio,jsonbored/khoj-aio,jsonbored/dify-aio,jsonbored/signoz-aio,jsonbored/nanoclaw-aio&type=Date&theme=dark)](https://star-history.com/#jsonbored/awesome-unraid&jsonbored/sure-aio&jsonbored/simplelogin-aio&jsonbored/infisical-aio&jsonbored/penpot-aio&jsonbored/mem0-aio&jsonbored/khoj-aio&jsonbored/dify-aio&jsonbored/signoz-aio&jsonbored/nanoclaw-aio&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=jsonbored/awesome-unraid,jsonbored/dify-aio,jsonbored/infisical-aio,jsonbored/khoj-aio,jsonbored/mem0-aio,jsonbored/nanoclaw-aio,jsonbored/penpot-aio,jsonbored/signoz-aio,jsonbored/simplelogin-aio,jsonbored/sure-aio&type=Date&theme=dark)](https://star-history.com/#jsonbored/awesome-unraid&jsonbored/dify-aio&jsonbored/infisical-aio&jsonbored/khoj-aio&jsonbored/mem0-aio&jsonbored/nanoclaw-aio&jsonbored/penpot-aio&jsonbored/signoz-aio&jsonbored/simplelogin-aio&jsonbored/sure-aio&Date)
