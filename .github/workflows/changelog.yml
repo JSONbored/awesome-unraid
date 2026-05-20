@@ -39,12 +39,12 @@ jobs:
 
       - name: Validate Fleetbot credentials
         env:
-          AIO_FLEET_APP_ID: ${{ secrets.AIO_FLEET_APP_ID }}
+          AIO_FLEET_APP_CLIENT_ID: ${{ vars.AIO_FLEET_APP_CLIENT_ID }}
           AIO_FLEET_APP_PRIVATE_KEY: ${{ secrets.AIO_FLEET_APP_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           missing=()
-          [[ -n "${AIO_FLEET_APP_ID}" ]] || missing+=(AIO_FLEET_APP_ID)
+          [[ -n "${AIO_FLEET_APP_CLIENT_ID}" ]] || missing+=(AIO_FLEET_APP_CLIENT_ID)
           [[ -n "${AIO_FLEET_APP_PRIVATE_KEY}" ]] || missing+=(AIO_FLEET_APP_PRIVATE_KEY)
           if (( ${#missing[@]} )); then
             printf 'credential-gap: missing %s\n' "${missing[*]}" >&2
@@ -55,7 +55,7 @@ jobs:
         id: fleetbot-token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
-          app-id: ${{ secrets.AIO_FLEET_APP_ID }}
+          client-id: ${{ vars.AIO_FLEET_APP_CLIENT_ID }}
           private-key: ${{ secrets.AIO_FLEET_APP_PRIVATE_KEY }}
 
       - name: Create changelog PR
