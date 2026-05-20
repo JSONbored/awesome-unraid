@@ -37,10 +37,32 @@ jobs:
         run: |
           git-cliff --config cliff.toml --unreleased --output CHANGELOG.md
 
+      - name: Validate Fleetbot credentials
+        env:
+          AIO_FLEET_APP_ID: ${{ secrets.AIO_FLEET_APP_ID }}
+          AIO_FLEET_APP_PRIVATE_KEY: ${{ secrets.AIO_FLEET_APP_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          missing=()
+          [[ -n "${AIO_FLEET_APP_ID}" ]] || missing+=(AIO_FLEET_APP_ID)
+          [[ -n "${AIO_FLEET_APP_PRIVATE_KEY}" ]] || missing+=(AIO_FLEET_APP_PRIVATE_KEY)
+          if (( ${#missing[@]} )); then
+            printf 'credential-gap: missing %s\n' "${missing[*]}" >&2
+            exit 1
+          fi
+
+      - name: Create Fleetbot token
+        id: fleetbot-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.AIO_FLEET_APP_ID }}
+          private-key: ${{ secrets.AIO_FLEET_APP_PRIVATE_KEY }}
+
       - name: Create changelog PR
+        id: changelog-pr
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
-          token: ${{ secrets.AIO_FLEET_BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          token: ${{ steps.fleetbot-token.outputs.token }}
           commit-message: "chore(changelog): update catalog history"
           title: "chore(changelog): update catalog history"
           body: |
@@ -50,3 +72,15 @@ jobs:
             - does not create tags or GitHub Releases
           branch: "changelog/update-catalog-history"
           delete-branch: true
+          sign-commits: true
+
+      - name: Verify changelog PR commits
+        if: ${{ steps.changelog-pr.outputs.pull-request-operation != 'none' }}
+        env:
+          VERIFIED: ${{ steps.changelog-pr.outputs.pull-request-commits-verified }}
+        run: |
+          set -euo pipefail
+          if [[ "${VERIFIED}" != "true" ]]; then
+            echo "unsigned-generated-pr: changelog PR commits were not verified" >&2
+            exit 1
+          fi
