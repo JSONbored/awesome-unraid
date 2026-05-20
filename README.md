@@ -5,6 +5,7 @@
 Unraid Community Applications catalog for JSONbored AIO templates.
 
 [At A Glance](#at-a-glance) | [Templates](#template-catalog) |
+[Images](#published-image-packages) |
 [Candidate Pipeline](#candidate-pipeline) | [Quick Start](#quick-start) |
 [Contributing](CONTRIBUTING.md)
 
@@ -20,6 +21,10 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
   and app-specific documentation.
 - This repo owns the catalog copies: root `*.xml` files, `icons/`,
   `screenshots/`, and `ca_profile.xml`.
+- Some source repos publish more than one Docker image or CA template. For
+  example, `sure-aio` publishes both stable `sure-aio` and testing
+  `sure-aio-alpha`, while `nanoclaw-aio` also publishes the helper
+  `nanoclaw-agent` image used by its template.
 - AIO templates are beginner-friendly by default, but they keep advanced
   configuration paths visible for users who need external services, SMTP,
   identity providers, reverse proxies, or other power-user controls.
@@ -27,6 +32,7 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
 ## At A Glance
 
 - Available templates: `11`
+- Published image packages: `12`
 - In progress: `0`
 - Candidate pipeline: active research backlog.
 - Catalog assets: root XML templates, shared icons, screenshots, and the CA
@@ -91,6 +97,27 @@ screenshots, and maintainer profile assets that Unraid users import or discover.
   for upstream Sure alpha prereleases and wrapper-only experiments. Uses a
   dedicated `sure-aio-alpha` image package plus a separate template, port, and
   appdata path from stable `sure-aio`.
+
+## Published Image Packages
+
+These are the Docker image packages currently published for the AIO fleet. Most
+map one-to-one to a Community Applications template, but companion and helper
+images can share the same GitHub source repo as their parent app.
+
+| Image | Source repo | CA template |
+| --- | --- | --- |
+| [`jsonbored/dify-aio`](https://hub.docker.com/r/jsonbored/dify-aio) | [`JSONbored/dify-aio`](https://github.com/JSONbored/dify-aio) | `dify-aio` |
+| [`jsonbored/infisical-aio`](https://hub.docker.com/r/jsonbored/infisical-aio) | [`JSONbored/infisical-aio`](https://github.com/JSONbored/infisical-aio) | `infisical-aio` |
+| [`jsonbored/khoj-aio`](https://hub.docker.com/r/jsonbored/khoj-aio) | [`JSONbored/khoj-aio`](https://github.com/JSONbored/khoj-aio) | `khoj-aio` |
+| [`jsonbored/mem0-aio`](https://hub.docker.com/r/jsonbored/mem0-aio) | [`JSONbored/mem0-aio`](https://github.com/JSONbored/mem0-aio) | `mem0-aio` |
+| [`jsonbored/nanoclaw-agent`](https://hub.docker.com/r/jsonbored/nanoclaw-agent) | [`JSONbored/nanoclaw-aio`](https://github.com/JSONbored/nanoclaw-aio) | Helper image used by `nanoclaw-aio` |
+| [`jsonbored/nanoclaw-aio`](https://hub.docker.com/r/jsonbored/nanoclaw-aio) | [`JSONbored/nanoclaw-aio`](https://github.com/JSONbored/nanoclaw-aio) | `nanoclaw-aio` |
+| [`jsonbored/penpot-aio`](https://hub.docker.com/r/jsonbored/penpot-aio) | [`JSONbored/penpot-aio`](https://github.com/JSONbored/penpot-aio) | `penpot-aio` |
+| [`jsonbored/signoz-agent`](https://hub.docker.com/r/jsonbored/signoz-agent) | [`JSONbored/signoz-aio`](https://github.com/JSONbored/signoz-aio) | `signoz-agent` |
+| [`jsonbored/signoz-aio`](https://hub.docker.com/r/jsonbored/signoz-aio) | [`JSONbored/signoz-aio`](https://github.com/JSONbored/signoz-aio) | `signoz-aio` |
+| [`jsonbored/simplelogin-aio`](https://hub.docker.com/r/jsonbored/simplelogin-aio) | [`JSONbored/simplelogin-aio`](https://github.com/JSONbored/simplelogin-aio) | `simplelogin-aio` |
+| [`jsonbored/sure-aio`](https://hub.docker.com/r/jsonbored/sure-aio) | [`JSONbored/sure-aio`](https://github.com/JSONbored/sure-aio) | `sure-aio` |
+| [`jsonbored/sure-aio-alpha`](https://hub.docker.com/r/jsonbored/sure-aio-alpha) | [`JSONbored/sure-aio`](https://github.com/JSONbored/sure-aio) | `sure-aio-alpha` |
 
 ## Candidate Pipeline
 
