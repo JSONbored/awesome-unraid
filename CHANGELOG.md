@@ -14,8 +14,11 @@ For app-specific release history, use the individual AIO repositories.
 Automated catalog sync commits are intentionally omitted here so this file stays readable.
 
 This catalog is maintained continuously on `main` and does not require formal GitHub Releases.
+
 ## Unreleased
+
 ### CI
+
 - Remove awesome-unraid release workflow
 - Restore catalog changelog automation
 - Auto-sync dify-aio assets (#59)
@@ -40,13 +43,14 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Update dify and infisical catalog templates
 - Update nanoclaw catalog release notes
 - Update infisical catalog release
-
+- Update security release templates
 
 ### Dependency Updates
+
 - Update peter-evans/create-pull-request action to v8.1.1 (#45)
 
-
 ### Documentation
+
 - Update Sure-AIO description
 - Update maintainer profile metadata
 - Add repository guidance
@@ -74,8 +78,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync nanoclaw ca description
 - Refresh nanoclaw template listing
 
-
 ### Features
+
 - Add SimpleLogin-AIO and SimpleLogin-Postfix CA templates
 - Update to awesome-unraid
 - Add 9 new production-quality templates
@@ -84,8 +88,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Add git-cliff release workflow
 - Add sure alpha catalog template
 
-
 ### Fixes
+
 - Correct repo references, rewrite README as proper awesome-list format, add star badges
 - Point template Icon tags to raw GitHub master/main URLs
 - Tighten changelog spacing
@@ -96,8 +100,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Prefer Docker Hub image metadata
 - Normalize nanoclaw ca metadata
 
-
 ### Maintenance
+
 - Sync local config drift for all modified AIO templates
 - Cleanup repo, keep only confirmed complete AIO templates (SimpleLogin, Sure)
 - Remove old title-cased xml files
