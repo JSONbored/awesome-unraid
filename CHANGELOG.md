@@ -82,6 +82,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Refresh nanoclaw template listing
 - Sort AIO templates alphabetically
 - List published image packages (#135)
+- Sync infisical and nanoclaw templates
 
 
 ### Features
