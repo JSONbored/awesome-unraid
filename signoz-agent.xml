@@ -24,9 +24,9 @@ Use signoz-agent on remote Unraid servers, separate Docker hosts, or any machine
 4. Optional: enable host metrics, Docker metrics, Docker logs, or Prometheus targets in Advanced View and explicitly set the matching mounts or target list.&#xD;
 &#xD;
 [b]Security Note:[/b] Host root, Docker socket, and Docker log mounts are blank by default. Enable only the collection sources you need. Docker socket access can expose Docker control access to this collector container.</Overview>
-  <Changes>### 2026-05-17&#xD;
+  <Changes>### 2026-05-21&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Update upstream pins for signoz-aio (#69)</Changes>
+- Bump signoz to v0.125.1</Changes>
   <Category>Network:Management Tools:Utilities</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/signoz-agent.xml</TemplateURL>
