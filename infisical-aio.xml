@@ -17,7 +17,7 @@
 [b]Quick Install (Beginners)[/b]&#xD;
 1. Install the template and keep the default `/config` and `/data` paths unless you have a reason to move them.&#xD;
 2. Set [code]SITE_URL[/code] to the real URL users will visit, such as [code]https://secrets.example.com[/code] or [code]http://tower.local:8080[/code].&#xD;
-3. Start the container. The wrapper will auto-generate and persist [code]ENCRYPTION_KEY[/code] and [code]AUTH_SECRET[/code] if you leave them blank, and the bundled Mailpit inbox UI will be reachable on port [code]8025[/code] using credentials stored in [code]/config/aio/generated.env[/code].&#xD;
+3. Start the container. The wrapper will auto-generate and persist [code]ENCRYPTION_KEY[/code] and [code]AUTH_SECRET[/code] if you leave them blank, and bundled Mailpit inbox UI credentials will be stored in [code]/config/aio/generated.env[/code]. Publish [code]Local Mail Inbox Port[/code] only when you intentionally need host-network inbox access.&#xD;
 4. Either create the first account in the UI, or fill the optional [code]AIO_BOOTSTRAP_*[/code] fields in Advanced View to bootstrap the first admin and organization automatically.&#xD;
 &#xD;
 [b]Power Users (Advanced View)[/b]&#xD;
@@ -57,7 +57,7 @@
         <Protocol>tcp</Protocol>
       </Port>
       <Port>
-        <HostPort>8025</HostPort>
+        <HostPort></HostPort>
         <ContainerPort>8025</ContainerPort>
         <Protocol>tcp</Protocol>
       </Port>
@@ -78,7 +78,7 @@
   <Environment/>
 
   <Config Name="Web UI Port" Target="8080" Default="8080" Mode="tcp" Description="Main Infisical web and API port." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
-  <Config Name="Local Mail Inbox Port" Target="8025" Default="8025" Mode="tcp" Description="Bundled Mailpit inbox UI port for local or lab email capture. The UI is auth-protected, SMTP stays internal to the container, and this should not be treated like public production mail infrastructure." Type="Port" Display="always" Required="false" Mask="false">8025</Config>
+  <Config Name="Local Mail Inbox Port" Target="8025" Default="" Mode="tcp" Description="Optional host port for the bundled Mailpit inbox UI used in local or lab email capture. Leave blank unless you intentionally need inbox UI access from the host network." Type="Port" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="Prometheus Metrics Port" Target="9464" Default="" Mode="tcp" Description="Optional host port for OTEL Prometheus metrics. Leave blank unless you enable OTEL_TELEMETRY_COLLECTION_ENABLED=true and OTEL_EXPORT_TYPE=prometheus." Type="Port" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="AppData - Config" Target="/config" Default="/mnt/user/appdata/infisical-aio/config" Mode="rw" Description="Persistent wrapper state, generated first-run secrets, and optional bootstrap artifacts." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/infisical-aio/config</Config>
   <Config Name="AppData - Data" Target="/data" Default="/mnt/user/appdata/infisical-aio/data" Mode="rw" Description="Persistent bundled PostgreSQL and Redis data for the default AIO path." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/infisical-aio/data</Config>

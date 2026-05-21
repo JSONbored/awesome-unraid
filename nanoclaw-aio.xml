@@ -28,21 +28,21 @@
 &#xD;
 [b]Important Notes[/b]&#xD;
 - This template is marked beta while the NanoClaw v2 runtime gets more real-world Unraid soak time.&#xD;
-- The Docker socket mount is required and always visible because NanoClaw launches paired helper containers through the host Docker daemon, which grants host-level Docker control.&#xD;
+- The Docker socket mount is an advanced opt-in setting because NanoClaw launches paired helper containers through the host Docker daemon, which grants host-level Docker control. NanoClaw cannot run helper containers until that mount is enabled.&#xD;
 - Persistent databases, logs, groups, env files, and channel state live under [code]/appdata[/code].</Overview>
   <Changes>### 2026-05-20&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
 - Realign pinned upstream version metadata&#xD;
 - Restore missing upstream fleet config&#xD;
 - Correct shell quoting in Unraid host paths patch&#xD;
-- Require always-visible Docker socket mount&#xD;
+- Gate Docker socket mount behind Advanced View&#xD;
 - Remove centralized repo files</Changes>
   <Category>AI Productivity Network:Messenger Tools:Utilities</Category>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/nanoclaw.png</Icon>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/nanoclaw-aio.xml</TemplateURL>
   <Beta>True</Beta>
   <ExtraSearchTerms>telegram, claude, agents, automation, scheduler, docker, assistant, nanoclaw</ExtraSearchTerms>
-  <Requires>NanoClaw requires a Telegram bot token and at least one Claude credential. The Docker socket mount is required for nested [code]jsonbored/nanoclaw-agent[/code] helper containers and grants host-level Docker control.</Requires>
+  <Requires>NanoClaw requires a Telegram bot token and at least one Claude credential. Enable the advanced Docker socket mount for nested [code]jsonbored/nanoclaw-agent[/code] helper containers; this grants host-level Docker control.</Requires>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
@@ -53,7 +53,7 @@
   <ReadMe>Configure [code]TELEGRAM_BOT_TOKEN[/code] and at least one Claude credential, then start the container and watch the logs for [code]PAIR_TELEGRAM_CODE[/code]. Send that code to your Telegram bot to pair the main chat. NanoClaw stores runtime state under [code]/appdata[/code] and uses the Docker socket to launch paired [code]jsonbored/nanoclaw-agent[/code] helper containers.</ReadMe>
 
   <Config Name="Appdata Directory" Target="/appdata" Default="/mnt/user/appdata/nanoclaw-aio" Mode="rw" Description="Persistent NanoClaw data: databases, logs, groups, channel state, env files, and host-visible runtime files for nested agent containers." Type="Path" Display="always" Required="true" Mask="false"/>
-  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Security-sensitive mount. NanoClaw v2 needs the Docker socket to spawn nested jsonbored/nanoclaw-agent helper containers, which grants host-level Docker control access." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="" Mode="rw" Description="Advanced opt-in security-sensitive mount. NanoClaw v2 needs the Docker socket to spawn nested jsonbored/nanoclaw-agent helper containers, which grants host-level Docker control access." Type="Path" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="Telegram Bot Token" Target="TELEGRAM_BOT_TOKEN" Default="" Mode="" Description="Bot token from @BotFather. After startup, send the PAIR_TELEGRAM_CODE from the logs to this bot." Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Anthropic API Key" Target="ANTHROPIC_API_KEY" Default="" Mode="" Description="Claude API key. Use this or one of the advanced Claude credential options." Type="Variable" Display="always" Required="false" Mask="true"/>
   <Config Name="Host Appdata Path" Target="NANOCLAW_HOST_APPDATA_DIR" Default="/mnt/user/appdata/nanoclaw-aio" Mode="" Description="Host-side path matching the Appdata Directory mount. Nested agent containers need this host path when the AIO talks to the host Docker daemon." Type="Variable" Display="always" Required="true" Mask="false"/>
