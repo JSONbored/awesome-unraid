@@ -17,7 +17,7 @@
 [b]Quick Install (Beginners)[/b]&#xD;
 1. Install this template in Unraid.&#xD;
 2. Set [code]URL[/code], [code]EMAIL_DOMAIN[/code], [code]SUPPORT_EMAIL[/code], and [code]FLASK_SECRET[/code].&#xD;
-3. Leave registration enabled for first boot, create your first account with a mailbox that is not on [code]EMAIL_DOMAIN[/code], then disable registration later in Advanced View if you want a private instance.&#xD;
+3. Registration is disabled by default for safety. Temporarily set [code]DISABLE_REGISTRATION[/code] to [code]false[/code] only if you need web sign-up for first boot, then switch it back to [code]true[/code] and restart.&#xD;
 4. Choose an outbound relay mode if your ISP blocks outbound TCP 25.&#xD;
 5. Forward inbound TCP 25 from your router/firewall to the Unraid host if you want internet mail delivery.&#xD;
 6. Start the container, wait for first boot to finish, then add the required DNS records from the setup guide.&#xD;
@@ -31,9 +31,13 @@
 - Current upstream packaging is [code]linux/amd64[/code] only.&#xD;
 - This is still a real self-hosted mail stack. DNS, deliverability, router/firewall port forwarding, and sender reputation still matter.&#xD;
 - For the simplest operation, keep the internal Postgres/Redis/Postfix defaults and only set the small required config set above.</Overview>
-  <Changes>### 2026-05-17&#xD;
+  <Changes>### 2026-05-20&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Clarify simplelogin registration mailbox</Changes>
+- Enforce verified TLS for SMTP relays&#xD;
+- Prevent DKIM symlink ownership takeover&#xD;
+- Harden internal Postgres auth defaults&#xD;
+- Restrict SimpleLogin state dir permissions&#xD;
+- Default registration to disabled</Changes>
   <Category>Network:Privacy Network:Web</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
@@ -105,7 +109,7 @@
   <Config Name="Partner API Token Secret" Target="PARTNER_API_TOKEN_SECRET" Default="" Mode="" Description="Optional partner token secret. Generate with: openssl rand -hex 32. Blank uses FLASK_SECRET." Type="Variable" Display="advanced" Required="false" Mask="true"/>
 
   <!-- Security and registration -->
-  <Config Name="Disable Registration" Target="DISABLE_REGISTRATION" Default="false|true" Mode="" Description="Leave false for first boot so you can create the first account. After that, switch to true and restart to close registration." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Disable Registration" Target="DISABLE_REGISTRATION" Default="true|false" Mode="" Description="Recommended default. Keep true to block public sign-up. Temporarily switch to false only while creating a first account, then set true again and restart." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="Disable Onboarding Emails" Target="DISABLE_ONBOARDING" Default="true|false" Mode="" Description="Recommended for self-hosted installs." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="Disable Alias Suffix" Target="DISABLE_ALIAS_SUFFIX" Default="true|false" Mode="" Description="Recommended for self-hosted installs to allow cleaner aliases without the random suffix." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="Enable SPF Enforcement" Target="ENFORCE_SPF" Default="true|false" Mode="" Description="Enable SPF enforcement using the extra headers provided by Postfix." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
