@@ -45,6 +45,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Use Fleetbot client ID
 - Verify existing Fleetbot PRs
 - Sync security release templates
+- Update release template changelogs
 
 
 ### Dependency Updates
