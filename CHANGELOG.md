@@ -46,6 +46,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Verify existing Fleetbot PRs
 - Sync security release templates
 - Update release template changelogs
+- Update Penpot template release notes
 
 
 ### Dependency Updates
