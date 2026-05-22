@@ -48,6 +48,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Update release template changelogs
 - Update Penpot template release notes
 - Refresh released AIO catalog templates
+- Refresh Khoj catalog history
 
 
 ### Dependency Updates
