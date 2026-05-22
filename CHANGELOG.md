@@ -47,6 +47,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync security release templates
 - Update release template changelogs
 - Update Penpot template release notes
+- Refresh released AIO catalog templates
 
 
 ### Dependency Updates
