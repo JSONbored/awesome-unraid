@@ -32,7 +32,8 @@
 - The bundled Mailpit inbox is for local/lab capture, not real mail deliverability.</Overview>
   <Changes>### 2026-05-23&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Separate Penpot exporter port</Changes>
+- Separate Penpot exporter port&#xD;
+- Keep Mailpit UI auth readable when extra.env pre-creates the config directory</Changes>
   <Category>Productivity Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/penpot-aio.xml</TemplateURL>
