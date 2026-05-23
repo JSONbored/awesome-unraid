@@ -47,7 +47,7 @@
   <DonateText>Support JSONbored on GitHub Sponsors.</DonateText>
   <DonateLink>https://github.com/sponsors/JSONbored</DonateLink>
   <Description/>
-  <ReadMe>Configure [code]TELEGRAM_BOT_TOKEN[/code] and at least one Claude credential, then start the container and watch the logs for [code]PAIR_TELEGRAM_CODE[/code]. Send that code to your Telegram bot to pair the main chat. NanoClaw stores runtime state under [code]/appdata[/code] and uses the Docker socket to launch paired [code]jsonbored/nanoclaw-agent[/code] helper containers.</ReadMe>
+  <ReadMe>https://github.com/JSONbored/nanoclaw-aio#readme</ReadMe>
 
   <Config Name="Appdata Directory" Target="/appdata" Default="/mnt/user/appdata/nanoclaw-aio" Mode="rw" Description="Persistent NanoClaw data: databases, logs, groups, channel state, env files, and host-visible runtime files for nested agent containers." Type="Path" Display="always" Required="true" Mask="false"/>
   <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="" Mode="rw" Description="Advanced opt-in security-sensitive mount. NanoClaw v2 needs the Docker socket to spawn nested jsonbored/nanoclaw-agent helper containers, which grants host-level Docker control access." Type="Path" Display="advanced" Required="false" Mask="false"></Config>
