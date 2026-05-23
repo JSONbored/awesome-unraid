@@ -38,12 +38,16 @@
 - Harden internal Postgres auth defaults&#xD;
 - Restrict SimpleLogin state dir permissions&#xD;
 - Default registration to disabled</Changes>
-  <Category>Network:Privacy Network:Web</Category>
+  <Category>Network:Privacy Network:Web Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
+  <ReadMe>https://github.com/JSONbored/simplelogin-aio#readme</ReadMe>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/simplelogin.jpeg</Icon>
   <ExtraSearchTerms>email alias privacy forwarding self-hosted proton mail postfix smtp dkim</ExtraSearchTerms>
   <Requires>**For full inbound mail delivery:** a public domain, correct DNS records, and inbound TCP 25 forwarded to your Unraid host. If outbound TCP 25 is blocked, use an SMTP relay mode instead of direct delivery.</Requires>
+  <Screenshot>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/screenshots/simplelogin-aio/01-login.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/screenshots/simplelogin-aio/02-dashboard.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/screenshots/simplelogin-aio/03-settings.png</Screenshot>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
