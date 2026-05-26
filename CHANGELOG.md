@@ -50,6 +50,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Refresh released AIO catalog templates
 - Refresh Khoj catalog history
 - Sync CA template metadata
+- Refresh release metadata catalog XML
 
 
 ### Dependency Updates
