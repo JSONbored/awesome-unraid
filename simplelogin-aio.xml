@@ -31,13 +31,9 @@
 - Current upstream packaging is [code]linux/amd64[/code] only.&#xD;
 - This is still a real self-hosted mail stack. DNS, deliverability, router/firewall port forwarding, and sender reputation still matter.&#xD;
 - For the simplest operation, keep the internal Postgres/Redis/Postfix defaults and only set the small required config set above.</Overview>
-  <Changes>### 2026-05-20&#xD;
+  <Changes>### 2026-05-26&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Enforce verified TLS for SMTP relays&#xD;
-- Prevent DKIM symlink ownership takeover&#xD;
-- Harden internal Postgres auth defaults&#xD;
-- Restrict SimpleLogin state dir permissions&#xD;
-- Default registration to disabled</Changes>
+- Add CA readme and utility category</Changes>
   <Category>Network:Privacy Network:Web Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>

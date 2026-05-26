@@ -32,9 +32,9 @@
 - The bundled Mailpit inbox is for local or lab use. It is not a production mail relay and should not be confused with real deliverability infrastructure.&#xD;
 - [code]SITE_URL[/code] matters. If you set it wrong, browser flows, links, email behavior, and some integrations will break in subtle ways.&#xD;
 - If you enable automatic bootstrap, you are creating a highly privileged instance-admin identity during first boot. Treat those credentials carefully.</Overview>
-  <Changes>### 2026-05-21&#xD;
+  <Changes>### 2026-05-26&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Bump infisical to v0.160.4</Changes>
+- Update infisical to v0.160.5</Changes>
   <Category>Security Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/infisical-aio.xml</TemplateURL>
@@ -114,6 +114,7 @@
 
   <Config Name="[Advanced] KUBERNETES_AUTO_FETCH_SERVICE_ACCOUNT_TOKEN" Target="KUBERNETES_AUTO_FETCH_SERVICE_ACCOUNT_TOKEN" Default="false|true" Mode="" Description="Advanced upstream Infisical environment variable `KUBERNETES_AUTO_FETCH_SERVICE_ACCOUNT_TOKEN`." Type="Variable" Display="advanced" Required="false" Mask="true">false</Config>
   <Config Name="[Secret Scanning] DISABLE_SECRET_SCANNING" Target="DISABLE_SECRET_SCANNING" Default="false|true" Mode="" Description="Advanced upstream Infisical environment variable `DISABLE_SECRET_SCANNING`." Type="Variable" Display="advanced" Required="false" Mask="true">false</Config>
+  <Config Name="[Advanced] DISABLE_PUBLIC_SECRET_SHARING" Target="DISABLE_PUBLIC_SECRET_SHARING" Default="" Mode="" Description="Advanced upstream Infisical environment variable `DISABLE_PUBLIC_SECRET_SHARING`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Redis] REDIS_USERNAME" Target="REDIS_USERNAME" Default="" Mode="" Description="Advanced upstream Infisical environment variable `REDIS_USERNAME`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Redis] REDIS_PASSWORD" Target="REDIS_PASSWORD" Default="" Mode="" Description="Advanced upstream Infisical environment variable `REDIS_PASSWORD`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Redis] REDIS_SENTINEL_HOSTS" Target="REDIS_SENTINEL_HOSTS" Default="" Mode="" Description="Advanced upstream Infisical environment variable `REDIS_SENTINEL_HOSTS`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
