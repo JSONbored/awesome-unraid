@@ -31,9 +31,9 @@
 - Current upstream packaging is [code]linux/amd64[/code] only.&#xD;
 - This is still a real self-hosted mail stack. DNS, deliverability, router/firewall port forwarding, and sender reputation still matter.&#xD;
 - For the simplest operation, keep the internal Postgres/Redis/Postfix defaults and only set the small required config set above.</Overview>
-  <Changes>### 2026-05-26&#xD;
+  <Changes>### 2026-05-28&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Add CA readme and utility category</Changes>
+- Bump simplelogin to v4.81.0</Changes>
   <Category>Network:Privacy Network:Web Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:7777]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/simplelogin-aio.xml</TemplateURL>
