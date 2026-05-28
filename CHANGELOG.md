@@ -51,6 +51,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Refresh Khoj catalog history
 - Sync CA template metadata
 - Refresh release metadata catalog XML
+- Refresh release catalog metadata (#152)
 
 
 ### Dependency Updates
