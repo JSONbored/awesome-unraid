@@ -52,6 +52,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Sync CA template metadata
 - Refresh release metadata catalog XML
 - Refresh release catalog metadata (#152)
+- Publish Sure referrer policy setting
+- Publish Sure 0.7.1 catalog metadata
 
 
 ### Dependency Updates
