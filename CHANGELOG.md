@@ -54,6 +54,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Refresh release catalog metadata (#152)
 - Publish Sure referrer policy setting
 - Publish Sure 0.7.1 catalog metadata
+- Publish app release catalog metadata
 
 
 ### Dependency Updates
