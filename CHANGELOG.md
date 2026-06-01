@@ -59,6 +59,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Publish Sure 0.7.1 catalog metadata
 - Publish app release catalog metadata
 - Centralize catalog automation
+- Refresh catalog validation workflow
 
 ### Dependency Updates
 
