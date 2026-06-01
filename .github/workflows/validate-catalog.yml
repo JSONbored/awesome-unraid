@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: JSONbored/aio-fleet
-          ref: c4099c09cb2375a0f5a5a822a0f8af02a77d0526
+          ref: f5bc53e7e34b86630173a3e1e4c0e5148c468cbd
           path: .aio-fleet
 
       - name: Install aio-fleet
@@ -30,5 +30,5 @@ jobs:
       - name: Validate catalog
         run: python3 -m aio_fleet --manifest .aio-fleet/fleet.yml validate-catalog --catalog-path .
 
-      - name: Validate README inventory
-        run: python3 scripts/validate-readme-inventory.py
+      - name: Audit catalog quality
+        run: python3 -m aio_fleet --manifest .aio-fleet/fleet.yml catalog-audit --catalog-path .
