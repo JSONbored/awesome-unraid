@@ -32,12 +32,12 @@ This template is meant for testing and local validation, not primary household f
 - [code]/mnt/user/appdata/sure-aio-alpha/system[/code]&#xD;
 - [code]/mnt/user/appdata/sure-aio-alpha/postgres[/code]&#xD;
 - [code]/mnt/user/appdata/sure-aio-alpha/redis[/code]</Overview>
-  <Changes>### 2026-05-19&#xD;
+  <Changes>### 2026-06-02&#xD;
 - Generated from CHANGELOG.alpha.md during release preparation. Do not edit manually.&#xD;
-- Harden Sure runtime, alpha import preflight, template secret masking, and release paths.&#xD;
-- Enforce capped alpha import limits and structured malformed Account preflight errors.&#xD;
-- Derive external assistant session keys when operators leave the shared key blank.&#xD;
-- Tighten first-boot database readiness so Rails waits for authenticated PostgreSQL access.</Changes>
+- Track upstream Sure Alpha 0.7.2-alpha.1.&#xD;
+- Publish Docker Hub and GHCR tags with the configured component revision tag.&#xD;
+- Preserve the Sure AIO alpha import-limit, strict import preflight, and route-parity importer overlays.&#xD;
+- Keep alpha import and WebAuthn controls separate from stable.</Changes>
   <Category>Productivity Tools:Utilities</Category>
   <Beta>True</Beta>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
