@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           repository: JSONbored/aio-fleet
-          ref: 0f7e941d5cff3baaee5058dbaf6a8f380fc9be28
+          ref: e2e92719102685688c54f77c9769e178e6492170
           path: .aio-fleet
 
       - name: Install aio-fleet

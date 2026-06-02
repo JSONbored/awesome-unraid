@@ -32,9 +32,11 @@
 - The bundled Mailpit inbox is for local or lab use. It is not a production mail relay and should not be confused with real deliverability infrastructure.&#xD;
 - [code]SITE_URL[/code] matters. If you set it wrong, browser flows, links, email behavior, and some integrations will break in subtle ways.&#xD;
 - If you enable automatic bootstrap, you are creating a highly privileged instance-admin identity during first boot. Treat those credentials carefully.</Overview>
-  <Changes>### 2026-05-31&#xD;
+  <Changes>### 2026-06-02&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Update upstream pins for infisical-aio</Changes>
+- Refresh fleet manifest contract&#xD;
+- Bump infisical to v0.160.10&#xD;
+- Use shared app test helpers</Changes>
   <Category>Security Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/infisical-aio.xml</TemplateURL>
@@ -242,6 +244,7 @@
   <Config Name="[Telemetry] OTEL_COLLECTOR_BASIC_AUTH_USERNAME" Target="OTEL_COLLECTOR_BASIC_AUTH_USERNAME" Default="" Mode="" Description="Advanced upstream Infisical environment variable `OTEL_COLLECTOR_BASIC_AUTH_USERNAME`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Telemetry] OTEL_COLLECTOR_BASIC_AUTH_PASSWORD" Target="OTEL_COLLECTOR_BASIC_AUTH_PASSWORD" Default="" Mode="" Description="Advanced upstream Infisical environment variable `OTEL_COLLECTOR_BASIC_AUTH_PASSWORD`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Telemetry] OTEL_EXPORT_TYPE" Target="OTEL_EXPORT_TYPE" Default="" Mode="" Description="Advanced upstream Infisical environment variable `OTEL_EXPORT_TYPE`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[Telemetry] OTEL_DROP_HIGH_CARDINALITY_METERS" Target="OTEL_DROP_HIGH_CARDINALITY_METERS" Default="" Mode="" Description="Advanced upstream Infisical environment variable `OTEL_DROP_HIGH_CARDINALITY_METERS`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Advanced] PYLON_API_KEY" Target="PYLON_API_KEY" Default="" Mode="" Description="Advanced upstream Infisical environment variable `PYLON_API_KEY`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Advanced] DISABLE_AUDIT_LOG_GENERATION" Target="DISABLE_AUDIT_LOG_GENERATION" Default="" Mode="" Description="Advanced upstream Infisical environment variable `DISABLE_AUDIT_LOG_GENERATION`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Network/Security] SSL_CLIENT_CERTIFICATE_HEADER_KEY" Target="SSL_CLIENT_CERTIFICATE_HEADER_KEY" Default="" Mode="" Description="Advanced upstream Infisical environment variable `SSL_CLIENT_CERTIFICATE_HEADER_KEY`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>

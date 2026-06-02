@@ -64,6 +64,7 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 ### Dependency Updates
 
 - Update peter-evans/create-pull-request action to v8.1.1
+- Update actions/checkout action to v6.0.3
 
 ### Documentation
 
