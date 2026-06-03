@@ -60,6 +60,8 @@ This catalog is maintained continuously on `main` and does not require formal Gi
 - Publish app release catalog metadata
 - Centralize catalog automation
 - Refresh catalog validation workflow
+- Refresh catalog assets
+- Refresh sure alpha catalog template
 
 ### Dependency Updates
 
