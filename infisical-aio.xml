@@ -32,11 +32,10 @@
 - The bundled Mailpit inbox is for local or lab use. It is not a production mail relay and should not be confused with real deliverability infrastructure.&#xD;
 - [code]SITE_URL[/code] matters. If you set it wrong, browser flows, links, email behavior, and some integrations will break in subtle ways.&#xD;
 - If you enable automatic bootstrap, you are creating a highly privileged instance-admin identity during first boot. Treat those credentials carefully.</Overview>
-  <Changes>### 2026-06-02&#xD;
+  <Changes>### 2026-06-12&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Refresh fleet manifest contract&#xD;
-- Bump infisical to v0.160.10&#xD;
-- Use shared app test helpers</Changes>
+- Bump infisical to v0.160.11 (#75)&#xD;
+- Bump infisical to v0.161.0 (#77)</Changes>
   <Category>Security Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/infisical-aio.xml</TemplateURL>
@@ -230,6 +229,9 @@
   <Config Name="[Platform] LICENSE_SERVER_KEY" Target="LICENSE_SERVER_KEY" Default="" Mode="" Description="Advanced upstream Infisical environment variable `LICENSE_SERVER_KEY`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Platform] LICENSE_KEY" Target="LICENSE_KEY" Default="" Mode="" Description="Advanced upstream Infisical environment variable `LICENSE_KEY`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Platform] LICENSE_KEY_OFFLINE" Target="LICENSE_KEY_OFFLINE" Default="" Mode="" Description="Advanced upstream Infisical environment variable `LICENSE_KEY_OFFLINE`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="[Platform] LICENSE_SERVER_V2_ENABLED" Target="LICENSE_SERVER_V2_ENABLED" Default="" Mode="" Description="Advanced upstream Infisical environment variable `LICENSE_SERVER_V2_ENABLED`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[Platform] LICENSE_SERVER_V2_URL" Target="LICENSE_SERVER_V2_URL" Default="" Mode="" Description="Advanced upstream Infisical environment variable `LICENSE_SERVER_V2_URL`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[Platform] LICENSE_SERVER_V2_SERVICE_KEY" Target="LICENSE_SERVER_V2_SERVICE_KEY" Default="" Mode="" Description="Advanced upstream Infisical environment variable `LICENSE_SERVER_V2_SERVICE_KEY`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[Advanced] STANDALONE_MODE" Target="STANDALONE_MODE" Default="" Mode="" Description="Advanced upstream Infisical environment variable `STANDALONE_MODE`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Platform] INFISICAL_CLOUD" Target="INFISICAL_CLOUD" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INFISICAL_CLOUD`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Platform] INFISICAL_DEDICATED" Target="INFISICAL_DEDICATED" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INFISICAL_DEDICATED`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
@@ -281,6 +283,7 @@
   <Config Name="[App Connections] INF_APP_CONNECTION_GITHUB_APP_PRIVATE_KEY" Target="INF_APP_CONNECTION_GITHUB_APP_PRIVATE_KEY" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITHUB_APP_PRIVATE_KEY`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_GITHUB_APP_SLUG" Target="INF_APP_CONNECTION_GITHUB_APP_SLUG" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITHUB_APP_SLUG`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_GITHUB_APP_ID" Target="INF_APP_CONNECTION_GITHUB_APP_ID" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITHUB_APP_ID`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[App Connections] INF_APP_CONNECTION_GITHUB_APP_HOST" Target="INF_APP_CONNECTION_GITHUB_APP_HOST" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITHUB_APP_HOST`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_GITHUB_RADAR_APP_CLIENT_ID" Target="INF_APP_CONNECTION_GITHUB_RADAR_APP_CLIENT_ID" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITHUB_RADAR_APP_CLIENT_ID`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_GITHUB_RADAR_APP_CLIENT_SECRET" Target="INF_APP_CONNECTION_GITHUB_RADAR_APP_CLIENT_SECRET" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITHUB_RADAR_APP_CLIENT_SECRET`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="[App Connections] INF_APP_CONNECTION_GITHUB_RADAR_APP_PRIVATE_KEY" Target="INF_APP_CONNECTION_GITHUB_RADAR_APP_PRIVATE_KEY" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INF_APP_CONNECTION_GITHUB_RADAR_APP_PRIVATE_KEY`." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
@@ -314,5 +317,9 @@
   <Config Name="[Advanced] TRUSTED_PROXY_CIDRS" Target="TRUSTED_PROXY_CIDRS" Default="" Mode="" Description="Advanced upstream Infisical environment variable `TRUSTED_PROXY_CIDRS`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Advanced] TNS_ADMIN" Target="TNS_ADMIN" Default="" Mode="" Description="Advanced upstream Infisical environment variable `TNS_ADMIN`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Advanced] GOLANG_SIDECAR_URL" Target="GOLANG_SIDECAR_URL" Default="" Mode="" Description="Advanced upstream Infisical environment variable `GOLANG_SIDECAR_URL`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[Advanced] GO_SIDECAR_SHADOW_ENABLED" Target="GO_SIDECAR_SHADOW_ENABLED" Default="" Mode="" Description="Advanced upstream Infisical environment variable `GO_SIDECAR_SHADOW_ENABLED`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[Advanced] GO_SIDECAR_SHADOW_SAMPLE_RATE" Target="GO_SIDECAR_SHADOW_SAMPLE_RATE" Default="" Mode="" Description="Advanced upstream Infisical environment variable `GO_SIDECAR_SHADOW_SAMPLE_RATE`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[Advanced] GO_SIDECAR_BINARY_PATH" Target="GO_SIDECAR_BINARY_PATH" Default="" Mode="" Description="Advanced upstream Infisical environment variable `GO_SIDECAR_BINARY_PATH`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="[Advanced] GO_SIDECAR_SPAWN_ENABLED" Target="GO_SIDECAR_SPAWN_ENABLED" Default="" Mode="" Description="Advanced upstream Infisical environment variable `GO_SIDECAR_SPAWN_ENABLED`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
   <Config Name="[Advanced] INTERNAL_REGION" Target="INTERNAL_REGION" Default="" Mode="" Description="Advanced upstream Infisical environment variable `INTERNAL_REGION`." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
 </Container>
