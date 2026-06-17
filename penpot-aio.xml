@@ -30,10 +30,9 @@
 - Penpot is a real multi-service stack. Plan for at least 2 CPU cores and 4 GiB RAM, with more for active teams or large files.&#xD;
 - Public exposure should sit behind a trusted HTTPS reverse proxy. Remove [code]disable-secure-session-cookies[/code] and [code]disable-email-verification[/code] for production.&#xD;
 - The bundled Mailpit inbox is for local/lab capture, not real mail deliverability.</Overview>
-  <Changes>### 2026-06-12&#xD;
+  <Changes>### 2026-06-17&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Keep gateway online when external template host fails DNS (#19)&#xD;
-- Update upstream pins for penpot-aio (#18)</Changes>
+- Bump mailpit to v1.30.2 (#22)</Changes>
   <Category>Productivity Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/penpot-aio.xml</TemplateURL>
