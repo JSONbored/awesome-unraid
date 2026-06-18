@@ -32,9 +32,8 @@
 - Persistent databases, logs, groups, env files, and channel state live under [code]/appdata[/code].</Overview>
   <Changes>### 2026-06-18&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Bump nanoclaw to upstream v2.1.17&#xD;
-- Align pytest config&#xD;
-- Use shared app test helpers</Changes>
+- Run nanoclaw on shared aio-base&#xD;
+- Sync upstream commit keys</Changes>
   <Category>AI Productivity Network:Messenger Tools:Utilities</Category>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/nanoclaw.png</Icon>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/nanoclaw-aio.xml</TemplateURL>
