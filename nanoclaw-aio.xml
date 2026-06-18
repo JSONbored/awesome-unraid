@@ -30,9 +30,11 @@
 - This template is marked beta while the NanoClaw v2 runtime gets more real-world Unraid soak time.&#xD;
 - The Docker socket mount is an advanced opt-in setting because NanoClaw launches paired helper containers through the host Docker daemon, which grants host-level Docker control. NanoClaw cannot run helper containers until that mount is enabled.&#xD;
 - Persistent databases, logs, groups, env files, and channel state live under [code]/appdata[/code].</Overview>
-  <Changes>### 2026-05-26&#xD;
+  <Changes>### 2026-06-18&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Use URL readme metadata</Changes>
+- Bump nanoclaw to upstream v2.1.17&#xD;
+- Align pytest config&#xD;
+- Use shared app test helpers</Changes>
   <Category>AI Productivity Network:Messenger Tools:Utilities</Category>
   <Icon>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/icons/nanoclaw.png</Icon>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/nanoclaw-aio.xml</TemplateURL>
