@@ -25,9 +25,10 @@ Install it, keep the defaults, and point your OpenTelemetry senders at the publi
 5. Optional: enable the built-in local host agent and explicitly fill the advanced host/Docker path fields if you want this same Unraid machine to forward host metrics, Docker metrics, and Docker logs into SigNoz.&#xD;
 &#xD;
 [b]Resource Note:[/b] ClickHouse makes SigNoz powerful, but also heavier on RAM, disk, and startup time than lighter AIO apps.</Overview>
-  <Changes>### 2026-06-12&#xD;
+  <Changes>### 2026-06-18&#xD;
 - Generated from CHANGELOG.md during release preparation. Do not edit manually.&#xD;
-- Update upstream pins for signoz-aio (#95)</Changes>
+- Bump signoz to v0.129.0&#xD;
+- Migrate to the shared aio-base s6 overlay (#97)</Changes>
   <Category>Network:Management Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JSONbored/awesome-unraid/main/signoz-aio.xml</TemplateURL>
